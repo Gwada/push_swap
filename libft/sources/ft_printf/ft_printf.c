@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 17:23:00 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/13 16:20:41 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/13 18:50:38 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int			ft_printf(const char *format, ...)
 		*data.ft == '{' ? ft_set_color(&data, 0) : 0;
 		if (!data.error && !ft_strchr("%{", *data.ft))
 			ft_buffering(&data, data.ft, 1);
-		*data.ft != '%' ? ++data.i : 0;
-		*data.ft && *data.ft != '%' ? ++data.ft : 0;
+		!ft_strchr("%{", *data.ft) ? ++data.i : 0;
+		*data.ft && !ft_strchr("%{", *data.ft) ? ++data.ft : 0;
 	}
 	write(data.fd, data.buf, data.i_b);
 	va_end(data.ap);

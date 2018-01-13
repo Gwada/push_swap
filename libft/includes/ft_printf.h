@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 09:49:20 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/12 13:24:00 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/13 18:21:12 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 **	*** LIBRAIRIES ***
 */
 
+# include "libft.h"
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -81,12 +82,6 @@
 # define MAGENTA	"\033[35m"
 # define CYAN		"\033[36m"
 # define WHITE		"\033[37m"
-
-/*
-** *** SET BUFF SIZE ***
-*/
-
-# define BUFF_SIZE	512
 
 /*
 **	*** STRUCTURES ***

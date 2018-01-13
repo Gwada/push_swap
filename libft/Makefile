@@ -2,7 +2,7 @@ CC = gcc
 
 NAME	= libft.a
 
-HEADER = -I Includes/
+HEADER = -I includes/
 
 CFLAGS = -Wall -Wextra -Werror $(HEADER)
 
@@ -90,6 +90,8 @@ SRC = mem/ft_memset.c \
 		ft_swap.c \
 		str/ft_strchri.c \
 		str/ft_strchri_up.c \
+		ft_wstrlen.c \
+		ft_wcharlen.c \
 		get_next_line/get_next_line.c \
 		ft_printf/attribuate.c \
 		ft_printf/ft_printf.c \
@@ -130,7 +132,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $?
 	@ranlib $(NAME)
-	@echo "$(_CYAN)$(NAME)$(_END) $(_GREEN)edited$(_END)"
+	@echo "$(_CYAN)$(NAME)$(_END)	:	$(_GREEN)edited$(_END)"
 
 %.o: %.c
 	@printf "%-60b\r" "$(ECHO)"
@@ -139,11 +141,11 @@ $(NAME): $(OBJ)
 clean:
 	@rm -f $(OBJ)
 	@rm -f libft.h.gch
-	@echo "$(_RED)clean$(_END)	: $(_GREEN)done$(_END)"
+#	@echo "$(_RED)clean libft$(_END) :	$(_GREEN)done$(_END)"
 
 fclean:	clean
 	@rm -f $(NAME)
-	@echo "$(_RED)fclean$(_END)	: $(_GREEN)done$(_END)"
+#	@echo "$(_RED)fclean libft$(_END) :	$(_GREEN)done$(_END)"
 
 re: fclean
 	@make all

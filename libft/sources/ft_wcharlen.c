@@ -6,11 +6,11 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 15:22:53 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/13 15:26:42 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/13 18:24:46 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#inclue "libft.h"
+#include "libft.h"
 
 size_t	ft_wcharlen(wchar_t c)
 {
