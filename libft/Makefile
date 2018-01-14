@@ -127,12 +127,13 @@ _PURPLE=\x1b[35m
 _CYAN=\x1b[36m
 _WHITE=\x1b[37m
 _END=\x1b[0m
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $?
 	@ranlib $(NAME)
-	@echo "$(_CYAN)$(NAME)$(_END)	:	$(_GREEN)edited$(_END)"
+	@echo "$(_CYAN)$(NAME)$(_END)			: $(_GREEN)edited$(_END)"
 
 %.o: %.c
 	@printf "%-60b\r" "$(ECHO)"

@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 09:49:20 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/13 18:21:12 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/14 11:42:02 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 
 /*
-**	*** LIBRAIRIES ***
+**	*** LIBRARIES ***
 */
 
 # include "libft.h"

@@ -6,24 +6,34 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/13 19:59:12 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/14 19:36:35 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_C		= checker
-NAME_P_S	= push_swap
-LIB			= libft
+LIB				= libft
+CHECKER			= checker
+PUSH_SWAP		= push_swap
 
-CC			= gcc
-FLAGS		= -Wall -Wextra -Werror
-HARDFLAGS	= -Weverything
-HEADER		= -I Includes -I $(LIB)/includes/
+CC				= gcc
+FLAGS			= -Wall -Wextra -Werror
+HARDFLAGS		= -Weverything
+HEADER			= -I includes -I $(LIB)/includes/
 
-SOURCES		= \
-SOURCES_C	= c_main.c \
-SOURCES_P_S	= p_s_main.c \
+#SOURCES			= 
+SOURCES_C		= c_main.c 
+#SOURCES_C		+= $(SOURCES)
+SOURCES_PS		= ps_main.c 
+#SOURCES_P_S		+= $(SOURCES)
+OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))
+OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))
 
-OBJ_PS		= $(addprefix sources/,$(SOURCES_P_S:.c=.o))
+#PROGRESS
+#TC				= $(words $(SOURCES_C))
+#TPS				= $(words $(SOURCES_P_S))
+#N				= 0
+#C				= $(words $N)$(eval N := x $N)
+#ECHOC			= "[`expr $C '*' 100 / $TC`%]"
+#ECHOPS			= "[`expr $C '*' 100 / $TPS`%]"
 
 #Color
 _GREY=\x1b[30m
@@ -36,26 +46,34 @@ _CYAN=\x1b[36m
 _WHITE=\x1b[37m
 _END=\x1b[0m
 
-all: $(NAME_P_S) #$(NAME_C)
+all: $(CHECKER) $(PUSH_SWAP)
 
-$(NAME_P_S): librarie $(OBJ_P_S)
-	@$(CC) $(FLAGS) -o $(NAME_P_S) $(SOURCES_P_S) -L . -lft $(HEADER)
-	@echo "\n$(_CYAN)$(NAME_P_S)$(_END) $(_GREEN)edited$(_END)"
+$(CHECKER): librarie $(OBJ_C)
+	@$(CC) $(FLAGS) -o $(CHECKER) $(OBJ_C) $(LIB)/$(LIB).a
+	@echo "$(_CYAN)$(CHECKER)$(_END)			: $(_GREEN)compiled$(_END)"
 
-#$(NAME_C)
-#	@$(CC) $(FLAGS) -o $(NAME_C) $(SOURCES_C) -L . -lft $(HEADER)
+$(PUSH_SWAP): librarie $(OBJ_PS) 
+	@$(CC) $(FLAGS) -o $(PUSH_SWAP) $(OBJ_PS) $(LIB)/$(LIB).a
+	@echo "$(_CYAN)$(PUSH_SWAP)$(_END)		: $(_GREEN)compiled$(_END)"
 
 %.o: %.c
-	@$(CC) $(FLAGS) $(HEADER) -o $@
+#	@printf "%-60b\r" "$(ECHOPS)"
+	@$(CC) $(FLAGS) -c $< -o $@ $(HEADER)
 
 clean:
 	@make -C $(LIB) clean
-	@echo "$(_RED)clean$(_END)	:	$(_GREEN)done$(_END)"
+	@make clean_C
+	@make clean_PS
+	@echo "$(_RED)clean $(_END)			: $(_GREEN)done$(_END)"
+clean_C:
+	@rm -f $(OBJ_C)
+clean_PS:
+	@rm -f $(OBJ_PS)
 
 fclean: clean
 	@make -C $(LIB) fclean
-	@rm -f $(NAME_P_S)
-	@echo "$(_RED)fclean$(_END)	:	$(_GREEN)done$(_END)"
+	@rm -f $(CHECKER) $(PUSH_SWAP)
+	@echo "$(_RED)fclean$(_END)			: $(_GREEN)done$(_END)"
 
 re: fclean
 	@make all
@@ -65,9 +83,22 @@ librarie:
 
 go:
 	@clear
+	@make clean_C
+	@make clean_PS
 	@make all
-#	@$(GCC) $(FLAGS) -o test $(SOURCES) -L . -lft $(HEADER)
-#	@$(GCC) $(HARDFLAGS) -o test $(SOURCES) -L . -lft $(HEADER)
-	@./$(NAME_P_S)
+	@./$(CHECKER)
+	@./$(PUSH_SWAP)
+
+goc:
+	@clear
+	@make clean_C
+	@make $(CHECKER)
+	@./$(CHECKER)
+
+gops:
+	@clear
+	@make clean_PS
+	@make $(PUSH_SWAP)
+	@./$(PUSH_SWAP)
 
 .PHONY: all re fclean clean

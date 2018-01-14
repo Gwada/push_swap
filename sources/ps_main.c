@@ -6,18 +6,15 @@
 /*   By: dlavaury <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 17:17:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/13 19:14:31 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/14 15:33:24 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <wchar.h>
-#include <locale.h>
-#include "libft.h"
+#include "push_swap.h"
 #include "ft_printf.h"
 
-int				main(void)
+int		main(void)
 {
-	ft_printf("ret = %d\n", ft_printf("test\n"));
+	ft_printf("test : in ps_main.c\n");
 	return (0);
 }
