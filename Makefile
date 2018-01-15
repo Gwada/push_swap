@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/14 19:36:35 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/15 14:56:42 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,13 @@ FLAGS			= -Wall -Wextra -Werror
 HARDFLAGS		= -Weverything
 HEADER			= -I includes -I $(LIB)/includes/
 
-#SOURCES			= 
-SOURCES_C		= c_main.c 
-#SOURCES_C		+= $(SOURCES)
-SOURCES_PS		= ps_main.c 
+SOURCES			= display.c \
+					init.c
+#SOURCES_C		= c_main.c 
+SOURCES_C		= $(SOURCES) \
+					c_main.c
+SOURCES_PS		= $(SOURCES) \
+					ps_main.c
 #SOURCES_P_S		+= $(SOURCES)
 OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))
 OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))
@@ -99,6 +102,6 @@ gops:
 	@clear
 	@make clean_PS
 	@make $(PUSH_SWAP)
-	@./$(PUSH_SWAP)
+	@./$(PUSH_SWAP) 1 2 3
 
 .PHONY: all re fclean clean

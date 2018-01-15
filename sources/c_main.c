@@ -6,12 +6,11 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 15:30:29 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/14 15:33:22 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/15 13:29:49 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
-#include "ft_printf.h"
+#include "push_swap.h"
 
 int	main(void)
 {

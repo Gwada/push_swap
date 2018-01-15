@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/14 15:33:42 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/14 19:36:37 by dlavaury         ###   ########.fr       */
+/*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
+/*   Updated: 2018/01/15 14:56:38 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "push_swap.h"
 
-/*
-** LIBRAIRIES
-*/
-
-# include "libft.h"
-# include "ft_printf.h"
-
-#endif
+void	init_main(t_roll *r)
+{
+	r->nb_ea = 0;
+	r->nb_eb = 0;
+	r->a.root = &r->a;
+	r->b.root = &r->b;
+	ft_printf("init_main ok\n");
+}
