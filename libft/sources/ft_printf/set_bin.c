@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 09:53:47 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/12 09:54:21 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/16 18:21:15 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void					ft_put_bin_p(t_data *data, ULX2I n)
 	mask = ~(~0LLU >> 1) >> (-(ft_nb_bit(data) * 8));
 	while (mask)
 	{
-		if (++i && !(i % 8))
-			ft_buffering(data, " ", 1);
+		++i && !(i % 8) ? ft_buffering(data, " ", 1) : 0;
 		ft_buffering(data, n & mask ? "1" : "0", 1);
 		mask >>= 1;
 	}

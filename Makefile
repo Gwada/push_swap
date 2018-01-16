@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/15 14:56:42 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/16 22:14:25 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,8 @@ OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))
 #TPS				= $(words $(SOURCES_P_S))
 #N				= 0
 #C				= $(words $N)$(eval N := x $N)
-#ECHOC			= "[`expr $C '*' 100 / $TC`%]"
-#ECHOPS			= "[`expr $C '*' 100 / $TPS`%]"
+#ECHOC			= "[`expr $C '*' 100 / $(TC)`%]"
+#ECHOPS			= "[`expr $C '*' 100 / $(TPS)`%]"
 
 #Color
 _GREY=\x1b[30m
@@ -51,11 +51,11 @@ _END=\x1b[0m
 
 all: $(CHECKER) $(PUSH_SWAP)
 
-$(CHECKER): librarie $(OBJ_C)
+$(CHECKER): lib $(OBJ_C)
 	@$(CC) $(FLAGS) -o $(CHECKER) $(OBJ_C) $(LIB)/$(LIB).a
 	@echo "$(_CYAN)$(CHECKER)$(_END)			: $(_GREEN)compiled$(_END)"
 
-$(PUSH_SWAP): librarie $(OBJ_PS) 
+$(PUSH_SWAP): lib $(OBJ_PS) 
 	@$(CC) $(FLAGS) -o $(PUSH_SWAP) $(OBJ_PS) $(LIB)/$(LIB).a
 	@echo "$(_CYAN)$(PUSH_SWAP)$(_END)		: $(_GREEN)compiled$(_END)"
 
@@ -81,7 +81,7 @@ fclean: clean
 re: fclean
 	@make all
 
-librarie:
+lib:
 	@make -j3 -C $(LIB)
 
 go:
@@ -92,6 +92,8 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
+NUM = -cv -30 +5465
+
 goc:
 	@clear
 	@make clean_C
@@ -100,8 +102,10 @@ goc:
 
 gops:
 	@clear
-	@make clean_PS
+#	@make clean_PS
 	@make $(PUSH_SWAP)
-	@./$(PUSH_SWAP) 1 2 3
+	./push_swap "$(NUM)"
+	@echo "\n"
+	./push_swap $(NUM)
 
-.PHONY: all re fclean clean
+.PHONY: all re fclean clean 
