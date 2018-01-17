@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/17 20:36:36 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/17 20:59:55 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
 	ft_printf("in init sort\n\n");
-	i = 0;
 	ft_qsort(t, r->size, 0, 0);
+	while (!(r->bd & ERR) && ++i < r->size - 1)
+		t[i].n == t[i + 1].n ? r->bd |= ERR : 0;
+	r->bd & ERR ? ft_printf("t[%d].n = %d t[%d].n = %d\n", i, t[i].n, i+1, t[i+1].n) : 0;
 	ft_printf("end init sort\n\n");
 }

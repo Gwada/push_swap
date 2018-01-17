@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 20:04:12 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/17 20:36:48 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/17 20:59:50 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,15 @@ void			ft_qsort(t_tab *t, int size, int i, int j)
 	{
 		if (t[i].n <= t[pvt].n)
 		{
-			if (i > pvt)
-			{
-				ps_swap(t + i, t + pvt);
-				pvt = i;
-			}
+			i > pvt ? ps_swap(t + i, t + pvt) : 0;
+			i > pvt ? pvt = i : 0;
 			i += (i + 1 == pvt) ? 2 : 1;
 		}
 		else
 		{
 			ps_swap(t + i, t + j);
-			if (j < pvt)
-			{
-				ps_swap(t + j, t + pvt);
-				pvt = j;
-			}
+			j < pvt ? ps_swap(t + j, t + pvt) : 0;
+			j < pvt ? pvt = j : 0;
 			j -= (j - 1 == pvt) ? 2 : 1;
 		}
 	}
