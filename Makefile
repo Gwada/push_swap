@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/17 19:47:35 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/17 20:16:24 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ HEADER			= -I includes -I $(LIB)/includes/
 
 SOURCES			= display.c \
 					init.c \
-					push_swap.c
+					push_swap.c \
+					quicksort.c
 #SOURCES_C		= c_main.c 
 SOURCES_C		= $(SOURCES) \
 					c_main.c

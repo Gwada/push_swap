@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/17 19:47:43 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/17 20:36:41 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef	struct		s_roll
 
 int					init_struct(t_roll *r, char **argv, int size);
 void				init_tab(t_tab *t, t_roll *r, char **a, int i);
+void				init_sort(t_tab *t, t_roll *r, int i);
+
+void				ft_qsort(t_tab *t, int size, int i, int j);
 
 void				push_swap(t_roll *r, char **p, int size);
 

@@ -6,7 +6,7 @@
 /*   By: dlavaury <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 17:17:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/17 19:47:40 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/17 20:36:43 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int				main(int argc, char **argv)
 
 	if (argc > 1)
 	{
-		//if (!((r.size = init_struct(&r, ++argv, 0))))
-			//return (display_error(&r));
 		r.size = init_struct(&r, ++argv, 0);
 		ft_printf("r.size = %d\n", r.size);//
 		!(r.bd & ERR) && r.size ? push_swap(&r, argv, r.size) : 0;
