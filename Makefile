@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/16 22:14:25 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/17 19:47:35 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ HARDFLAGS		= -Weverything
 HEADER			= -I includes -I $(LIB)/includes/
 
 SOURCES			= display.c \
-					init.c
+					init.c \
+					push_swap.c
 #SOURCES_C		= c_main.c 
 SOURCES_C		= $(SOURCES) \
 					c_main.c
@@ -92,7 +93,7 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
-NUM = -cv -30 +5465
+NUM = -cv -56464 684 84 -86 15465 654 349682 0 -1 2147483647 3158 1 16 684 135 864 654 64 526 5945 -156 +48584 1564 684 684 861 16584768 38768 849746364 49764 4888848 68463641 4864651 68476351 -445541 -5415 -1545 -1584
 
 goc:
 	@clear
@@ -104,8 +105,8 @@ gops:
 	@clear
 #	@make clean_PS
 	@make $(PUSH_SWAP)
-	./push_swap "$(NUM)"
-	@echo "\n"
-	./push_swap $(NUM)
+	time ./push_swap $(NUM)
+#	@echo "\n"
+#	./push_swap $(NUM)
 
 .PHONY: all re fclean clean 

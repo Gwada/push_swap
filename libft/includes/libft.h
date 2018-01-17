@@ -6,7 +6,7 @@
 /*   By: dlavaury <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 16:12:40 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/14 20:19:15 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/17 19:34:23 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 **    MACROS
 */
 
-# define INTMAXLEN 9223372036854775807
-# define BUFF_SIZE 128
+# define INTMAXLEN	9223372036854775807
+# define BUFF_SIZE	128
+# define IMAX		2147483647
+# define IMIN		-2147483648
 
 /*
 **	STRUCTURES

@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/16 22:14:36 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/17 19:47:43 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@
 */
 
 # define STRING		(1 << 3)
-# define MINUS		(1 << 4)
+# define MIN		(1 << 4)
 # define VISUAL		(1 << 5)
 # define COLOR		(1 << 6)
 # define ERR		(1 << 7)
+
+# define CHR		ft_strchr
+# define ISNUM		"0123456789"
 
 /*
 ** STRUCTURES
@@ -42,6 +45,12 @@ typedef struct		s_pile
 	struct s_pile	*top;
 	struct s_pile	*low;
 }					t_pile;
+
+typedef struct		s_tab
+{
+	long long		n;
+	t_pile			m;
+}					t_tab;
 
 typedef	struct		s_roll
 {
@@ -57,6 +66,9 @@ typedef	struct		s_roll
 ** PROTOTYPES
 */
 
-int					init_main(t_roll *r, char **argv, int size);
+int					init_struct(t_roll *r, char **argv, int size);
+void				init_tab(t_tab *t, t_roll *r, char **a, int i);
+
+void				push_swap(t_roll *r, char **p, int size);
 
 #endif
