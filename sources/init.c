@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/18 19:21:56 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/18 20:54:07 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,31 +90,22 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;
 	r->bd |= GOOD;
-	//while (!(r->bd & ERR) && ++i < r->size)//
-//	while (!(r->bd & ERR) && ++i < r->size)
-//	{
-//		(i < r->size - 1) && (t[i].n == t[i + 1].n) ? r->bd |= ERR : 0;
-//		t[i].n != t[i].m.nbr ? r->bd &= ~GOOD : 0;
-		add_elem(t, r, i);
-//	}
+	add_elem(t, r, i);
 	t_pile *tmp = r->a.low;
-	tmp->top->root ? ft_printf("root a ->") : 0;
+	tmp->top->root ? ft_printf("[root a]<->") : 0;
 	while (!tmp->root)
 	{
-		!tmp->root ? ft_printf(" %d ->", tmp->nbr) : 0;
+		!tmp->root ? ft_printf("[%d]<->", tmp->nbr) : 0;
 		tmp = tmp->low;
 	}
-	tmp->root ? ft_printf(" root a\n") : 0;
-//	r->bd & GOOD ? ft_printf("GOOD END\n") : 0;
-//	r->bd & ERR ? ft_printf("doublon!!!\nt[%d].n == %d == t[%d].n\n\n", i, t[i].n, i+1) : 0;//
+	tmp->root ? ft_printf("[root a]\n") : 0;
+//	if (r->bd & GOOD || r->bd & ERR)
+//		return ;
 
-	if (r->bd & GOOD || r->bd & ERR)
-		return ;
-
-//	ft_printf("r.size = %d\n", r->size);
-//	ft_printf("r.a_max = %d\tr.a_min = %d\n", r->a_max, r->a_min);
-//	ft_printf("r.b_max = %d\tr.a_min = %d\n", r->b_max, r->b_min);
-//	ft_printf("r.nb_a = %u\tr.nb_b = %u\n", r->nb_a, r->nb_b);
+	ft_printf("r.size = %d\n", r->size);
+	ft_printf("r.a_max = %d\tr.a_min = %d\n", r->a_max, r->a_min);
+	ft_printf("r.b_max = %d\tr.a_min = %d\n", r->b_max, r->b_min);
+	ft_printf("r.nb_a = %u\tr.nb_b = %u\n", r->nb_a, r->nb_b);
 
 	ft_printf("end init sort\n");
 }
