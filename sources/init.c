@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/18 20:54:07 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/18 21:40:11 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 	r->bd |= GOOD;
 	add_elem(t, r, i);
 	t_pile *tmp = r->a.low;
-	tmp->top->root ? ft_printf("[root a]<->") : 0;
 	while (!tmp->root)
 	{
+		tmp->top->root ? ft_printf("[root a]<->") : 0;
 		!tmp->root ? ft_printf("[%d]<->", tmp->nbr) : 0;
 		tmp = tmp->low;
+		tmp->root ? ft_printf("[root a]\n\n") : 0;
 	}
-	tmp->root ? ft_printf("[root a]\n") : 0;
 //	if (r->bd & GOOD || r->bd & ERR)
 //		return ;
 

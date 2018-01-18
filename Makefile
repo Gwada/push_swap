@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/18 20:54:04 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/18 21:40:26 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
-NUM = -5 -3 5 6 4156 87 -185 654
+NUM = -5 -3 5 6 4156 87 -185 654 15 5645 35153 354351 3543513 153134351 2021548 65135 31545 3154 -4856156 -4157 -774 56486 +45684684 -4785454 15684312 +48465123 -4845431 -1235487 9512 -97845
 
 goc:
 	@clear
@@ -107,8 +107,8 @@ gops:
 	@clear
 #	@make clean_PS
 	@make $(PUSH_SWAP)
-#	time ./push_swap $(NUM)
+	time ./push_swap $(NUM)
 #	@echo "\n"
-	./push_swap $(NUM)
+#	./push_swap $(NUM)
 
 .PHONY: all re fclean clean 

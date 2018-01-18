@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:23:15 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/18 20:54:09 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/18 21:48:15 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void		push_swap(t_roll *r, char **p, int size)
 
 	ft_printf("\nin push_swap\n");
 	init_tab(t, r, p, -1);
+	if (r->bd & ERR)
+		return ;
 	init_sort(t, r, -1);
-
 	int i = -1;
 	while (!(r->bd & GOOD) && ++i < size)
 	{
