@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/17 20:59:55 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/18 12:35:05 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,13 @@ static void		parse_nbr(t_roll *r, char *n, int *size)
 
 int				init_struct(t_roll *r, char **nbr, int size)
 {
-	r->bd = 0;
-	r->size = 0;
-	r->nb_ea = 0;
-	r->nb_eb = 0;
-	r->a.nbr = 0;
+	ft_bzero(r, sizeof(*r));
 	r->a.root = &r->a;
 	r->a.top = &r->a;
 	r->a.low = &r->a;
 	r->b.root = &r->b;
 	r->b.top = &r->b;
 	r->b.low = &r->b;
-	r->b.nbr = 0;
 	while (*nbr && !(r->bd & ERR))
 	{
 		parse_nbr(r, *nbr++, &size);
@@ -61,38 +56,40 @@ int				init_struct(t_roll *r, char **nbr, int size)
 
 void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 {
-	while (*a)
+	while (*a && ++i < r->size)
 	{
-		while ((r->bd & ERR && **a))
+		ft_bzero(&t[i], sizeof(*t));
+	//	ft_printf("bzero ok t[%d].n = %d\n", i, t[i].n);
+		while (**a && **a != ' ')
 		{
-			ft_strchr("+0123456789", **a) ? r->bd &= ~ERR : 0;
-			**a == '-' && ft_strchr(ISNUM, *a[1]) ? r->bd &= ~ERR : 0;
-			r->bd & ERR ? ++(*a) : 0;
-		}
-		if (!(r->bd & ERR))
-		{
-			**a == '+' || (**a == '-' && (r->bd |= MIN)) ? ++(*a) : 0;
-			t[++i].n = 0;
+			(**a == '+') || (**a == '-' && (r->bd |= MIN)) ? ++(*a) : 0;
 			while (**a && **a >= '0' && **a <= '9')
 			{
 				t[i].n = t[i].n * 10 + *((*a)++) - '0';
+				//ft_printf("t[%d].n = %d\n", i, t[i].n);
 				if (((t[i].n > IMAX && !(r->bd & MIN)) || (t[i].n > -IMIN && r->bd & MIN)) && (r->bd |= ERR))
 					return ;
 			}
 			r->bd & MIN ? t[i].n = -t[i].n : 0;
+			ft_printf("t[%d].n = %d\n", i, t[i].n);
 			t[i].m.nbr = (int)t[i].n;
 			r->bd & MIN ? r->bd &= ~MIN : 0;
+			if (**a == ' ')
+				break ;
 		}
-		++a;
+	//	ft_printf("fin de boucle c = |%c|\n", **a);
+		!**a ? ++a : 0;
+		**a == ' ' ? ++(*a) : 0;
+
 	}
 }
 
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
-	ft_printf("in init sort\n\n");
+	//ft_printf("in init sort\n\n");
 	ft_qsort(t, r->size, 0, 0);
 	while (!(r->bd & ERR) && ++i < r->size - 1)
 		t[i].n == t[i + 1].n ? r->bd |= ERR : 0;
 	r->bd & ERR ? ft_printf("t[%d].n = %d t[%d].n = %d\n", i, t[i].n, i+1, t[i+1].n) : 0;
-	ft_printf("end init sort\n\n");
+	//ft_printf("end init sort\n\n");
 }
