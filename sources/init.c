@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/18 12:35:05 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/18 19:21:56 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,20 @@ int				init_struct(t_roll *r, char **nbr, int size)
 {
 	ft_bzero(r, sizeof(*r));
 	r->a.root = &r->a;
-	r->a.top = &r->a;
-	r->a.low = &r->a;
+	r->a.top = r->a.low;
+	r->a.low = r->a.top;
 	r->b.root = &r->b;
-	r->b.top = &r->b;
-	r->b.low = &r->b;
+	r->b.top = r->b.low;
+	r->b.low = r->b.top;
 	while (*nbr && !(r->bd & ERR))
 	{
 		parse_nbr(r, *nbr++, &size);
 		r->bd & STRING && *nbr && size ? r->bd |= ERR : 0;
 	}
-	return (r->bd & ERR ? 0 : size);
+	if (r->bd & ERR)
+		return (0);
+	r->bd |= ERR;
+	return (size);
 }
 
 void			init_tab(t_tab *t, t_roll *r, char **a, int i)
@@ -59,37 +62,59 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 	while (*a && ++i < r->size)
 	{
 		ft_bzero(&t[i], sizeof(*t));
-	//	ft_printf("bzero ok t[%d].n = %d\n", i, t[i].n);
-		while (**a && **a != ' ')
+		while (**a)
 		{
-			(**a == '+') || (**a == '-' && (r->bd |= MIN)) ? ++(*a) : 0;
+			CHR("+ ", **a) || (**a == '-' && (r->bd |= MIN)) ? ++(*a) : 0;
 			while (**a && **a >= '0' && **a <= '9')
 			{
 				t[i].n = t[i].n * 10 + *((*a)++) - '0';
-				//ft_printf("t[%d].n = %d\n", i, t[i].n);
-				if (((t[i].n > IMAX && !(r->bd & MIN)) || (t[i].n > -IMIN && r->bd & MIN)) && (r->bd |= ERR))
+				if (t[i].n > IMAX && !(r->bd & MIN)  && (r->bd |= ERR))
+					return ;
+				if (t[i].n > -IMIN && r->bd & MIN && (r->bd |= ERR))
 					return ;
 			}
 			r->bd & MIN ? t[i].n = -t[i].n : 0;
-			ft_printf("t[%d].n = %d\n", i, t[i].n);
 			t[i].m.nbr = (int)t[i].n;
 			r->bd & MIN ? r->bd &= ~MIN : 0;
 			if (**a == ' ')
 				break ;
 		}
-	//	ft_printf("fin de boucle c = |%c|\n", **a);
-		!**a ? ++a : 0;
-		**a == ' ' ? ++(*a) : 0;
-
+		**a != ' ' ? ++a : 0;
 	}
 }
 
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
-	//ft_printf("in init sort\n\n");
 	ft_qsort(t, r->size, 0, 0);
-	while (!(r->bd & ERR) && ++i < r->size - 1)
-		t[i].n == t[i + 1].n ? r->bd |= ERR : 0;
-	r->bd & ERR ? ft_printf("t[%d].n = %d t[%d].n = %d\n", i, t[i].n, i+1, t[i+1].n) : 0;
-	//ft_printf("end init sort\n\n");
+	r->nb_a = (unsigned)r->size;
+	r->a_max = (int)t[r->size - 1].n;
+	r->a_min = (int)(*t).n;
+	r->bd |= GOOD;
+	//while (!(r->bd & ERR) && ++i < r->size)//
+//	while (!(r->bd & ERR) && ++i < r->size)
+//	{
+//		(i < r->size - 1) && (t[i].n == t[i + 1].n) ? r->bd |= ERR : 0;
+//		t[i].n != t[i].m.nbr ? r->bd &= ~GOOD : 0;
+		add_elem(t, r, i);
+//	}
+	t_pile *tmp = r->a.low;
+	tmp->top->root ? ft_printf("root a ->") : 0;
+	while (!tmp->root)
+	{
+		!tmp->root ? ft_printf(" %d ->", tmp->nbr) : 0;
+		tmp = tmp->low;
+	}
+	tmp->root ? ft_printf(" root a\n") : 0;
+//	r->bd & GOOD ? ft_printf("GOOD END\n") : 0;
+//	r->bd & ERR ? ft_printf("doublon!!!\nt[%d].n == %d == t[%d].n\n\n", i, t[i].n, i+1) : 0;//
+
+	if (r->bd & GOOD || r->bd & ERR)
+		return ;
+
+//	ft_printf("r.size = %d\n", r->size);
+//	ft_printf("r.a_max = %d\tr.a_min = %d\n", r->a_max, r->a_min);
+//	ft_printf("r.b_max = %d\tr.a_min = %d\n", r->b_max, r->b_min);
+//	ft_printf("r.nb_a = %u\tr.nb_b = %u\n", r->nb_a, r->nb_b);
+
+	ft_printf("end init sort\n");
 }

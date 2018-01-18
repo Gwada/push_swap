@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/18 12:35:26 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/18 19:21:53 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 **	BINARY MASK
 */
 
+# define GOOD		(1 << 0)
 # define STRING		(1 << 3)
 # define MIN		(1 << 4)
 # define VISUAL		(1 << 5)
@@ -40,6 +41,7 @@
 
 typedef struct		s_pile
 {
+	char			bd;
 	int				nbr;
 	struct s_pile	*root;
 	struct s_pile	*top;
@@ -58,8 +60,12 @@ typedef	struct		s_roll
 	char			bd;
 	t_pile			a;
 	t_pile			b;
-	unsigned		nb_ea;
-	unsigned		nb_eb;
+	int				a_max;
+	int				a_min;
+	int				b_max;
+	int				b_min;
+	unsigned		nb_a;
+	unsigned		nb_b;
 }					t_roll;
 
 /*
@@ -69,6 +75,8 @@ typedef	struct		s_roll
 int					init_struct(t_roll *r, char **argv, int size);
 void				init_tab(t_tab *t, t_roll *r, char **a, int i);
 void				init_sort(t_tab *t, t_roll *r, int i);
+
+void				add_elem(t_tab *t, t_roll *r, int i);
 
 void				ft_qsort(t_tab *t, int size, int i, int j);
 

@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/18 12:35:23 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/18 19:22:01 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,9 @@ HEADER			= -I includes -I $(LIB)/includes/
 SOURCES			= display.c \
 					init.c \
 					push_swap.c \
-					quicksort.c
-#SOURCES_C		= c_main.c 
+					quicksort.c \
+					add_elem.c
+
 SOURCES_C		= $(SOURCES) \
 					c_main.c
 SOURCES_PS		= $(SOURCES) \
@@ -94,7 +95,7 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
-NUM = "-c -v -56464 684 84 -5415 -1545 -1584 861554 65486"
+NUM = -5 -3 5 6 4156
 
 goc:
 	@clear
@@ -106,8 +107,8 @@ gops:
 	@clear
 #	@make clean_PS
 	@make $(PUSH_SWAP)
-	time ./push_swap $(NUM)
+#	time ./push_swap $(NUM)
 #	@echo "\n"
-#	./push_swap $(NUM)
+	./push_swap $(NUM)
 
 .PHONY: all re fclean clean 
