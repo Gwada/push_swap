@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/18 21:40:11 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/19 19:51:07 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,18 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 		ft_bzero(&t[i], sizeof(*t));
 		while (**a)
 		{
-			CHR("+ ", **a) || (**a == '-' && (r->bd |= MIN)) ? ++(*a) : 0;
+			CHR("+ ", **a) || (**a == '-' && (r->bd |= MINUS)) ? ++(*a) : 0;
 			while (**a && **a >= '0' && **a <= '9')
 			{
 				t[i].n = t[i].n * 10 + *((*a)++) - '0';
-				if (t[i].n > IMAX && !(r->bd & MIN)  && (r->bd |= ERR))
+				if (t[i].n > IMAX && !(r->bd & MINUS)  && (r->bd |= ERR))
 					return ;
-				if (t[i].n > -IMIN && r->bd & MIN && (r->bd |= ERR))
+				if (t[i].n > -IMIN && r->bd & MINUS && (r->bd |= ERR))
 					return ;
 			}
-			r->bd & MIN ? t[i].n = -t[i].n : 0;
+			r->bd & MINUS ? t[i].n = -t[i].n : 0;
 			t[i].m.nbr = (int)t[i].n;
-			r->bd & MIN ? r->bd &= ~MIN : 0;
+			r->bd & MINUS ? r->bd &= ~MINUS : 0;
 			if (**a == ' ')
 				break ;
 		}
@@ -85,27 +85,30 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
+	ft_printf("{magenta}{bold}IN INIT SORT{eoc}\n");
 	ft_qsort(t, r->size, 0, 0);
 	r->nb_a = (unsigned)r->size;
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;
 	r->bd |= GOOD;
+	display_piles(r->a.low, r->b.low);
 	add_elem(t, r, i);
-	t_pile *tmp = r->a.low;
-	while (!tmp->root)
-	{
-		tmp->top->root ? ft_printf("[root a]<->") : 0;
-		!tmp->root ? ft_printf("[%d]<->", tmp->nbr) : 0;
-		tmp = tmp->low;
-		tmp->root ? ft_printf("[root a]\n\n") : 0;
-	}
+	display_piles(r->a.low, r->b.low);
+//	t_pile *tmp = r->a.low;
+//	while (!tmp->root)
+//	{
+//		tmp->top->root ? ft_printf("[root a]<->") : 0;
+//		!tmp->root ? ft_printf("[%d]<->", tmp->nbr) : 0;
+//		tmp = tmp->low;
+//		tmp->root ? ft_printf("[root a]\n\n") : 0;
+//	}
 //	if (r->bd & GOOD || r->bd & ERR)
 //		return ;
 
-	ft_printf("r.size = %d\n", r->size);
-	ft_printf("r.a_max = %d\tr.a_min = %d\n", r->a_max, r->a_min);
-	ft_printf("r.b_max = %d\tr.a_min = %d\n", r->b_max, r->b_min);
-	ft_printf("r.nb_a = %u\tr.nb_b = %u\n", r->nb_a, r->nb_b);
-
-	ft_printf("end init sort\n");
+	//ft_printf("r.size = %d\n\n", r->size);
+	ft_printf("{green}{underline}Pile A\t\tPileB{eoc}\n");
+	ft_printf("r.a_max = %d\tr.b_max = %d\n", r->a_max, r->b_max);
+	ft_printf("r.a_min = %d\tr.b_min = %d\n", r->a_min, r->b_min);
+	ft_printf("r.nb_a = %d\tr.nb_b = %d\n", r->nb_a, r->nb_b);
+	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");
 }

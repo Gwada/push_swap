@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/18 21:39:59 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/19 19:51:09 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@
 
 # define GOOD		(1 << 0)
 # define STRING		(1 << 3)
-# define MIN		(1 << 4)
+# define MINUS		(1 << 4)
 # define VISUAL		(1 << 5)
 # define COLOR		(1 << 6)
 # define ERR		(1 << 7)
+
+# define MIN		(1 << 1)
+# define MAX		(1 << 2)
 
 # define CHR		ft_strchr
 # define ISNUM		"0123456789"
@@ -42,7 +45,9 @@
 typedef struct		s_pile
 {
 	char			bd;
+
 	int				nbr;
+
 	struct s_pile	*root;
 	struct s_pile	*top;
 	struct s_pile	*low;
@@ -51,19 +56,24 @@ typedef struct		s_pile
 typedef struct		s_tab
 {
 	long long		n;
+
 	t_pile			m;
 }					t_tab;
 
 typedef	struct		s_roll
 {
 	int				size;
+
 	char			bd;
+
 	t_pile			a;
 	t_pile			b;
+
 	int				a_max;
 	int				a_min;
 	int				b_max;
 	int				b_min;
+
 	unsigned		nb_a;
 	unsigned		nb_b;
 }					t_roll;
@@ -76,7 +86,13 @@ int					init_struct(t_roll *r, char **argv, int size);
 void				init_tab(t_tab *t, t_roll *r, char **a, int i);
 void				init_sort(t_tab *t, t_roll *r, int i);
 
+void				display_piles(t_pile *a, t_pile *b);
+void				display_pile(t_pile *p, char pile);
+
 void				add_elem(t_tab *t, t_roll *r, int i);
+void				sa(t_pile *a);
+void				sb(t_pile *b);
+void				ss(t_pile *a, t_pile *b);
 
 void				ft_qsort(t_tab *t, int size, int i, int j);
 

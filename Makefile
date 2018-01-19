@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/18 21:40:26 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/19 19:51:17 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SOURCES			= display.c \
 					init.c \
 					push_swap.c \
 					quicksort.c \
-					add_elem.c
+					add_elem.c \
+					swap.c
 
 SOURCES_C		= $(SOURCES) \
 					c_main.c
@@ -55,11 +56,11 @@ _END=\x1b[0m
 all: $(CHECKER) $(PUSH_SWAP)
 
 $(CHECKER): lib $(OBJ_C)
-	@$(CC) $(FLAGS) -o $(CHECKER) $(OBJ_C) $(LIB)/$(LIB).a
+	@$(CC) $(FLAGS) $(HEADER) -o $(CHECKER) $(OBJ_C) $(LIB)/$(LIB).a
 	@echo "$(_CYAN)$(CHECKER)$(_END)			: $(_GREEN)compiled$(_END)"
 
 $(PUSH_SWAP): lib $(OBJ_PS) 
-	@$(CC) $(FLAGS) -o $(PUSH_SWAP) $(OBJ_PS) $(LIB)/$(LIB).a
+	@$(CC) $(FLAGS) $(HEADER) -o $(PUSH_SWAP) $(OBJ_PS) $(LIB)/$(LIB).a
 	@echo "$(_CYAN)$(PUSH_SWAP)$(_END)		: $(_GREEN)compiled$(_END)"
 
 %.o: %.c
@@ -95,7 +96,7 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
-NUM = -5 -3 5 6 4156 87 -185 654 15 5645 35153 354351 3543513 153134351 2021548 65135 31545 3154 -4856156 -4157 -774 56486 +45684684 -4785454 15684312 +48465123 -4845431 -1235487 9512 -97845
+NUM = 1 2 3
 
 goc:
 	@clear
@@ -107,7 +108,7 @@ gops:
 	@clear
 #	@make clean_PS
 	@make $(PUSH_SWAP)
-	time ./push_swap $(NUM)
+	@time ./push_swap $(NUM)
 #	@echo "\n"
 #	./push_swap $(NUM)
 
