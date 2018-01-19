@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/19 19:51:07 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/19 20:18:11 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,9 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;
 	r->bd |= GOOD;
-	display_piles(r->a.low, r->b.low);
+	display_piles(r->a.low, r->b.low);//////////////
 	add_elem(t, r, i);
-	display_piles(r->a.low, r->b.low);
-//	t_pile *tmp = r->a.low;
-//	while (!tmp->root)
-//	{
-//		tmp->top->root ? ft_printf("[root a]<->") : 0;
-//		!tmp->root ? ft_printf("[%d]<->", tmp->nbr) : 0;
-//		tmp = tmp->low;
-//		tmp->root ? ft_printf("[root a]\n\n") : 0;
-//	}
-//	if (r->bd & GOOD || r->bd & ERR)
-//		return ;
+	display_piles(r->a.low, r->b.low);//////////////
 
 	//ft_printf("r.size = %d\n\n", r->size);
 	ft_printf("{green}{underline}Pile A\t\tPileB{eoc}\n");

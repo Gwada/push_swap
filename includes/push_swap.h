@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/19 19:51:09 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/19 20:18:07 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct		s_pile
 {
 	char			bd;
 
+	int				pos;
 	int				nbr;
 
 	struct s_pile	*root;

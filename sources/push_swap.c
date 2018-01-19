@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:23:15 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/19 19:51:12 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/19 20:17:46 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void		push_swap(t_roll *r, char **p, int size)
 	int i = -1;
 	while (!(r->bd & GOOD) && ++i < size)//////////
 	{///////////
-		ft_printf("%d\tt[%d].n = [%d]   \t|",i + 1, i, t[i].n);///////////////
-		ft_printf("\tt[%d].m.nbr = [%d]", i, t[i].m.nbr);//////////////
-		t[i].m.bd & MAX ? ft_printf("\ttest MAX") : 0;////////////////
-		t[i].m.bd & MIN ? ft_printf("\ttest MIN") : 0;/////////////////
+		ft_printf("%d)t[%d]\tn = {green}[%d]{eoc}\t",i + 1, i, t[i].n);///////////////
+		ft_printf("\tm.nbr = {red}[%d]{eoc}", t[i].m.nbr);//////////////
+		ft_printf(" m.pos = %d", i, t[i].m.pos);//////////////
+		t[i].m.bd & MAX ? ft_printf("\tMAX") : 0;////////////////
+		t[i].m.bd & MIN ? ft_printf("\tMIN") : 0;/////////////////
 		ft_printf("\n");////////////////////
 	}//////////////////
 	r->bd & GOOD ? ft_printf("{green}{underline}{bold}GOOD END (entree triee){eoc} / ") : 0;///////////

@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 15:47:19 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/19 19:51:15 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/19 20:17:51 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		add_elem(t_tab *t, t_roll *r, int i)
 		t[i].n != t[i].m.nbr ? (r->bd &= ~GOOD) : (t[i].m.bd |= GOOD);
 		t[i].m.nbr == r->a_max ? t[i].m.bd |= MAX : 0;
 		t[i].m.nbr == r->a_min ? t[i].m.bd |= MIN : 0;
+		t[i].m.pos = i;
 
 		t[i].m.low = &r->a;
 		t[i].m.top = !r->a.top ? &r->a : r->a.top;
