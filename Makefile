@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/19 20:17:59 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/20 09:49:37 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SOURCES			= display.c \
 					push_swap.c \
 					quicksort.c \
 					add_elem.c \
-					swap.c
+					swap.c \
+					rotate.c
 
 SOURCES_C		= $(SOURCES) \
 					c_main.c
@@ -96,7 +97,7 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
-NUM = -1 -2 -3
+NUM = -1 0 -3
 
 goc:
 	@clear

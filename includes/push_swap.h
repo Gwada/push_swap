@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/19 20:18:07 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/20 09:49:29 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef	struct		s_roll
 	t_pile			a;
 	t_pile			b;
 
+	int				cor;
 	int				a_max;
 	int				a_min;
 	int				b_max;
@@ -91,9 +92,14 @@ void				display_piles(t_pile *a, t_pile *b);
 void				display_pile(t_pile *p, char pile);
 
 void				add_elem(t_tab *t, t_roll *r, int i);
+void				find_best(t_tab *t, t_roll *r, int val);
 void				sa(t_pile *a);
 void				sb(t_pile *b);
 void				ss(t_pile *a, t_pile *b);
+void				rotate(t_tab *t, t_pile *p);
+void				r_rotate(t_tab *t, t_pile *p);
+void				d_rotate(t_tab *t, t_pile *p);
+void				d_r_rotate(t_tab *t, t_pile *p);
 
 void				ft_qsort(t_tab *t, int size, int i, int j);
 
