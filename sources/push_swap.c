@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:23:15 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/20 09:49:48 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/20 20:13:38 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		push_swap(t_roll *r, char **p, int size)
 		t[i].m.bd & MIN ? ft_printf("\tMIN") : 0;/////////////////
 		ft_printf("\n");////////////////////
 	}//////////////////
+	//find_best(t, r, 0);
 	r->bd & GOOD ? ft_printf("{green}{underline}{bold}GOOD END (entree triee){eoc} / ") : 0;///////////
 	ft_printf("{yellow}{bold}END PUSH SWAP{eoc}\n\n");
 }

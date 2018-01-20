@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/20 09:49:45 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/20 20:13:41 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,19 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;
 	r->bd |= GOOD;
-	display_piles(r->a.low, r->b.low);//////////////
+//	display_piles(r->a.low, r->b.low);//////////////
 	add_elem(t, r, i);
 	display_piles(r->a.low, r->b.low);//////////////
 
 	//ft_printf("r.size = %d\n\n", r->size);
-	ft_printf("{green}{underline}Pile A\t\tPileB{eoc}\n");
-	ft_printf("r.a_max\t= %2d\tr.b_max\t= %2d\n", r->a_max, r->b_max);
-	ft_printf("r.a_min\t= %2d\tr.b_min\t= %2d\n", r->a_min, r->b_min);
-	ft_printf("r.nb_a\t= %2d\tr.nb_b\t= %2d\n", r->nb_a, r->nb_b);
-	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");
+//	ft_printf("{green}{underline}Pile A\t\tPileB{eoc}\n");
+//	ft_printf("r.a_max\t= %2d\tr.b_max\t= %2d\n", r->a_max, r->b_max);
+//	ft_printf("r.a_min\t= %2d\tr.b_min\t= %2d\n", r->a_min, r->b_min);
+//	ft_printf("r.nb_a\t= %2d\tr.nb_b\t= %2d\n", r->nb_a, r->nb_b);
+//	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");
 //	while (!(r->bd & GOOD))
 //	{
-		find_best(t, r, 0);
+	find_best(t, r, 0);
+	display_piles(r->a.low, r->b.low);//////////////
 //	}
 }

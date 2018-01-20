@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 15:47:19 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/20 09:49:57 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/20 20:13:33 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void		add_elem(t_tab *t, t_roll *r, int i)
 		t[i].m.nbr == r->a_max ? t[i].m.bd |= MAX : 0;
 		t[i].m.nbr == r->a_min ? t[i].m.bd |= MIN : 0;
 		t[i].m.pos = i;
-
 		t[i].m.low = &r->a;
 		t[i].m.top = !r->a.top ? &r->a : r->a.top;
 		!r->a.low ? (r->a.low = &t[i].m) : (r->a.top->low = &t[i].m);
@@ -34,13 +33,18 @@ void		add_elem(t_tab *t, t_roll *r, int i)
 void		find_best(t_tab *t, t_roll *r, int val)
 {
 	int		rotate;
+	int		elem;
 
+	ft_printf("in find\n");
 	rotate = -1;
-	//while (++rotate < r->size)
-	//{
-		
-//	}
+	while (++rotate < r->size)
+	{
+		r_rotate(NULL, &r->a);
+		elem = -1;
+	//	while (++elem < r->size)
+	//		cmp_tab_to_pile(t, r, &val);
+		display_piles(r->a.low, NULL);
+	}
 	(void)t;
-	(void)r;
 	(void)val;
 }

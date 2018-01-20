@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/20 09:49:29 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/20 20:13:54 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 # define MIN		(1 << 1)
 # define MAX		(1 << 2)
+# define SWAP		(1 << 3)
 
 # define CHR		ft_strchr
 # define ISNUM		"0123456789"
@@ -98,8 +99,8 @@ void				sb(t_pile *b);
 void				ss(t_pile *a, t_pile *b);
 void				rotate(t_tab *t, t_pile *p);
 void				r_rotate(t_tab *t, t_pile *p);
-void				d_rotate(t_tab *t, t_pile *p);
-void				d_r_rotate(t_tab *t, t_pile *p);
+void				d_rotate(t_tab *t, t_roll *r);
+void				d_r_rotate(t_tab *t, t_roll *r);
 
 void				ft_qsort(t_tab *t, int size, int i, int j);
 
