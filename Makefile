@@ -24,6 +24,7 @@ SOURCES			= display.c \
 					push_swap.c \
 					quicksort.c \
 					add_elem.c \
+					push_swap_crack.c \
 					swap.c \
 					rotate.c
 
@@ -97,7 +98,7 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
-NUM = 2 3 1
+NUM = "2 3 1"
 
 goc:
 	@clear
@@ -109,8 +110,8 @@ gops:
 	@clear
 #	@make clean_PS
 	@make $(PUSH_SWAP)
-	@time ./push_swap $(NUM)
+#	@time ./push_swap $(NUM)
 #	@echo "\n"
-#	./push_swap $(NUM)
+	./push_swap $(NUM)
 
 .PHONY: all re fclean clean 

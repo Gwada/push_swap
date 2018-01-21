@@ -81,29 +81,40 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 		}
 		**a != ' ' ? ++a : 0;
 	}
+	!(r->bd & ERR) ? init_sort(t, r, -1) : 0;
 }
 
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
-	ft_printf("{magenta}{bold}IN INIT SORT{eoc}\n");
+	ft_printf("{magenta}{bold}IN INIT SORT{eoc}\n");//
 	ft_qsort(t, r->size, 0, 0);
 	r->nb_a = (unsigned)r->size;
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;
 	r->bd |= GOOD;
+	while (!(r->bd & ERR) && ++i < r->size)
+	{
+		(i < r->size - 1) && (t[i].n == t[i + 1].n) ? r->bd |= ERR : 0;
+		t[i].n != t[i].m.nbr ? (r->bd &= ~GOOD) : (t[i].m.bd |= GOOD);
+		t[i].n == t[i].m.nbr ? ++r->cor : 0;
+		t[i].m.nbr == r->a_max ? t[i].m.bd |= MAX : 0;
+		t[i].m.nbr == r->a_min ? t[i].m.bd |= MIN : 0;
+		t[i].m.pos = i;
+		t[i].m.low = &r->a;
+		t[i].m.top = r->a.top ? r->a.top : &r->a;
+		r->a.low ? (r->a.top->low = &t[i].m) : (r->a.low = &t[i].m);
+		r->a.top = &t[i].m;
+	}
 //	display_piles(r->a.low, r->b.low);//////////////
-	add_elem(t, r, i);
-	display_piles(r->a.low, r->b.low);//////////////
-
-	//ft_printf("r.size = %d\n\n", r->size);
-//	ft_printf("{green}{underline}Pile A\t\tPileB{eoc}\n");
-//	ft_printf("r.a_max\t= %2d\tr.b_max\t= %2d\n", r->a_max, r->b_max);
-//	ft_printf("r.a_min\t= %2d\tr.b_min\t= %2d\n", r->a_min, r->b_min);
-//	ft_printf("r.nb_a\t= %2d\tr.nb_b\t= %2d\n", r->nb_a, r->nb_b);
-//	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");
-//	while (!(r->bd & GOOD))
-//	{
-	find_best(t, r, 0);
-	display_piles(r->a.low, r->b.low);//////////////
-//	}
+	//ft_printf("r.size = %d\n\n", r->size);//
+//	ft_printf("{green}{underline}Pile A\t\tPileB{eoc}\n");//
+//	ft_printf("r.a_max\t= %2d\tr.b_max\t= %2d\n", r->a_max, r->b_max);//
+//	ft_printf("r.a_min\t= %2d\tr.b_min\t= %2d\n", r->a_min, r->b_min);//
+//	ft_printf("r.nb_a\t= %2d\tr.nb_b\t= %2d\n", r->nb_a, r->nb_b);//
+//	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");//
+//	while (!(r->bd & GOOD))//
+//	{//
+//	find_best(t, r, 0);
+//	}//
+	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");//
 }

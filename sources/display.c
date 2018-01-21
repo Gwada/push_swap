@@ -14,27 +14,28 @@
 
 void		display_piles(t_pile *a, t_pile *b)
 {
-	ft_printf("{black}{bold}Pile A{eoc} = ");
-	if (!a)
-		ft_printf("{red}[EMPTY]{eoc}\n");
-	else
-		display_pile(a, 'a');
-	ft_printf("{black}{bold}Pile B{eoc} = ");
-	if (!b)
-		ft_printf("{red}[EMPTY]{eoc}\n");
-	else
-		display_pile(b, 'b');
+	display_pile(a, 'a');
+	display_pile(b, 'b');
 	ft_printf("\n");
 }
 
 void		display_pile(t_pile *p, char pile)
 {
-	while(!p->root)
+	ft_printf("{blue}{bold}Pile %c{eoc} = ", pile);
+	if (!p)
+		ft_printf("{red}[EMPTY]{eoc}\n");
+	else
 	{
-		p->top->root ? ft_printf("{black}<-{eoc}") : 0;
-		!p->top->root ? ft_printf("{yellow}<->{eoc}", pile) : 0;
-		!p->root && p->bd & GOOD ? ft_printf("{green}[%d]{eoc}", p->nbr) : ft_printf("[%d]", p->nbr);
-		p = p->low;
-		p->root ? ft_printf("{black}->{eoc}\n", pile) : 0;
+		ft_printf("{black}<-{eoc}");
+		while(!p->low->root)
+		{
+			if (p->bd & GOOD)
+				ft_printf("{green}[%d]{eoc}", p->low->nbr);
+			if (!(p->bd & GOOD))
+				ft_printf("[%d]", p->low->nbr);
+			!p->low->root ? ft_printf("{yellow}<->{eoc}", pile) : 0;
+			p = p->low;
+		}
+		ft_printf("{black}->{eoc}\n", pile);
 	}
 }

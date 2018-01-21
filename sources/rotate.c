@@ -14,8 +14,14 @@
 
 void		rotate(t_tab *t, t_pile *p)
 {
-	(void)t;
-	(void)p;
+	p->low->top = p->top;
+	p->top->low = p->low;
+	p->top = p->low;
+	p->low->low->top = p;
+	p->low = p->low->low;
+	p->top->low = p;
+	if (!t)
+		return ;
 }
 
 void		r_rotate(t_tab *t, t_pile *p)
@@ -33,12 +39,14 @@ void		r_rotate(t_tab *t, t_pile *p)
 
 void		d_rotate(t_tab *t, t_roll *r)
 {
-	(void)t;
-	(void)r;
+	rotate(t, &r->a);
+	rotate(t, &r->b);
+	if (!t)
+		return ;
 }
 
 void		d_r_rotate(t_tab *t, t_roll *r)
 {
-	(void)t;
-	(void)r;
+	r_rotate(t, &r->a);
+	r_rotate(t, &r->a);
 }

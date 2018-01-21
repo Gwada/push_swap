@@ -16,7 +16,7 @@ void		ft_putwchar_p(t_data *data, wchar_t c, int size, int n_b)
 {
 	char	wc[4];
 
-	if (n_b <= size && n_b <= MB_CUR_MAX)
+	if (n_b <= size && (unsigned)n_b <= MB_CUR_MAX)
 	{
 		if (n_b == 1)
 			wc[0] = (char)c;
