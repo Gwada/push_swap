@@ -49,4 +49,6 @@ void		d_r_rotate(t_tab *t, t_roll *r)
 {
 	r_rotate(t, &r->a);
 	r_rotate(t, &r->a);
+	if (!t)
+		return ;
 }

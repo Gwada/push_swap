@@ -14,15 +14,15 @@
 
 void		display_piles(t_pile *a, t_pile *b)
 {
-	display_pile(a, 'a');
-	display_pile(b, 'b');
+	display_pile(a, 'A');
+	display_pile(b, 'B');
 	ft_printf("\n");
 }
 
 void		display_pile(t_pile *p, char pile)
 {
 	ft_printf("{blue}{bold}Pile %c{eoc} = ", pile);
-	if (!p)
+	if (!p->low)
 		ft_printf("{red}[EMPTY]{eoc}\n");
 	else
 	{
@@ -31,10 +31,10 @@ void		display_pile(t_pile *p, char pile)
 		{
 			if (p->bd & GOOD)
 				ft_printf("{green}[%d]{eoc}", p->low->nbr);
-			if (!(p->bd & GOOD))
+			else
 				ft_printf("[%d]", p->low->nbr);
-			!p->low->root ? ft_printf("{yellow}<->{eoc}", pile) : 0;
 			p = p->low;
+			!p->low->root ? ft_printf("{yellow}<->{eoc}", pile) : 0;
 		}
 		ft_printf("{black}->{eoc}\n", pile);
 	}
