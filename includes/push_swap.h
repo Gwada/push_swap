@@ -75,6 +75,7 @@ typedef	struct		s_roll
 	t_pile			b;
 
 	int				cor;
+	int				b_rot;
 	int				a_max;
 	int				a_min;
 	int				b_max;
@@ -96,7 +97,7 @@ void				display_piles(t_pile *a, t_pile *b);
 void				display_pile(t_pile *p, char pile);
 
 void				find_best(t_tab *t, t_roll *r, int val);
-void				crack_that_shit(t_tab *t, t_roll *r, int val);
+void				crack_that_shit(t_tab *t, t_roll *r, int rot);
 
 void				sa(t_pile *a);
 void				sb(t_pile *b);

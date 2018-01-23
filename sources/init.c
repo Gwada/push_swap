@@ -105,16 +105,5 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 		r->a.low ? (r->a.top->low = &t[i].m) : (r->a.low = &t[i].m);
 		r->a.top = &t[i].m;
 	}
-//	display_piles(r->a.low, r->b.low);//////////////
-	//ft_printf("r.size = %d\n\n", r->size);//
-//	ft_printf("{green}{underline}Pile A\t\tPileB{eoc}\n");//
-//	ft_printf("r.a_max\t= %2d\tr.b_max\t= %2d\n", r->a_max, r->b_max);//
-//	ft_printf("r.a_min\t= %2d\tr.b_min\t= %2d\n", r->a_min, r->b_min);//
-//	ft_printf("r.nb_a\t= %2d\tr.nb_b\t= %2d\n", r->nb_a, r->nb_b);//
-//	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");//
-//	while (!(r->bd & GOOD))//
-//	{//
-//	find_best(t, r, 0);
-//	}//
 	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");//
 }

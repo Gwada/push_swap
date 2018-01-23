@@ -98,7 +98,7 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
-NUM = "2 3 1 7"
+NUM = 2 3 1
 
 goc:
 	@clear
