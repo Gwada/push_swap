@@ -12,18 +12,45 @@
 
 #include "push_swap.h"
 
+static	void	check_sort(t_tab *t, t_roll *r, int i)
+{
+	ft_printf("\n{black}{bold}IN chek{eoc}\n");//
+	t_pile		*tmp;
+
+	tmp = r->a.low ? &r->a : NULL;
+	tmp ? r->bd |= GOOD : 0;
+	display_pile(tmp, 'A');//
+	while (++i < r->size)
+	{
+		ft_printf("%d\t%d\n", (int)t[i].n, tmp->low->nbr);//
+		(int)t[i].n != tmp->low->nbr ? r->bd &= ~GOOD : 0;
+		tmp = tmp->low;
+	}
+	ft_printf("{black}{bold}end check{eoc}\n\n");//
+}
+
 static	void	dlavaury_sort(t_tab *t, t_roll *r)
 {
-	ft_printf("{black}{bold}IN DLAVAURY{eoc}\n\n");
-//	while (!(r->bd & GOOD))
-//	{
-	display_pile(&r->a, 'A');
-		r->a.low->bd & R_ROT ? r_rotate(t, &r->a) : 0;
-	display_pile(&r->a, 'A');
-//	}
-	ft_printf("{black}{bold}END DLAVAURY{eoc}\n\n");
-	(void)r;
-	(void)t;
+	ft_printf("{black}{bold}IN DLAVAURY{eoc}\n\n");//
+	while (!(r->bd & GOOD))
+	{
+		display_pile(&r->a, 'A');//
+		if (r->a.low->bd & R_ROT)
+		{//
+			ft_printf("test1\n");//
+			r_rotate(t, &r->a);
+		}//
+		else if (r->a.low->bd & ROT)
+		{//
+			ft_printf("test2\n");//
+			r_rotate(t, &r->a);
+		}//
+		display_pile(&r->a, 'A');//
+		check_sort(t, r, -1);
+		display_pile(&r->a, 'A');//
+	}
+	r->bd & GOOD ? ft_printf("le tri est fini!!\n") : 0;//
+	ft_printf("{black}{bold}END DLAVAURY{eoc}\n\n");//
 }
 
 void		push_swap(t_roll *r, char **p, int size)
