@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 09:54:42 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/12 09:54:46 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/25 10:54:29 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		ft_putwchar_p(t_data *data, wchar_t c, int size, int n_b)
 {
 	char	wc[4];
 
-	if (n_b <= size && (unsigned)n_b <= MB_CUR_MAX)
+	if (n_b <= size && (int)n_b <= (int)MB_CUR_MAX)
 	{
 		if (n_b == 1)
 			wc[0] = (char)c;

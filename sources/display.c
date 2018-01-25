@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:26:28 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/20 19:00:37 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/25 20:34:01 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		display_pile(t_roll *r, t_pile *p, char pile)
 	!p->low && !(r->bd & COLOR) ? ft_printf("[EMPTY]\n") : 0;
 	if (p->low)
 	{
-		r->bd & COLOR ? ft_printf("{black}<-{eoc}") : ft_printf("<-");
+		r->bd & COLOR ? ft_printf("{red}<-{eoc}") : ft_printf("<-");
 		while(!p->low->root)
 		{
 			p->bd & GOOD ? ft_printf("{green}[%d]{eoc}", p->low->nbr) : 0;
@@ -37,6 +37,6 @@ void		display_pile(t_roll *r, t_pile *p, char pile)
 				r->bd & COLOR ? ft_printf("{yellow}<->{eoc}", pile) : 0;
 			(!p->low->root && !(r->bd & COLOR)) ? ft_printf("<->", pile) : 0;
 		}
-		r->bd & COLOR ? ft_printf("{black}->{eoc}\n") : ft_printf("->\n");
+		r->bd & COLOR ? ft_printf("{red}->{eoc}\n") : ft_printf("->\n");
 	}
 }

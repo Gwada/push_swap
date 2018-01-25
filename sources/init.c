@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/20 20:13:41 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/25 19:12:04 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
-//	ft_printf("{magenta}{bold}IN INIT SORT{eoc}\n");//
 	ft_qsort(t, r->size, 0, 0);
 	r->nb_a = (unsigned)r->size;
 	r->a_max = (int)t[r->size - 1].n;
@@ -97,7 +96,7 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 	while (!(r->bd & ERR) && ++i < r->size)
 	{
 		(i < r->size - 1) && (t[i].n == t[i + 1].n) ? r->bd |= ERR : 0;
-		t[i].n != t[i].m.nbr ? (r->bd &= ~GOOD) : (t[i].m.bd |= GOOD);
+		t[i].n != t[i].m.nbr ? (r->bd &= ~GOOD) : 0;
 		t[i].n == t[i].m.nbr ? ++r->cor : 0;
 		t[i].m.nbr == r->a_max ? t[i].m.bd |= MAX : 0;
 		t[i].m.nbr == r->a_min ? t[i].m.bd |= MIN : 0;
@@ -107,5 +106,4 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 		r->a.low ? (r->a.top->low = &t[i].m) : (r->a.low = &t[i].m);
 		r->a.top = &t[i].m;
 	}
-//	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");//
 }

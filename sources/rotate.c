@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 09:41:02 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/20 20:13:46 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/25 20:34:05 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		rotate(t_roll *r, t_tab *t, t_pile *p, char pile)
 		if (!(r->bd & COLOR))
 			ft_printf("r%c\n", pile);
 		else
-			ft_printf("{yellow}r%c{eoc}\n", pile);
+			ft_printf("{green}r%c{eoc}\n", pile);
 		if (r->bd & VISUAL)
 			display_piles(r, &r->a, &r->b);
 	}
@@ -49,11 +49,9 @@ void		r_rotate(t_roll *r, t_tab *t, t_pile *p, char pile)
 			ft_printf("rr%c\n", pile);
 		else
 			ft_printf("{green}rr%c{eoc}\n", pile);
-		if (r->bd & VISUAL)
-			display_piles(r, &r->a, &r->b);
+		r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	}
 }
-
 
 void		d_rotate(t_tab *t, t_roll *r)
 {
@@ -61,7 +59,7 @@ void		d_rotate(t_tab *t, t_roll *r)
 	rotate(NULL, t, &r->b, 0);
 	if (!t)
 		return ;
-	ft_printf("rr\n");
+	!(r->bd & COLOR) ? ft_printf("rr\n") : ft_printf("{green}rr{eoc}\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
 
@@ -71,6 +69,6 @@ void		d_r_rotate(t_tab *t, t_roll *r)
 	r_rotate(NULL, t, &r->a, 0);
 	if (!t)
 		return ;
-	ft_printf("rrr\n");
+	!(r->bd & COLOR) ? ft_printf("rrr\n") : ft_printf("{green}rrr{eoc}\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
