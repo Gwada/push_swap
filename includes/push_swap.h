@@ -93,17 +93,16 @@ int					init_struct(t_roll *r, char **argv, int size);
 void				init_tab(t_tab *t, t_roll *r, char **a, int i);
 void				init_sort(t_tab *t, t_roll *r, int i);
 
-void				display_piles(t_pile *a, t_pile *b);
-void				display_pile(t_pile *p, char pile);
+void				display_piles(t_roll *r, t_pile *a, t_pile *b);
+void				display_pile(t_roll *r, t_pile *p, char pile);
 
-void				find_best(t_tab *t, t_roll *r, int val);
 void				crack_that_shit(t_tab *t, t_roll *r, int rot);
 
 void				sa(t_pile *a);
 void				sb(t_pile *b);
 void				ss(t_pile *a, t_pile *b);
-void				rotate(t_tab *t, t_pile *p);
-void				r_rotate(t_tab *t, t_pile *p);
+void				rotate(t_roll *r, t_tab *t, t_pile *p, char pile);
+void				r_rotate(t_roll *r, t_tab *t, t_pile *p, char pile);
 void				d_rotate(t_tab *t, t_roll *r);
 void				d_r_rotate(t_tab *t, t_roll *r);
 

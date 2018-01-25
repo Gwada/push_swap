@@ -59,6 +59,7 @@ int				init_struct(t_roll *r, char **nbr, int size)
 
 void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 {
+//	ft_printf("{magenta}{bold}IN INIT TAB{eoc}\n");//
 	while (*a && ++i < r->size)
 	{
 		ft_bzero(&t[i], sizeof(*t));
@@ -81,12 +82,13 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 		}
 		**a != ' ' ? ++a : 0;
 	}
+//	ft_printf("{magenta}{bold}END INIT TAB{eoc}\n\n");//
 	!(r->bd & ERR) ? init_sort(t, r, -1) : 0;
 }
 
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
-	ft_printf("{magenta}{bold}IN INIT SORT{eoc}\n");//
+//	ft_printf("{magenta}{bold}IN INIT SORT{eoc}\n");//
 	ft_qsort(t, r->size, 0, 0);
 	r->nb_a = (unsigned)r->size;
 	r->a_max = (int)t[r->size - 1].n;
@@ -105,5 +107,5 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 		r->a.low ? (r->a.top->low = &t[i].m) : (r->a.low = &t[i].m);
 		r->a.top = &t[i].m;
 	}
-	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");//
+//	ft_printf("{magenta}{bold}END INIT SORT{eoc}\n\n");//
 }

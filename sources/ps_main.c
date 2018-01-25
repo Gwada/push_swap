@@ -41,6 +41,6 @@ int				main(int argc, char **argv)
 		!(r.bd & ERR) && r.size ? push_swap(&r, argv, r.size) : 0;
 	}
 	//argc == 1 ? ft_printf("no argument end\n") : 0;//
-	r.bd & ERR ? display_error(&r) : ft_printf("OK\n");//
+	r.bd & ERR ? display_error(&r) : 0;//
 	return (0);
 }
