@@ -6,13 +6,13 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:23:15 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/25 20:36:28 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/26 17:22:21 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	void	check_sort(t_tab *t, t_roll *r, int i)
+/*static	void	check_sort(t_tab *t, t_roll *r, int i)
 {
 //	ft_printf("\n{black}{bold}IN chek{eoc}\n");//
 	t_pile		*tmp;
@@ -29,21 +29,23 @@ static	void	check_sort(t_tab *t, t_roll *r, int i)
 	}
 	i == r->size ? r->bd |= GOOD : 0;
 //	ft_printf("{black}{bold}end check{eoc}\n\n");//
-}
+}*/
 
 void		push_swap(t_roll *r, char **p, int size)
 {
+	ft_printf("{yellow}{bold}{underline}IN PUSH SWAP{eoc}\n");//////////////////
 	t_tab	t[size];
-//	ft_printf("{yellow}{bold}{underline}IN PUSH SWAP{eoc}\n\n");//
 
 	init_tab(t, r, p, -1);
-//	display_piles(r, &r->a, &r->b);//
+	display_piles(r, &r->a, &r->b);/////////////////////////
 	if (r->bd & ERR || r->bd & GOOD)
 		return ;
-	crack_that_shit(t, r, 0, 0);
-	int i = 0;
-//	display_piles(r, &r->a, &r->b);//
-	while (!(r->bd & GOOD))
+	find_best_combinaison(t, r, 0);
+	ft_printf("r->cor = %d\tr->b_rot = %d\n", r->cor, r->b_rot);////////////////
+	crack_that_shit(t, r);
+//	int i = 0;
+
+/*	while (!(r->bd & GOOD))
 	{
 //		ft_printf("r->a.low->nbr = %d ", r->a.low->nbr);
 //		r->a.low->bd & GOOD ? ft_printf("GOOD ") : 0;
@@ -53,11 +55,11 @@ void		push_swap(t_roll *r, char **p, int size)
 //		r->a.low->bd & ROT ? ft_printf("ROT ") : 0;
 //		ft_printf("\n");
 
-		/*if (r->a.low->bd & GOOD)
+		if (r->a.low->bd & GOOD)
 		{//
 			r->a.low->bd &= ~GOOD;
 			r_rotate(r, t, &r->a, 'a');
-		}//*/
+		}//
 
 		if (r->a.low->bd & SWAP)
 		{
@@ -87,8 +89,8 @@ void		push_swap(t_roll *r, char **p, int size)
 			break ;
 	//	crack_that_shit(t, r, 0, 0);
 	}
-	i == 20 ? ft_printf("tu fais de la merde\n") : 0;
+	i == 20 ? ft_printf("tu fais de la merde\n") : 0;*/
 	r->bd & GOOD ? ft_printf("le tri est fini!!\n") : 0;//
 
-//	ft_printf("{yellow}{bold}{underline}END PUSH SWAP{eoc}\n\n");
+	ft_printf("{yellow}{bold}{underline}END PUSH SWAP{eoc}\n");
 }
