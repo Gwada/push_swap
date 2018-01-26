@@ -33,30 +33,25 @@
 */
 void		find_best_sort(t_tab *t, t_roll *r, int size, int i)
 {
-	ft_printf("{blue}{bold}{underline}IN BEST SORT{eoc}\n\n");//
+	ft_printf("{blue}{bold}{underline}IN BEST SORT{eoc}\n\n");///////////////
 	int		j;
 	int		best[size];
 
 	j = -1;
-	find_best_rotation(r, r->size - r->b_rot);
-	display_pile(r, &r->a, 'A');///
-	ft_printf("\n");
+	display_pile(r, &r->a, 'A');////////////////
+	find_best_rotation(r, r->size - r->b_rot, 0);
+	display_pile(r, &r->a, 'A');//////////////////
+	ft_printf("\n");/////////////////////
 	while (++j < r->size)
 	{
 		best[j] = r->a.low->nbr;
-		ft_printf("best[%d] = %d\tt[%d].n = %d\n", j, best[j], j, t[j].n);
+		ft_printf("best[%d] = %d\tt[%d].n = %d\n", j, best[j], j, t[j].n);////////////////
 		rotate(NULL, NULL, &r->a, 0);
 	}
-	find_best_rotation(r, r->b_rot);
+//	find_best_rotation(r, r->b_rot, 0);////////////////
+	ft_printf("\n");/////////////////////
 	display_pile(r, &r->a, 'A');///
 	j = -1;
-	while (++j < r->size)
-	{
-		r->a.low->bd & ROT ? r->a.low->bd &= ~ROT : 0;
-		r->a.low->bd & R_ROT ? r->a.low->bd &= ~R_ROT : 0;
-		rotate(NULL, NULL, &r->a, 0);
-	}
-//	display_pile(r, &r->a, 'A');///
 	i = 0;
 /*	while (best[i] != r->a.low->nbr)
 		i++;
@@ -108,35 +103,40 @@ void		find_best_sort(t_tab *t, t_roll *r, int size, int i)
 		rotate(NULL, NULL, &r->a, 0);
 //		ft_printf("\n");//
 	}*/
+//	ft_printf("\n");//
 	display_pile(r, &r->a, 'A');///
+	find_best_rotation(r, r->b_rot, ROT | R_ROT);
+	//display_pile(r, &r->a, 'A');///
 	ft_printf("{blue}{bold}{underline}\nEND BEST SORT{eoc}\n");//
 }
 
-void		find_best_rotation(t_roll *r, int rot)
+void		find_best_rotation(t_roll *r, int rot, int state)
 {
-	ft_printf("{red}in best rot{eoc}\n");//
+//	ft_printf("{red}in best rot{eoc}\n");//
+
 	if (rot > r->size / 2)
 	{
-		//ft_printf ("best rot > size / 2 (rotate)\n");//
+//		ft_printf ("best rot > size / 2 (rotate)\n");//
 		while (rot++ < r->size)
 		{
 			rotate(NULL, NULL, &r->a, 0);
-//			display_pile(r, &r->a, 'T');///
-			r->a.low->bd |= R_ROT;
+//			display_pile(r, &r->a, 'T');//
+			state & R_ROT ? r->a.low->bd |= R_ROT : 0;
 		}
 	}
 	else
 	{
-	//	ft_printf ("best rot <= size / 2 (r_rotate)\n");//
+//		ft_printf ("best rot <= size / 2 (r_rotate)\n");//
 		while (rot-- > 0)
 		{
 			r_rotate(NULL, NULL, &r->a, 0);
 //			display_pile(r, &r->a, 'T');///
-			r->a.low->bd |= ROT;
+			state & ROT ? r->a.low->bd |= ROT : 0;
 		}
 	}
-//	display_pile(&r->a, 'A');///
-	ft_printf("{red}end best rot{eoc}\n");//
+//	display_pile(r, &r->a, 'A');///
+	(void)state;
+	ft_printf("{red}{bold}END BEST ROT{eoc}\n");//
 }
 
 void		find_best_combinaison(t_tab *t, t_roll *r, int i)
@@ -148,7 +148,7 @@ void		find_best_combinaison(t_tab *t, t_roll *r, int i)
 	t_pile	*tmp2;
 
 	tmp1 = &r->a;
-	while (++i <= r->size && r->cor != r->size)
+	while (++i <= r->size)
 	{
 		rotate(NULL, NULL, tmp1, 0);
 		tmp2 = tmp1->low;
@@ -164,6 +164,7 @@ void		find_best_combinaison(t_tab *t, t_roll *r, int i)
 		cor > r->cor ? r->b_rot = i : 0;
 		cor > r->cor ? r->cor = cor : 0;
 	}
+	r->cor == r->size ? ft_printf("(tris relatif!!!) ") : 0;//
 //	ft_printf("{red}end best comb{eoc}\n\n");//
 }
 

@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:23:15 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/26 17:22:21 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/26 21:26:38 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,16 @@ void		push_swap(t_roll *r, char **p, int size)
 	find_best_combinaison(t, r, 0);
 	ft_printf("r->cor = %d\tr->b_rot = %d\n", r->cor, r->b_rot);////////////////
 	crack_that_shit(t, r);
-//	int i = 0;
+	display_piles(r, &r->a, &r->b);/////////////////////////
+	int i = -1;
+	while (++i < r->size)
+	{
+		r->a.low->bd & ROT ? ft_printf("{green}ROT {eoc}", r->a.low->nbr) : 0;
+		r->a.low->bd & R_ROT ? ft_printf("{red}R_ROT {eoc}", r->a.low->nbr) : 0;
+		ft_printf("%d ", r->a.low->nbr);
+		rotate(NULL, NULL, &r->a, 0);
+	}
+	ft_printf("\n");
 
 /*	while (!(r->bd & GOOD))
 	{
@@ -55,37 +64,8 @@ void		push_swap(t_roll *r, char **p, int size)
 //		r->a.low->bd & ROT ? ft_printf("ROT ") : 0;
 //		ft_printf("\n");
 
-		if (r->a.low->bd & GOOD)
-		{//
-			r->a.low->bd &= ~GOOD;
-			r_rotate(r, t, &r->a, 'a');
-		}//
-
-		if (r->a.low->bd & SWAP)
-		{
-			r->a.low->bd &= ~SWAP;
-			swap(r, &r->a, 'a');
-			r_rotate(r, t, &r->a, 'a');
-			r->a.low->bd |= R_ROT;
-		}
-		else if (r->a.low->bd & PUSH)
-		{
-			r->a.low->bd &= ~PUSH;
-			push(r, &r->a, &r->b);
-		}
-
-		else if (r->a.low->bd & R_ROT)
-		{//
-			r->a.low->bd &= ~R_ROT;
-			r_rotate(r, t, &r->a, 'a');
-		}//
-		else if (r->a.low->bd & ROT)
-		{//
-			r->a.low->bd &= ~ROT;
-			rotate(r, t, &r->a, 'a');
-		}//
 		check_sort(t, r, -1);
-		if (++i == 20 || r->bd & GOOD)
+		if (++i == 200 || r->bd & GOOD)
 			break ;
 	//	crack_that_shit(t, r, 0, 0);
 	}
