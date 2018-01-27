@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/26 21:26:51 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/27 21:22:25 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,18 @@ void				init_sort(t_tab *t, t_roll *r, int i);
 void				display_piles(t_roll *r, t_pile *a, t_pile *b);
 void				display_pile(t_roll *r, t_pile *p, char pile);
 
-void				crack_that_shit(t_tab *t, t_roll *r);
 void				find_best_sort(t_tab *t, t_roll *r, int size, int i);
+void				go_to_best_rotation(t_roll *r, t_tab *t);
 void				find_best_rotation(t_roll *r, int rot, int state);
 void				find_best_combinaison(t_tab *t, t_roll *r, int i);
 
-void				push(t_roll *r, t_pile *dst, t_pile *src);
+void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				swap(t_roll *r, t_pile *p, char pile);
 void				d_swap(t_roll *r);
-void				rotate(t_roll *r, t_tab *t, t_pile *p, char pile);
-void				r_rotate(t_roll *r, t_tab *t, t_pile *p, char pile);
-void				d_rotate(t_tab *t, t_roll *r);
-void				d_r_rotate(t_tab *t, t_roll *r);
+void				rotate(t_roll *r, t_pile *p, char pile);
+void				r_rotate(t_roll *r, t_pile *p, char pile);
+void				d_rotate(t_roll *r, int state);
+void				d_r_rotate(t_roll *r, int state);
 
 void				ft_qsort(t_tab *t, int size, int i, int j);
 

@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/25 19:12:04 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/01/27 19:55:07 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void		parse_nbr(t_roll *r, char *n, int *size)
 {
 	!CHR("-+0123456789", *n) ? r->bd |= ERR : 0;
-	while (*n && !(r->bd & ERR))
+	while (*n && r->bd ^ ERR)
 	{
 		!CHR("-+cv 0123456789", *n) ? r->bd |= ERR : 0;
 		*n == 'c' && r->bd & COLOR ? r->bd |= ERR : 0;
@@ -24,8 +24,8 @@ static void		parse_nbr(t_roll *r, char *n, int *size)
 		*n == 'v' && !CHR(" c", n[1]) ? r->bd |= ERR : 0;
 		CHR("cv", *n) && *size ? r->bd |= ERR : 0;
 		*n == '-' && !CHR("cv0123456789", n[1]) ? r->bd |= ERR : 0;
-		!(r->bd & COLOR) && *n == 'c' ? r->bd |= COLOR : 0;
-		!(r->bd & VISUAL) && *n == 'v' ? r->bd |= VISUAL : 0;
+		r->bd ^ COLOR && *n == 'c' ? r->bd |= COLOR : 0;
+		r->bd ^ VISUAL && *n == 'v' ? r->bd |= VISUAL : 0;
 		*n == '+' && !CHR(ISNUM, n[1]) ? r->bd |= ERR : 0;
 		CHR("+-", *n) && !n[1] ? r->bd |= ERR : 0;
 		*n == ' ' ? r->bd |= STRING : 0;
@@ -46,7 +46,7 @@ int				init_struct(t_roll *r, char **nbr, int size)
 	r->b.root = &r->b;
 	r->b.top = r->b.low;
 	r->b.low = r->b.top;
-	while (*nbr && !(r->bd & ERR))
+	while (*nbr && r->bd ^ ERR)//
 	{
 		parse_nbr(r, *nbr++, &size);
 		r->bd & STRING && *nbr && size ? r->bd |= ERR : 0;
@@ -59,7 +59,7 @@ int				init_struct(t_roll *r, char **nbr, int size)
 
 void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 {
-//	ft_printf("{magenta}{bold}IN INIT TAB{eoc}\n");//
+//	ft_printf("{magenta}{bold}IN INIT TAB{eoc}\n");//////////////////////////////
 	while (*a && ++i < r->size)
 	{
 		ft_bzero(&t[i], sizeof(*t));
@@ -82,8 +82,8 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 		}
 		**a != ' ' ? ++a : 0;
 	}
-//	ft_printf("{magenta}{bold}END INIT TAB{eoc}\n\n");//
-	!(r->bd & ERR) ? init_sort(t, r, -1) : 0;
+//	ft_printf("{magenta}{bold}END INIT TAB{eoc}\n\n");///////////////////////////
+	r->bd ^ ERR ? init_sort(t, r, -1) : 0;
 }
 
 void			init_sort(t_tab *t, t_roll *r, int i)
@@ -93,7 +93,7 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;
 	r->bd |= GOOD;
-	while (!(r->bd & ERR) && ++i < r->size)
+	while (r->bd ^ ERR && ++i < r->size)
 	{
 		(i < r->size - 1) && (t[i].n == t[i + 1].n) ? r->bd |= ERR : 0;
 		t[i].n != t[i].m.nbr ? (r->bd &= ~GOOD) : 0;

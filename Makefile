@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/26 21:26:48 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/01/27 21:15:29 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SOURCES			= display.c \
 					init.c \
 					push_swap.c \
 					quicksort.c \
+					crack_that_shit.c \
 					push_swap_crack.c \
 					swap.c \
 					rotate.c \
@@ -98,7 +99,7 @@ go:
 	@./$(CHECKER)
 	@./$(PUSH_SWAP)
 
-NUM = -cv 4 5 6 2 3 
+NUM = "-cv 4 5 6 7 13 14 1 2 53 3"
 
 goc:
 	@clear
@@ -111,7 +112,7 @@ gops:
 	@make clean_PS
 	@make $(PUSH_SWAP)
 	@time ./push_swap $(NUM)
-#	./push_swap $(NUM)
+#	@./push_swap $(NUM)
 
 
 .PHONY: all re fclean clean 
