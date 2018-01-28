@@ -88,7 +88,7 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
-	ft_qsort(t, r->size, 0, 0);
+	ft_ps_qsort(t, r->size, 0, 0);
 	r->nb_a = (unsigned)r->size;
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;

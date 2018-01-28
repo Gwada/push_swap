@@ -15,9 +15,7 @@
 void		go_to_best_rotation(t_roll *r, t_tab *t)
 {
 //	ft_printf("{black}{bold}{underline}IN\tGO TO BEST ROTATION{eoc}\n");/////////
-
-
-	find_best_combinaison(t, r, 0);
+	find_best_combinaison(t, r, -1);
 	find_best_sort(t, r, r->size, -1);
 	while (r->a.low->bd & ROT || r->a.low->bd & R_ROT || r->a.low->bd & PUSH)
 	{
@@ -27,7 +25,10 @@ void		go_to_best_rotation(t_roll *r, t_tab *t)
 				r->a.low->low->bd |= ROT;
 			else if (r->a.low->bd & R_ROT)
 				r->a.low->low->bd |= R_ROT;
-			push(r, &r->a, &r->b, 'b');
+			if (r->a.low->nbr < r->a.low->low->nbr && r->a.low->nbr > r->a.top->nbr)
+				r->a.low->bd &= ~PUSH;
+			else
+				push(r, &r->a, &r->b, 'b');
 		}
 		if (r->a.low->bd & ROT)
 		{

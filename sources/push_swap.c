@@ -12,29 +12,38 @@
 
 #include "push_swap.h"
 
-/*static	void	check_sort(t_tab *t, t_roll *r, int i)
+int				check_sort(t_pile *p, int size, int i)
 {
 //	ft_printf("\n{black}{bold}IN chek{eoc}\n");//////////////////////////////////
-	t_pile		*tmp;
+	int			tab[size];
 
-	tmp = r->a.low ? r->a.low : NULL;
-//	display_pile(tmp, '1');//////////////////////////////////////////////////////
-	while (++i < r->size)
+	while (++i < size)
 	{
+		tab[i] = p->low->nbr;
+		rotate(NULL, p, 'p');
+		ft_printf("t[%d] = %d\t", i, tab[i]);
+	}
+	ft_qsort(tab, size, 0, 0);
+	//tmp = r->a.low ? r->a.low : NULL;
+//	display_pile(NULL, p, 'p');//////////////////////////////////////////////////
+	i = -1;
+	while (++i < size)
+//	{
+		ft_printf("t[%d] = %d\t", i, tab[i]);
 //		ft_printf("%d\t%d\n", (int)t[i].n, tmp->low->nbr);///////////////////////
 //		tmp->low->bd & R_ROT ? ft_printf("rrot\n") : 0;//////////////////////////
-		if ((int)t[i].n != tmp->nbr)
-			break ;
-		tmp = tmp->low;
-	}
-	i == r->size ? r->bd |= GOOD : 0;
+//		if ((int)t[i].n != tmp->nbr)
+//			break ;
+//		tmp = tmp->low;
+//	}
+	return (i == size ? GOOD : 0);
 //	ft_printf("{black}{bold}end check{eoc}\n\n");////////////////////////////////
-}*/
+}
 
-void		push_swap(t_roll *r, char **p, int size)
+void			push_swap(t_roll *r, char **p, int size)
 {
-	ft_printf("{yellow}{bold}{underline}IN\tPUSH SWAP{eoc}\n");//////////////////
-	t_tab	t[size];
+//	ft_printf("{yellow}{bold}{underline}IN\tPUSH SWAP{eoc}\n");//////////////////
+	t_tab		t[size];
 
 	init_tab(t, r, p, -1);
 	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////

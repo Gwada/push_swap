@@ -109,21 +109,21 @@ void			find_best_combinaison(t_tab *t, t_roll *r, int i)
 	int			cor;
 	t_pile		*tmp;
 
-	while (++i <= r->size)
+	while (++i < r->size)
 	{
-		rotate(NULL, &r->a, 0);
-		tmp = r->a.low;
+		tmp = &r->a;
 //		display_pile(r, tmp, 'T');//////////////////////////////////////////////
 		j = -1;
 		cor = 0;
 		while (++j < r->size)
 		{
-			tmp->nbr == (int)t[j].n ? ++cor : 0;
-			tmp = tmp->low;
+			tmp->low->nbr == (int)t[j].n ? ++cor : 0;
+			rotate(NULL, tmp, 0);
 		}
 //		ft_printf("correspondance = %d\n\n", cor);///////////////////////////////
 		cor > r->cor ? r->b_rot = i : 0;
 		cor > r->cor ? r->cor = cor : 0;
+		rotate(NULL, &r->a, 0);
 	}
 //	r->cor == r->size ? ft_printf("{green}tri relatif!!!{eoc}\n") : 0;///////////
 //	ft_printf("r->cor = %d\tr->b_rot = %d\n", r->cor, r->b_rot);/////////////////

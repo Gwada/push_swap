@@ -12,18 +12,18 @@
 
 #include "push_swap.h"
 
-static void		ps_swap(t_tab *a, t_tab *b)
+static void	ps_swap(t_tab *a, t_tab *b)
 {
-	int			tmp;
+	int		tmp;
 
 	tmp = (int)a->n;
 	a->n = b->n;
 	b->n = tmp;
 }
 
-void			ft_qsort(t_tab *t, int size, int i, int j)
+void		ft_ps_qsort(t_tab *t, int size, int i, int j)
 {
-	int			pvt;
+	int		pvt;
 
 	if (size < 2)
 		return ;
@@ -42,6 +42,35 @@ void			ft_qsort(t_tab *t, int size, int i, int j)
 		{
 			ps_swap(t + i, t + j);
 			j < pvt ? ps_swap(t + j, t + pvt) : 0;
+			j < pvt ? pvt = j : 0;
+			j -= (j - 1 == pvt) ? 2 : 1;
+		}
+	}
+	ft_ps_qsort(t, pvt, 0, 0);
+	ft_ps_qsort(t + pvt + 1, size - pvt - 1, 0, 0);
+}
+
+void		ft_qsort(int *t, int size, int i, int j)
+{
+	int		pvt;
+
+	if (size < 2)
+		return ;
+	pvt = size / 2;
+	i = (pvt == 0) ? 1 : 0;
+	j = (pvt == size - 1) ? size - 2 : size - 1;
+	while (i <= j)
+	{
+		if (t[i] <= t[pvt])
+		{
+			i > pvt ? ft_swap(t + i, t + pvt) : 0;
+			i > pvt ? pvt = i : 0;
+			i += (i + 1 == pvt) ? 2 : 1;
+		}
+		else
+		{
+			ft_swap(t + i, t + j);
+			j < pvt ? ft_swap(t + j, t + pvt) : 0;
 			j < pvt ? pvt = j : 0;
 			j -= (j - 1 == pvt) ? 2 : 1;
 		}
