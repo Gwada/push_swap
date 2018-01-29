@@ -56,44 +56,53 @@ static	void	find_best_insert(t_roll *r, t_pile *p, int value, char pile)
 	i = -1;
 	rot = 0;
 	size = (int)(pile == 'a' ? r->nb_a : r->nb_b);
-	display_piles(r, &r->a, &r->b);
-	if (size < 2)
+	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
+	if (size < 2 || (value > p->low->nbr && value < p->top->nbr))
 		return ;
-//	ft_printf("rot = %d size = %d\n", rot, size);////////////////////////////////////////////////
+	ft_printf("rot = %d size = %d\n", rot, size);////////////////////////////////
+	
 	if (p->low->nbr < value)
 	{
-		while (p->low->nbr < value
-		&& ((p->low->low->nbr < value) || (p->low->low->nbr > value)))
+	//	ft_printf("p->low->nbr = %d < value = %d\n", p->low->nbr, value);/////////
+		while (value > p->low->nbr && p->low->nbr < p->top->nbr && ++i < size)
+		{
+	//		ft_printf("boucle rotation\n");
+	//		display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
+			rotate(NULL, p, 0);
+	//		display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
+			++rot;
+	//		ft_printf("end boucle\n");
+		}
+	//	ft_printf("fin 1ere boucle\n");
+		while (i++ + rot <= size)
 		{
 			rotate(NULL, p, 0);
-			++rot;
+	//		display_piles(r, &r->a, &r->b);//////////////////////////////////////
 		}
-		while (++i + rot < size)
-			rotate(NULL, p, 0);
-		display_piles(r, &r->a, &r->b);
+	//	ft_printf("fin 2eme boucle\n");
+	//	display_piles(r, &r->a, &r->b);//////////////////////////////////////
 	}
 	else
 	{
-		while (p->low->nbr > value
-		&& ((p->low->low->nbr > value) || (p->low->low->nbr < value)))
+		ft_printf("p->low->nbr > value\n");//////////////////////////////////////
+		while (value < p->low->nbr && p->low->nbr > p->top->nbr && ++i < size)
 		{
 			r_rotate(NULL, p, 0);
 			++rot;
 		}
 		while (++i + rot < size)
 			r_rotate(NULL, p, 0);
-		display_piles(r, &r->a, &r->b);
+		display_piles(r, &r->a, &r->b);//////////////////////////////////////////
 	}
-//	ft_printf("rot = %d\n", rot);////////////////////////////////////////////////
-	if (rot > size / 2)
+	if (rot >= size / 2)
 		while (rot++ < size)
 		{
-			rotate(r, p, pile);
+			r_rotate(r, p, pile);
 		}
 	else
-		while (rot-- >= 0)
+		while (--rot > 0)
 		{
-			r_rotate(r, p, pile);
+			rotate(r, p, pile);
 		}
 	ft_printf("{magenta}{bold}{underline}END\tFIND BEST INSERT\n{eoc}");/////////
 }
@@ -103,15 +112,15 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 //	ft_printf("{blue}{bold}{underline}IN\tPUSH\n{eoc}");/////////////////////////
 	t_pile		*tmp;
 
-	if (!(tmp = src->low) || tmp->low->root)
+	if (!(src->low) || src->low->root)
 		return ;
+	tmp = src->low;
 
 //	ft_printf("r->nb_a = %d r->nb_b = %d\n", r->nb_a, r->nb_b);////////////////////////////////////////////////
 	src->low->bd &= ~PUSH;
 	dst->low ? find_best_insert(r, dst, tmp->nbr, pile) : 0;
 	src->low = src->low->low;
 	src->low->low->top = src;
-	//dst->low ? find_best_insert(r, dst, tmp->nbr, pile) : 0;
 	tmp->top = dst;
 	tmp->low = dst->low ? dst->low : dst;
 	dst->low ? (dst->low->top = tmp) : (dst->top = tmp);

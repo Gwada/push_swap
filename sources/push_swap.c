@@ -21,21 +21,23 @@ int				check_sort(t_pile *p, int size, int i)
 	{
 		tab[i] = p->low->nbr;
 		rotate(NULL, p, 'p');
-		ft_printf("t[%d] = %d\t", i, tab[i]);
+		ft_printf("t[%d] = %d\t", i, tab[i]);////////////////////////////////////
 	}
 	ft_qsort(tab, size, 0, 0);
+		ft_printf("\n");/////////////////////////////////////////////////////////
 	//tmp = r->a.low ? r->a.low : NULL;
 //	display_pile(NULL, p, 'p');//////////////////////////////////////////////////
 	i = -1;
 	while (++i < size)
 //	{
-		ft_printf("t[%d] = %d\t", i, tab[i]);
+	ft_printf("t[%d] = %d\t", i, tab[i]);////////////////////////////////////////
 //		ft_printf("%d\t%d\n", (int)t[i].n, tmp->low->nbr);///////////////////////
 //		tmp->low->bd & R_ROT ? ft_printf("rrot\n") : 0;//////////////////////////
 //		if ((int)t[i].n != tmp->nbr)
 //			break ;
 //		tmp = tmp->low;
 //	}
+	ft_printf("\n");/////////////////////////////////////////////////////////////
 	return (i == size ? GOOD : 0);
 //	ft_printf("{black}{bold}end check{eoc}\n\n");////////////////////////////////
 }
@@ -50,6 +52,9 @@ void			push_swap(t_roll *r, char **p, int size)
 	if (r->bd & ERR || r->bd & GOOD)
 		return ;
 	go_to_best_rotation(r, t);
+//	ft_printf("\n\n\n");/////////////////////////////////////////////////////////
+//	ft_printf("return = %d\n", check_sort(&r->a, r->nb_a, -1));//////////////////
+//	ft_printf("return = %d\n", check_sort(&r->b, r->nb_b, -1));//////////////////
 //	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 /*	int i = -1;
 	while (++i < (int)r->nb_a)///////////////////////////////////////////////////
