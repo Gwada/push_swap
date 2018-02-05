@@ -21,7 +21,7 @@ int				check_sort(t_pile *p, int size, int i)
 	{
 		tab[i] = p->low->nbr;
 		rotate(NULL, p, 'p');
-		ft_printf("t[%d] = %d\t", i, tab[i]);////////////////////////////////////
+		ft_printf("t[%d] = %d\t", i, tab[i], -1);////////////////////////////////////
 	}
 	ft_qsort(tab, size, 0, 0);
 		ft_printf("\n");/////////////////////////////////////////////////////////
@@ -48,9 +48,9 @@ void			push_swap(t_roll *r, char **p, int size)
 	t_tab		t[size];
 
 	init_tab(t, r, p, -1);
-	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 	if (r->bd & ERR || r->bd & GOOD)
 		return ;
+//	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 	go_to_best_rotation(r, t);
 //	ft_printf("\n\n\n");/////////////////////////////////////////////////////////
 //	ft_printf("return = %d\n", check_sort(&r->a, r->nb_a, -1));//////////////////

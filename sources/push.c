@@ -12,99 +12,60 @@
 
 #include "push_swap.h"
 
-static	void	find_max(t_roll *r, int value)
+static	void	find_max(t_roll *r)
 {
-//	ft_printf("{magenta}{bold}{underline}IN\tFIND MAX\n{eoc}");//////////////////
 	int			i;
 
-	i = -1;
-	r->a_max = (!r->nb_a ? value : r->a_min);
-	r->a_min = (!r->nb_a ? value : r->a_max);
-	if (r->nb_a > 1)
+	i = 0;
+	r->a_max = !r->nb_a ? 0 : r->a.low->nbr;
+	r->a_min = !r->nb_a ? 0 : r->a.low->nbr;
+	while (++i <= (int)r->nb_a)
 	{
-		while (++i < (int)r->nb_a)
-		{
-//			display_piles(r, &r->a, &r->b);//////////////////////////////////////
-			r->a.low->nbr > r->a_max ? r->a_max = r->a.low->nbr : 0;
-			r->a.low->nbr < r->a_min ? r->a_min = r->a.low->nbr : 0;
-			rotate(NULL, &r->a, 0);
-		}
+		rotate(NULL, &r->a, 0);
+		r->a.low->nbr > r->a_max ? r->a_max = r->a.low->nbr : 0;
+		r->a.low->nbr < r->a_min ? r->a_min = r->a.low->nbr : 0;
 	}
-	i = -1;
-	r->b_max = (r->nb_b == 1 ? value : r->b_min);
-	r->b_min = (r->nb_b == 1 ? value : r->b_max);
-	if (r->nb_b > 1)
+	i = 0;
+	r->b_max = !r->nb_b ? 0 : r->b.low->nbr;
+	r->b_min = !r->nb_b ? 0 : r->b.low->nbr;
+	while (++i <= (int)r->nb_b)
 	{
-		while (++i < (int)r->nb_b)
-		{
-//			display_piles(r, &r->a, &r->b);//////////////////////////////////////
-			r->b.low->nbr > r->b_max ? r->b_max = r->b.low->nbr : 0;
-			r->b.low->nbr < r->b_min ? r->b_min = r->b.low->nbr : 0;
-			rotate(NULL, &r->b, 0);
-		}
+		rotate(NULL, &r->b, 0);
+		r->b.low->nbr > r->b_max ? r->b_max = r->b.low->nbr : 0;
+		r->b.low->nbr < r->b_min ? r->b_min = r->b.low->nbr : 0;
 	}
-//	ft_printf("{magenta}{bold}{underline}END\tFIND MAX\n{eoc}");/////////////////
 }
 
 static	void	find_best_insert(t_roll *r, t_pile *p, int value, char pile)
 {
-	ft_printf("{magenta}{bold}{underline}IN\tFIND BEST INSERT\n{eoc}");//////////
+//	ft_printf("{magenta}{bold}{underline}IN\tFIND BEST INSERT\n{eoc}");//////////
 	int			i;
+	int			max;
+	int			min;
 	int			rot;
 	int			size;
 
 	i = -1;
 	rot = 0;
 	size = (int)(pile == 'a' ? r->nb_a : r->nb_b);
-	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
-	if (size < 2 || (value > p->low->nbr && value < p->top->nbr))
+	max = (pile == 'a' ? r->a_max : r->b_max);
+	min = (pile == 'a' ? r->a_min : r->b_min);
+	if (size < 2 || (value > p->LNBR && value < p->TNBR))
 		return ;
-	ft_printf("rot = %d size = %d\n", rot, size);////////////////////////////////
-	
-	if (p->low->nbr < value)
+	while (++i < size)
 	{
-	//	ft_printf("p->low->nbr = %d < value = %d\n", p->low->nbr, value);/////////
-		while (value > p->low->nbr && p->low->nbr < p->top->nbr && ++i < size)
-		{
-	//		ft_printf("boucle rotation\n");
-	//		display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
-			rotate(NULL, p, 0);
-	//		display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
-			++rot;
-	//		ft_printf("end boucle\n");
-		}
-	//	ft_printf("fin 1ere boucle\n");
-		while (i++ + rot <= size)
-		{
-			rotate(NULL, p, 0);
-	//		display_piles(r, &r->a, &r->b);//////////////////////////////////////
-		}
-	//	ft_printf("fin 2eme boucle\n");
-	//	display_piles(r, &r->a, &r->b);//////////////////////////////////////
+		if ((value > p->LNBR && ((value < p->TNBR) || (p->LNBR == max)))
+		|| (p->TNBR == min && value < p->TNBR))
+			rot = i;
+		rotate(NULL, p, 0);
 	}
-	else
-	{
-		ft_printf("p->low->nbr > value\n");//////////////////////////////////////
-		while (value < p->low->nbr && p->low->nbr > p->top->nbr && ++i < size)
-		{
-			r_rotate(NULL, p, 0);
-			++rot;
-		}
-		while (++i + rot < size)
-			r_rotate(NULL, p, 0);
-		display_piles(r, &r->a, &r->b);//////////////////////////////////////////
-	}
-	if (rot >= size / 2)
+	if (rot > size / 2)
 		while (rot++ < size)
-		{
 			r_rotate(r, p, pile);
-		}
 	else
-		while (--rot > 0)
-		{
+		while (rot-- > 0)
 			rotate(r, p, pile);
-		}
-	ft_printf("{magenta}{bold}{underline}END\tFIND BEST INSERT\n{eoc}");/////////
+//	ft_printf("{magenta}{bold}{underline}END\tFIND BEST INSERT\n{eoc}");/////////
 }
 
 void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
@@ -115,10 +76,8 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	if (!(src->low) || src->low->root)
 		return ;
 	tmp = src->low;
-
-//	ft_printf("r->nb_a = %d r->nb_b = %d\n", r->nb_a, r->nb_b);////////////////////////////////////////////////
-	src->low->bd &= ~PUSH;
-	dst->low ? find_best_insert(r, dst, tmp->nbr, pile) : 0;
+	tmp->bd &= ~PUSH;
+	find_best_insert(r, dst, tmp->nbr, pile);
 	src->low = src->low->low;
 	src->low->low->top = src;
 	tmp->top = dst;
@@ -127,8 +86,7 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	!dst->top ? (dst->top = tmp) : (dst->low = tmp);
 	r->nb_a += (pile == 'a') ? 1 : -1;
 	r->nb_b += (pile == 'b') ? 1 : -1;
-	find_max(r, tmp->nbr);
-
+	find_max(r);
 
 	r->bd & COLOR ? ft_printf("{red}p%c\n{eoc}", pile) : 0;
 	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;

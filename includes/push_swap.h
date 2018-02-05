@@ -43,6 +43,8 @@
 
 # define CHR		ft_strchr
 # define ISNUM		"0123456789"
+# define LNBR		low->nbr
+# define TNBR		top->nbr
 
 /*
 ** STRUCTURES
