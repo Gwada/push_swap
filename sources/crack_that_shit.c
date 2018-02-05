@@ -63,20 +63,48 @@ static int	check_push(t_roll *r, int size, int i)
 	return (r->a.low->bd & PUSH ? 0 : 1);
 }
 
-void		go_to_best_rotation(t_roll *r, t_tab *t)
+void		go_to_best_rotation(t_roll *r, int size, int i)
 {
 //	ft_printf("{black}{bold}{underline}IN\tGO TO BEST ROTATION{eoc}\n");/////////
+	int		t[size];
+
+	while (++i < size)
+	{
+		t[i] = r->a.LNBR;
+		rotate(NULL, &r->a, 0);
+	}
+	ft_qsort(t, size, 0, 0);
 	find_best_combinaison(t, r, -1);
-	find_best_sort(t, r, r->size, -1);
-	//while (r->a.low->bd & ROT || r->a.low->bd & R_ROT || r->a.low->bd & PUSH)
+	find_best_sort(t, r, r->nb_a, -1);
+	i = -1;
+	while (++i < size)
+	{
+		ft_printf("[%d ", r->a.LNBR);
+		r->a.low->bd & ROT ? ft_printf("{green}(ROT){eoc}") : 0;
+		r->a.low->bd & R_ROT ? ft_printf("{yellow}(R_ROT){eoc}") : 0;
+		r->a.low->bd & PUSH ? ft_printf("{red}(PUSH){eoc}") : 0;
+		r->a.low->bd & GOOD ? ft_printf("{magenta}(GOOD){eoc}") : 0;
+		ft_printf("] ", r->a.LNBR);
+		rotate(NULL, &r->a, 0);
+	}
+		ft_printf("\n");
 	while (r->a.low->bd & (ROT | R_ROT | PUSH))
 	{
 		if (r->a.low->bd & PUSH && !check_push(r, r->nb_a, -1))
+		{
 			push(r, &r->a, &r->b, 'b');
+			i = -1;
+			while (++i < size)
+			{
+				r->a.low->bd = 0;
+				rotate(NULL, &r->a, 0);
+			}
+			break ;
+		}
 		else if (r->a.low->bd & ROT)
 			check_rot(r);
 		else if (r->a.low->bd & R_ROT)
 			check_r_rot(r);
 	}
-//	ft_printf("{black}{bold}{underline}END\tGO TO BEST ROTATION{eoc}\n");////////
+	ft_printf("{black}{bold}{underline}END\tGO TO BEST ROTATION{eoc}\n");////////
 }

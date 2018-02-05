@@ -100,10 +100,10 @@ void				init_sort(t_tab *t, t_roll *r, int i);
 void				display_piles(t_roll *r, t_pile *a, t_pile *b);
 void				display_pile(t_roll *r, t_pile *p, char pile);
 
-void				find_best_sort(t_tab *t, t_roll *r, int size, int i);
-void				go_to_best_rotation(t_roll *r, t_tab *t);
+void				find_best_sort(int *t, t_roll *r, int size, int i);
+void				go_to_best_rotation(t_roll *r, int size, int i);
 void				find_best_rotation(t_roll *r, int rot, int state);
-void				find_best_combinaison(t_tab *t, t_roll *r, int i);
+void				find_best_combinaison(int *t, t_roll *r, int i);
 int					check_sort();
 
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);

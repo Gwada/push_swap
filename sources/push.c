@@ -76,7 +76,7 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	if (!(src->low) || src->low->root)
 		return ;
 	tmp = src->low;
-	tmp->bd &= ~PUSH;
+	tmp->bd = 0;
 	find_best_insert(r, dst, tmp->nbr, pile);
 	src->low = src->low->low;
 	src->low->low->top = src;
