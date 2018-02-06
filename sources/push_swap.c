@@ -47,9 +47,8 @@ void			push_swap(t_roll *r, char **p, int size)
 	int test = 0;
 	while (check_sort(&r->a, r->nb_a, -1))
 	{
-		go_to_best_rotation(r, r->nb_a, -1);
-		if (++test == 42)
+		if (++test == 42 || go_to_best_rotation(r, r->nb_a, -1))
 			break ;
 	}
-	ft_printf("{yellow}{bold}{underline}END\tPUSH SWAP{eoc}\n");/////////////////
+//	ft_printf("{yellow}{bold}{underline}END\tPUSH SWAP{eoc}\n");/////////////////
 }

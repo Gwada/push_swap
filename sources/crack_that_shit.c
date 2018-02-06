@@ -63,7 +63,7 @@ static int	check_push(t_roll *r, int size, int i)
 	return (r->a.low->bd & PUSH ? 0 : 1);
 }
 
-void		go_to_best_rotation(t_roll *r, int size, int i)
+int			go_to_best_rotation(t_roll *r, int size, int i)
 {
 //	ft_printf("{black}{bold}{underline}IN\tGO TO BEST ROTATION{eoc}\n");/////////
 	int		t[size];
@@ -79,22 +79,25 @@ void		go_to_best_rotation(t_roll *r, int size, int i)
 	i = -1;
 	while (++i < size)
 	{
-		ft_printf("[%d ", r->a.LNBR);
-		r->a.low->bd & ROT ? ft_printf("{green}(ROT){eoc}") : 0;
-		r->a.low->bd & R_ROT ? ft_printf("{yellow}(R_ROT){eoc}") : 0;
-		r->a.low->bd & PUSH ? ft_printf("{red}(PUSH){eoc}") : 0;
-		r->a.low->bd & GOOD ? ft_printf("{magenta}(GOOD){eoc}") : 0;
+		ft_printf("[%d", r->a.LNBR);
+		r->a.low->bd & ROT ? ft_printf("{green}(R){eoc}") : 0;
+		r->a.low->bd & R_ROT ? ft_printf("{yellow}(R_R){eoc}") : 0;
+		r->a.low->bd & PUSH ? ft_printf("{red}(P){eoc}") : 0;
+		r->a.low->bd & SWAP ? ft_printf("{blue}(S){eoc}") : 0;
+		r->a.low->bd & GOOD ? ft_printf("{magenta}(G){eoc}") : 0;
 		ft_printf("] ", r->a.LNBR);
 		rotate(NULL, &r->a, 0);
 	}
-		ft_printf("\n");
+	ft_printf("\n");
+	int test = 1;
 	while (r->a.low->bd & (ROT | R_ROT | PUSH))
 	{
+		test = 0;
 		if (r->a.low->bd & PUSH && !check_push(r, r->nb_a, -1))
 		{
 			push(r, &r->a, &r->b, 'b');
 			i = -1;
-			while (++i < size)
+			while (++i < size - 1)
 			{
 				r->a.low->bd = 0;
 				rotate(NULL, &r->a, 0);
@@ -106,5 +109,6 @@ void		go_to_best_rotation(t_roll *r, int size, int i)
 		else if (r->a.low->bd & R_ROT)
 			check_r_rot(r);
 	}
-	ft_printf("{black}{bold}{underline}END\tGO TO BEST ROTATION{eoc}\n");////////
+//	ft_printf("{black}{bold}{underline}END\tGO TO BEST ROTATION ret = %d{eoc}\n", test);////////
+	return (test);
 }
