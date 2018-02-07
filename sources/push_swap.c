@@ -14,7 +14,7 @@
 
 int				check_sort(t_pile *p, int size, int i)
 {
-//	ft_printf("\n{black}{bold}IN check_sort{eoc}\n");////////////////////////////
+//	ft_printf("{black}{bold}IN check_sort{eoc}\n");//////////////////////////////
 	int			verif;
 	int			tab[size];
 
@@ -35,6 +35,14 @@ int				check_sort(t_pile *p, int size, int i)
 	return (verif);
 }
 
+void			go_to_last_value(t_roll *r, int last)
+{
+	while (r->a.LNBR != last)
+	{
+		rotate(r, &r->a, 'a');
+	}
+}
+
 void			push_swap(t_roll *r, char **p, int size)
 {
 //	ft_printf("{yellow}{bold}{underline}IN\tPUSH SWAP{eoc}\n");//////////////////
@@ -44,11 +52,22 @@ void			push_swap(t_roll *r, char **p, int size)
 	if (r->bd & ERR || r->bd & GOOD)
 		return ;
 //	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
-	int test = 0;
+//	int test = 0;
+//	ft_printf("{yellow}{bold}{underline}WHILE{eoc}\n\n");////////////////////////
 	while (check_sort(&r->a, r->nb_a, -1))
 	{
-		if (++test == 42 || go_to_best_rotation(r, r->nb_a, -1))
+		if (/*++test == 42 || */go_to_best_rotation(r, r->nb_a, -1))
+		{
+//			display_piles(r, &r->a, &r->b);//////////////////////////////////////
 			break ;
+		}
+//		display_piles(r, &r->a, &r->b);//////////////////////////////////////////
+//		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
+//		ft_printf("-------------------------------------------------\n\n\n");////
 	}
+	go_to_last_value(r, r->a.TNBR);
+//		display_piles(r, &r->a, &r->b);//////////////////////////////////////////
+//	test >= 42 ? ft_printf("{red}{bold}test == 42\n{eoc}") : 0;
+//	ft_printf("{yellow}{bold}{underline}END WHILE{eoc}\n");////////////////////
 //	ft_printf("{yellow}{bold}{underline}END\tPUSH SWAP{eoc}\n");/////////////////
 }

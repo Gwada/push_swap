@@ -15,10 +15,8 @@
 void		swap(t_roll *r, t_pile *p, char pile)
 {
 	t_pile	*tmp;
-//	t_pile	*tmp_low;
-//	t_pile	*tmp_top;
 
-	if (!p->low)
+	if (!p->low || p->low->root)
 		return ;
 	tmp = p->low;
 	p->low->low->top = &r->a;
@@ -31,7 +29,7 @@ void		swap(t_roll *r, t_pile *p, char pile)
 		return ;
 	if (pile)
 	{
-		if (r->bd & COLOR) 
+		if (r->bd & COLOR)
 			ft_printf("{magenta}s%c{eoc}\n", pile);
 		else
 			ft_printf("s%c\n", pile);
