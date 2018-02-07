@@ -18,6 +18,9 @@ void		swap(t_roll *r, t_pile *p, char pile)
 
 	if (!p->low || p->low->root)
 		return ;
+	p->low->bd &= ~SWAP;
+	p->low->bd |= GOOD;
+	p->low->low->bd |= GOOD;
 	tmp = p->low;
 	p->low->low->top = &r->a;
 	p->low = p->low->low;

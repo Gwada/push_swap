@@ -20,7 +20,7 @@ void		find_best_sort(int *t, t_roll *r, int size, int i)
 
 	init_best(r, best, -1);
 	for (int test = 0; test < size; test++)
-		ft_printf("[{green}%+4d{eoc}] ", t[test]);
+		ft_printf("[{green}%4+d{eoc}] ", t[test]);
 	ft_printf("\n");
 	while (++i < (int)r->nb_a)
 	{
@@ -28,39 +28,36 @@ void		find_best_sort(int *t, t_roll *r, int size, int i)
 //		ft_printf("-> i = %d\t", i);/////////////////////////////////////////////
 //		ft_printf("best[%d] = %d\t", i, best[i]);////////////////////////////////
 //		ft_printf("t[%d] = %d\t", i, t[i]);//////////////////////////////////////
-//		if (r->a.low->bd & (ROT | R_ROT))
-//		{
-			if (best[i] != t[i])
+		if (best[i] != t[i])
+		{
+//			ft_printf("{red}{underline}best[%d] != t[%d]){eoc}\t", i, i);/////
+			if (i + 1 <= (int)r->nb_a)
 			{
-//				ft_printf("{red}{underline}best[%d] != t[%d]){eoc}\t", i, i);/////
-				if (i + 1 <= (int)r->nb_a)
+//				ft_printf("{green}{underline}i + 1 <= r->size{eoc}\t");//////
+				if (best[i] == t[i + 1] && best[i + 1] == t[i])
 				{
-//					ft_printf("{green}{underline}i + 1 <= r->size{eoc}\t");//////
-					if (best[i] == t[i + 1] && best[i + 1] == t[i])
-					{
-//						ft_printf("{green}SWAP : best[i + j] == t[i + j + 1] && best[i + j + 1] == t[i + j]{eoc}");//
-						r->a.low->bd |= SWAP;
-						rotate(NULL, &r->a, 0);
-						++i;
-					}
-					else
-					{
-//						ft_printf("{red}PUSH : best[i] != t[i + 1] || best[i + 1] != t[i]{eoc}");//
-						r->a.low->bd |= PUSH;
-					}
+//					ft_printf("{green}SWAP : best[i + j] == t[i + j + 1] && best[i + j + 1] == t[i + j]{eoc}");//
+					r->a.low->bd |= SWAP;
+					rotate(NULL, &r->a, 0);
+					++i;
 				}
 				else
 				{
-//					ft_printf("{red}{underline}i + j > r->size -> pushb{eoc}\n");//
+//					ft_printf("{red}PUSH : best[i] != t[i + 1] || best[i + 1] != t[i]{eoc}");//
 					r->a.low->bd |= PUSH;
 				}
 			}
 			else
 			{
-//				ft_printf("{green}best[%d] == t[%d]\t{eoc}", i, i);//////////////////////
-				r->a.low->bd |= GOOD;
+//				ft_printf("{red}{underline}i + j > r->size -> pushb{eoc}\n");//
+				r->a.low->bd |= PUSH;
 			}
-//		}
+		}
+		else
+		{
+//			ft_printf("{green}best[%d] == t[%d]\t{eoc}", i, i);//////////////////////
+			r->a.low->bd |= GOOD;
+		}
 		rotate(NULL, &r->a, 0);
 //		ft_printf("\n\n");/////////////////////////////////////////////////////////
 	}

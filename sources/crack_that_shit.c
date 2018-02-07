@@ -12,31 +12,6 @@
 
 #include "push_swap.h"
 
-/*static int	check_push(t_roll *r, int size, int i)
-{
-	int		tab[size];
-
-	while (++i < size)
-	{
-		tab[i] = r->a.LNBR;
-		rotate(NULL, &r->a, 0);
-	}
-	ft_qsort(tab, size, 0, 0);
-	i = 0;
-	while (tab[i] != r->a.LNBR && i < size)
-		++i;
-	i = i + 1 >= size ? 0 : i + 1;
-	if (size > 1 && tab[i] == r->a.low->LNBR)
-		r->a.low->bd |= GOOD;
-	if (r->a.low->bd & ROT)
-		r->a.low->low->bd |= ROT;
-	else if (r->a.low->bd & R_ROT)
-		r->a.low->low->bd |= R_ROT;
-	if ((r->a.LNBR < r->a.low->LNBR && ((r->a.LNBR > r->a.TNBR) || (r->a.TNBR == r->a_max))) || (r->a.low->bd & GOOD))
-		r->a.low->bd &= ~PUSH;
-	return (r->a.low->bd & PUSH ? 0 : 1);
-}*/
-
 static	int	push_that(t_roll *r, int i)
 {
 	push(r, &r->a, &r->b, 'b');
@@ -85,19 +60,19 @@ int			go_to_best_rotation(t_roll *r, int size, int i)
 	ft_qsort(t, size, 0, 0);
 	find_best_combinaison(t, r, -1);
 	find_best_sort(t, r, r->nb_a, -1);
-	i = -1;//////////////////////////////////////////////////////////////////////
-	while (++i < size)///////////////////////////////////////////////////////////
-	{////////////////////////////////////////////////////////////////////////////
-		ft_printf("[%d", r->a.LNBR);/////////////////////////////////////////////
-		r->a.low->bd & ROT ? ft_printf("{magenta}(R){eoc}") : 0;///////////////////
-		r->a.low->bd & R_ROT ? ft_printf("{yellow}(R_R){eoc}") : 0;//////////////
-		r->a.low->bd & PUSH ? ft_printf("{red}(P){eoc}") : 0;////////////////////
-		r->a.low->bd & SWAP ? ft_printf("{blue}(S){eoc}") : 0;///////////////////
-		r->a.low->bd & GOOD ? ft_printf("{green}(G){eoc}") : 0;////////////////
-		ft_printf("] ", r->a.LNBR);//////////////////////////////////////////////
-		rotate(NULL, &r->a, 0);//////////////////////////////////////////////////
-	}////////////////////////////////////////////////////////////////////////////
-	ft_printf("\n\n");///////////////////////////////////////////////////////////
+//	i = -1;//////////////////////////////////////////////////////////////////////
+//	while (++i < size)///////////////////////////////////////////////////////////
+//	{////////////////////////////////////////////////////////////////////////////
+//		ft_printf("[%d", r->a.LNBR);/////////////////////////////////////////////
+//		r->a.low->bd & ROT ? ft_printf("{magenta}(R){eoc}") : 0;/////////////////
+//		r->a.low->bd & R_ROT ? ft_printf("{yellow}(R_R){eoc}") : 0;//////////////
+//		r->a.low->bd & PUSH ? ft_printf("{red}(P){eoc}") : 0;////////////////////
+//		r->a.low->bd & SWAP ? ft_printf("{blue}(S){eoc}") : 0;///////////////////
+//		r->a.low->bd & GOOD ? ft_printf("{green}(G){eoc}") : 0;//////////////////
+//		ft_printf("] ");/////////////////////////////////////////////////////////
+//		rotate(NULL, &r->a, 0);//////////////////////////////////////////////////
+//	}////////////////////////////////////////////////////////////////////////////
+//	ft_printf("\n\n");///////////////////////////////////////////////////////////
 	int test = 1;
 	while (r->a.low->bd & (ROT | R_ROT | PUSH))
 	{
