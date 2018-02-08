@@ -45,7 +45,6 @@ void			error_verif(t_roll *r, int size, int i, int j)
 	while (++i < size)
 	{
 		t[i] = r->a.LNBR;
-//		r->a.low->bd = 0;
 		rotate(NULL, &r->a, 0);
 	}
 	ft_qsort(t, size, 0, 0);
@@ -62,119 +61,6 @@ void			error_verif(t_roll *r, int size, int i, int j)
 	ft_printf("total = %d size = %d\n", total, size);
 	total == size ? r->bd |= GOOD : 0;
 	ft_printf("{black}{bold}END\tERROR VERIF{eoc}\n\n");/////////////////////////
-}
-
-void			go_to_last_value(t_roll *r, int last, int size, int i)
-{
-	ft_printf("{yellow}{bold}{underline}IN\tGO TO LAST VALUE{eoc} size = %d\n", size);///////////
-	int			t[size];
-	while (++i < size)
-	{
-		t[i] = r->a.LNBR;
-		rotate(NULL, &r->a, 0);
-	}
-	ft_qsort(t, size, 0, 0);
-	i = -1;
-	r->b_rot = 0;
-	ft_printf("go trouver l'indice\n");////////////////////////////////////////
-	//1. trouver lindice de la 1ere et derniere difference
-	int st = 0, lst = 0;
-	while (++i < size)
-	{
-//		if (!r->b_rot && t[i] != r->a.LNBR)
-//			r->b_rot = i;
-		if (!st && !lst && !(r->a.low->bd & GOOD))
-		{
-			st = i;
-			lst = i;
-		}
-		if (lst && t[i] != r->a.LNBR && i > lst)
-			lst = i;
-		rotate(NULL, &r->a, 0);
-	}
-	ft_printf("st = %d lst = %d\n", st, lst);
-	r->b_rot = (st && size - st > size - lst) ? st : lst;
-	ft_printf("1st dif = %d\n", r->b_rot);
-	find_best_rotation(r, r->nb_a - r->b_rot, 0);
-	find_best_rotation(r, r->b_rot, ROT | R_ROT);
-//	find_best_rotation(r, r->nb_a - r->b_rot, 0);
-//	find_best_rotation(r, r->b_rot, 0);
-	i = -1;//////////////////////////////////////////////////////////////////////
-	while (++i < size)///////////////////////////////////////////////////////////
-	{////////////////////////////////////////////////////////////////////////////
-		ft_printf("[%d", r->a.LNBR);/////////////////////////////////////////////
-		r->a.low->bd & ROT ? ft_printf("{magenta}(R){eoc}") : 0;/////////////////
-		r->a.low->bd & R_ROT ? ft_printf("{yellow}(R_R){eoc}") : 0;//////////////
-		r->a.low->bd & PUSH ? ft_printf("{red}(P){eoc}") : 0;////////////////////
-		r->a.low->bd & SWAP ? ft_printf("{blue}(S){eoc}") : 0;///////////////////
-		r->a.low->bd & GOOD ? ft_printf("{green}(G){eoc}") : 0;//////////////////
-		ft_printf("] ");/////////////////////////////////////////////////////////
-		rotate(NULL, &r->a, 0);//////////////////////////////////////////////////
-	}////////////////////////////////////////////////////////////////////////////
-	ft_printf("\n\ngo prochaine dif\n");/////////////////////////////////////////
-	//2. aller a cet element en optimisant les deplacement
-	while (r->a.low->bd & (ROT | R_ROT))
-	{
-		if (r->a.low->bd & R_ROT)
-		{
-			if (r->a.low->bd & PUSH)
-			{
-				push(r, &r->a, &r->b, 'b');
-				return ;
-			}
-			else if (r->a.low->bd & SWAP)
-			{
-				swap(r, &r->a, 'a');
-			//	r_rotate(r, &r->a, 'a');///////////////////////////////////////////
-			//	r_rotate(r, &r->a, 'a');///////////////////////////////////////////
-				return ;
-			}
-			r_rotate(r, &r->a, 'a');/////////////////////////////////////////////
-		}
-		else if (r->a.low->bd & ROT)
-		{
-			if (r->a.low->bd & PUSH)
-			{
-				push(r, &r->a, &r->b, 'b');
-				return ;
-			}
-			else if (r->a.low->bd & SWAP)
-			{
-				swap(r, &r->a, 'a');
-				rotate(r, &r->a, 'a');///////////////////////////////////////////
-				rotate(r, &r->a, 'a');///////////////////////////////////////////
-				return ;
-			}
-			else
-				rotate(r, &r->a, 'a');///////////////////////////////////////////
-		}
-	}
-	ft_printf("go dernier element\n");/////////////////////////////////////////
-	//3. aller a la fin ou repeter si necessaire
-	while (r->a.LNBR != last)
-	{
-		if (r->a.low->bd & PUSH)
-		{
-			push(r, &r->a, &r->b, 'b');
-	//		i = -1;
-	//		while (++i < (int)r->nb_a)
-	//		{
-	//			r->a.low->bd = 0;
-	//			rotate(NULL, &r->a, 0);//////////////////////////////////////////////////
-	//		}
-			return ;
-		}
-		else if (r->a.low->bd & SWAP)
-		{
-			swap(r, &r->a, 'a');
-			rotate(r, &r->a, 'a');///////////////////////////////////////////
-			rotate(r, &r->a, 'a');///////////////////////////////////////////
-			return ;
-		}
-		else
-			rotate(r, &r->a, 'a');
-	}
-	ft_printf("{yellow}{bold}{underline}END\tGO TO LAST VALUE{eoc}\n");//////////
 }
 
 void			push_swap(t_roll *r, char **p, int size)
@@ -200,11 +86,11 @@ void			push_swap(t_roll *r, char **p, int size)
 //		ft_printf("-------------------------------------------------\n\n\n");////
 	}
 //		display_piles(r, &r->a, &r->b);//////////////////////////////////////////
-	ft_printf("{yellow}{bold}{underline}END WHILE{eoc}\n\n");////////////////////
+	ft_printf("{red}{bold}{underline}END WHILE{eoc}\n\n");////////////////////
 	int test = 0;
 	while (!(r->bd & GOOD))
 	{
-		go_to_last_value(r, r->a.TNBR, r->nb_a, -1);
+		go_to_last_value(r, r->a.TNBR, r->nb_a);
 		error_verif(r, r->nb_a, -1, -1);
 		if (++test == 5)
 		{

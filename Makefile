@@ -21,10 +21,7 @@ HEADER			= -I includes -I $(LIB)/includes/
 
 SOURCES			= display.c \
 					init.c \
-					push_swap.c \
 					quicksort.c \
-					crack_that_shit.c \
-					push_swap_crack.c \
 					swap.c \
 					rotate.c \
 					push.c
@@ -32,8 +29,12 @@ SOURCES			= display.c \
 SOURCES_C		= $(SOURCES) \
 					c_main.c
 SOURCES_PS		= $(SOURCES) \
-					ps_main.c
-#SOURCES_P_S		+= $(SOURCES)
+					ps_main.c \
+					last_value.c \
+					crack_that_shit.c \
+					push_swap_crack.c \
+					push_swap.c
+
 OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))
 OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))
 
