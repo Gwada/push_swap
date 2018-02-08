@@ -41,29 +41,23 @@ void		find_best_sort(int *t, t_roll *r, int size, int i)
 			r->a.low->bd |= GOOD;
 		rotate(NULL, &r->a, 0);
 	}
-	find_best_rotation(r, r->b_rot, 0);//////////////////////////////////////////
+	find_best_rotation(r, r->b_rot, 0);
 }
 
 void		find_best_rotation(t_roll *r, int rot, int state)
 {
-//	ft_printf("{blue}{bold}{underline}IN\tFIND BEST ROTATION{eoc} rot = %d\n", rot);//
 	if (rot > (int)r->nb_a / 2)
-	{
 		while (rot++ < (int)r->nb_a)
 		{
 			rotate(NULL, &r->a, 0);
 			state & R_ROT ? r->a.low->bd |= R_ROT : 0;
 		}
-	}
 	else
-	{
 		while (rot-- > 0)
 		{
 			r_rotate(NULL, &r->a, 0);
 			state & ROT ? r->a.low->bd |= ROT : 0;
 		}
-	}
-//	ft_printf("{blue}{bold}{underline}END\tFIND BEST ROTATION{eoc}\n\n");////////
 }
 
 void			find_best_combinaison(int *t, t_roll *r, int i)

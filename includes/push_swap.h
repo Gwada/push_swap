@@ -106,7 +106,7 @@ void				find_best_rotation(t_roll *r, int rot, int state);
 void				find_best_combinaison(int *t, t_roll *r, int i);
 int					check_sort(t_pile *p, int size, int i);
 
-void				go_to_last_value(t_roll *r, int last, int size);
+void				go_to_last_value(t_roll *r, int size);
 
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				swap(t_roll *r, t_pile *p, char pile);
