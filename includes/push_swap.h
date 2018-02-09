@@ -108,6 +108,7 @@ int					check_sort(t_pile *p, int size, int i);
 
 void				go_to_last_value(t_roll *r, int size);
 
+int					find_best_push(t_roll *r, int value, int rot_a, int rot_b);
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				swap(t_roll *r, t_pile *p, char pile);
 void				d_swap(t_roll *r);
