@@ -19,7 +19,7 @@ static	void	find_max(t_roll *r)
 	i = 0;
 	r->a_max = !r->nb_a ? 0 : r->a.low->nbr;
 	r->a_min = !r->nb_a ? 0 : r->a.low->nbr;
-	while (++i <= (int)r->nb_a)
+	while (++i <= r->nb_a)
 	{
 		rotate(NULL, &r->a, 0);
 		r->a.low->nbr > r->a_max ? r->a_max = r->a.low->nbr : 0;
@@ -28,7 +28,7 @@ static	void	find_max(t_roll *r)
 	i = 0;
 	r->b_max = !r->nb_b ? 0 : r->b.low->nbr;
 	r->b_min = !r->nb_b ? 0 : r->b.low->nbr;
-	while (++i <= (int)r->nb_b)
+	while (++i <= r->nb_b)
 	{
 		rotate(NULL, &r->b, 0);
 		r->b.low->nbr > r->b_max ? r->b_max = r->b.low->nbr : 0;
@@ -78,7 +78,6 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	if (find_best_push(r, src->LNBR, 0, 0))
 		return ;
 	tmp = src->low;
-	tmp->bd = GOOD;
 	find_best_insert(r, dst, tmp->nbr, pile);
 	src->low = src->low->low;
 	src->low->low->top = src;
@@ -90,6 +89,7 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	r->nb_b += (pile == 'b') ? 1 : -1;
 	find_max(r);
 
+	tmp->bd = GOOD;
 	r->bd & COLOR ? ft_printf("{red}p%c\n{eoc}", pile) : 0;
 	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
@@ -98,57 +98,64 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 
 int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 {
-	ft_printf("{red}{underline}IN\tFIND BEST PUSH{eoc} value = %d\n\n", value);//
+	ft_printf("{red}{bold}IN\tFIND BEST PUSH{eoc} value = %d\n\n", value);//
+	ft_printf("{magenta}r->nb_a = [%3d]\tr->nb_b = [%3d]{eoc}\n\n", r->nb_a, r->nb_b);
 	int		i;
 	int		max;
 	int		min;
-	t_pile	*p;
+	int		i_cor;
+	int		i_incor;
+	int		t1[r->nb_a];
 
-	ft_printf("{magenta}r->nb_a = [%3d]\tr->nb_b = [%3d]{eoc}", r->nb_a, r->nb_b);
-	ft_printf("{green}\tbest rot_a = [%2d]\tbest rot_b = [%2d]{eoc}\n\n", rot_a, rot_b);
-	//display_piles(r, &r->a, &r->b);
-
+	max = r->b_max;
+	min = r->b_min;
 	i = -1;
-	int t1[r->nb_a];
-	p = &r->a;
-	display_pile(r, p, 'a');
-	ft_printf("\n");
-	while (++i < (int)r->nb_a)
+	while (++i < r->nb_a)
 	{
-		t1[i] = p->LNBR;
-		rotate(NULL, p, 0);
+		t1[i] = r->a.LNBR;
+		rotate(NULL, &r->a, 0);
 	}
 	ft_qsort(t1, r->nb_a, 0, 0);
 	find_best_combinaison(t1, r, -1);
-	rot_a = r->b_rot > (int)(r->nb_a / 2) ? (int)-(r->b_rot - r->nb_a) : (int)r->b_rot;
-	ft_printf("best rot_a = [%2d]\n", rot_a);
 	find_best_rotation(r, r->nb_a - r->b_rot, 0);
-//	display_pile(r, p, 'a');
-
-	ft_printf("\n");
 	i = -1;
-	while (++i < (int)r->nb_a)
+	while (++i < r->size)
 	{
-		ft_printf("t1[%2d] = [%10d]\t p->LNBR = [%10d]\n", i, t1[i], p->LNBR);
-		rotate(NULL, p, 0);
+		if (i >= r->nb_a && i >= r->nb_b)
+			break ;
+		if (i < r->nb_a)
+		{
+			t1[i] == value ? i_cor = i : 0;
+			r->a.LNBR == value ? i_incor = i : 0;
+			ft_printf("t1[%2d] = [%10d]\t p->LNBR = [%10d]\n", i, t1[i], r->a.LNBR);
+			rotate(NULL, &r->a, 0);
+		}
+		if (i < r->nb_b)
+		{
+			if ((value > r->b.LNBR && ((value < r->b.TNBR) || (r->b.LNBR == max)))
+			|| (r->b.TNBR == min && value < r->b.TNBR))
+				rot_b = i;
+			rotate(NULL, &r->b, 0);
+		}
 	}
 	ft_printf("\n");
+	rot_a = i_cor > i_incor ? i_cor - i_incor : i_incor - i_cor;
+	if (rot_a <= (r->nb_a / 2))
+		rot_a = (rot_a * 2) + 4;
+	else
+		rot_a = ((r->nb_a - rot_a) * 2) + 4;
+
 	find_best_rotation(r, r->b_rot, 0);
+	rot_b = (rot_b <= (r->nb_b / 2)) ? rot_b + 1 : (r->nb_b - rot_b) + 1;
 
-	i = -1;
-	p = &r->b;
-	max = r->b_max;
-	min = r->b_min;
-	while (++i < (int)r->nb_b)
+	ft_printf("nb_a = [%2d] rot_a = [%2d]\tnb_b = [%2d] rot_b = [%2d]\n", r->nb_a, rot_a, r->nb_b, rot_b);
+
+	if (rot_a <= rot_b)
 	{
-		if ((value > p->LNBR && ((value < p->TNBR) || (p->LNBR == max)))
-		|| (p->TNBR == min && value < p->TNBR))
-			rot_b = i;
-		rotate(NULL, &r->b, 0);
+		ft_printf("{yellow}{underline}{bold}insetion dans a!!!{eoc}\n");
+//		ft_printf("{red}{underline}END\tFIND BEST PUSH{eoc}\n\n");/////////////
+//		return (1);
 	}
-	display_piles(r, &r->a, &r->b);
-	ft_printf("nb_a = %2d rot_a = %2d\tnb_b = %2d rot_b = %2d\n", r->nb_a, rot_a, r->nb_b, rot_b);
-
-	ft_printf("{red}{underline}END\tFIND BEST PUSH{eoc}\n\n");/////////////
+	ft_printf("{red}{bold}END\tFIND BEST PUSH{eoc}\n\n");/////////////
 	return (0);
 }

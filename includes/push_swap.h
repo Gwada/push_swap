@@ -40,6 +40,7 @@
 # define ROT		(1 << 4)
 # define R_ROT		(1 << 5)
 # define PUSH		(1 << 6)
+# define S_PUSH		(1 << 7)
 
 # define CHR		ft_strchr
 # define ISNUM		"0123456789"
@@ -84,9 +85,8 @@ typedef	struct		s_roll
 	int				a_min;
 	int				b_max;
 	int				b_min;
-
-	unsigned		nb_a;
-	unsigned		nb_b;
+	int				nb_a;
+	int				nb_b;
 }					t_roll;
 
 /*
