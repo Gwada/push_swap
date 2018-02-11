@@ -19,23 +19,25 @@ void		find_best_sort(int *t, t_roll *r, int size, int i)
 	int		best[size];
 
 	init_best(r, best, -1);
-	while (++i < (int)r->nb_a)
+	while (++i < r->nb_a)
 	{
-		if (best[i] != t[i])
+		if (best[i] != t[i] && i + 1 < r->nb_a)
 		{
-			if (i + 1 <= (int)r->nb_a)
-			{
-				if (best[i] == t[i + 1] && best[i + 1] == t[i])
+//			if (i + 1 <= r->nb_a)
+//			{
+				if ((best[i] == t[i + 1] && best[i + 1] == t[i]))
 				{
 					r->a.low->bd |= SWAP;
 					rotate(NULL, &r->a, 0);
 					++i;
 				}
+				else if ((t[i + 1] == best[i]) || (i == r->nb_a - 1 && t[0] == best[i]))
+					r->a.low->bd |= GOOD;
 				else
 					r->a.low->bd |= PUSH;
-			}
-			else
-				r->a.low->bd |= PUSH;
+//			}
+//			else
+//				r->a.low->bd |= PUSH;
 		}
 		else
 			r->a.low->bd |= GOOD;

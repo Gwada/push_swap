@@ -75,10 +75,32 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 
 	if (!(src->low) || src->low->root)
 		return ;
-	if (find_best_push(r, src->LNBR, 0, 0))
-		return ;
+	if (!find_best_push(r, src->LNBR, 0, 0))
+	{
+		tmp = src->low;
+		find_best_insert(r, dst, tmp->nbr, pile);
+		src->low = src->low->low;
+		src->low->low->top = src;
+		tmp->top = dst;
+		tmp->low = dst->low ? dst->low : dst;
+		dst->low ? (dst->low->top = tmp) : (dst->top = tmp);
+		!dst->top ? (dst->top = tmp) : (dst->low = tmp);
+		r->nb_a += (pile == 'a') ? 1 : -1;
+		r->nb_b += (pile == 'b') ? 1 : -1;
+		find_max(r);
+		tmp->bd = GOOD;
+		r->bd & COLOR ? ft_printf("{red}p%c\n{eoc}", pile) : 0;
+		!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
+	}
+	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	ft_printf("{green}{bold}{underline}END\tPUSH{eoc}\n\n");/////////////////////
+}
+
+void		simple_push(t_roll*r, t_pile *src, t_pile *dst, char pile)
+{
+	t_pile		*tmp;
+
 	tmp = src->low;
-	find_best_insert(r, dst, tmp->nbr, pile);
 	src->low = src->low->low;
 	src->low->low->top = src;
 	tmp->top = dst;
@@ -88,12 +110,9 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	r->nb_a += (pile == 'a') ? 1 : -1;
 	r->nb_b += (pile == 'b') ? 1 : -1;
 	find_max(r);
-
-	tmp->bd = GOOD;
 	r->bd & COLOR ? ft_printf("{red}p%c\n{eoc}", pile) : 0;
 	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
-	ft_printf("{green}{bold}{underline}END\tPUSH{eoc}\n\n");/////////////////////
 }
 
 int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
@@ -101,14 +120,10 @@ int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 	ft_printf("{red}{bold}IN\tFIND BEST PUSH{eoc} value = %d\n\n", value);//
 	ft_printf("{magenta}r->nb_a = [%3d]\tr->nb_b = [%3d]{eoc}\n\n", r->nb_a, r->nb_b);
 	int		i;
-	int		max;
-	int		min;
 	int		i_cor;
 	int		i_incor;
 	int		t1[r->nb_a];
 
-	max = r->b_max;
-	min = r->b_min;
 	i = -1;
 	while (++i < r->nb_a)
 	{
@@ -127,13 +142,20 @@ int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 		{
 			t1[i] == value ? i_cor = i : 0;
 			r->a.LNBR == value ? i_incor = i : 0;
-			ft_printf("t1[%2d] = [%10d]\t p->LNBR = [%10d]\n", i, t1[i], r->a.LNBR);
+			ft_printf("t1[%2d] = [%10d]\t p->LNBR = [%10d] ", i, t1[i], r->a.LNBR);
+			if (r->a.low->bd & GOOD)
+				ft_printf("GOOD ");
+			if (r->a.low->bd & PUSH)
+				ft_printf("PUSH ");
+			if (r->a.low->bd & SWAP)
+				ft_printf("SWAP ");
 			rotate(NULL, &r->a, 0);
+			ft_printf("\n");
 		}
 		if (i < r->nb_b)
 		{
-			if ((value > r->b.LNBR && ((value < r->b.TNBR) || (r->b.LNBR == max)))
-			|| (r->b.TNBR == min && value < r->b.TNBR))
+			if ((value > r->b.LNBR && ((value < r->b.TNBR) || (r->b.LNBR == r->b_max)))
+			|| (r->b.TNBR == r->b_min && value < r->b.TNBR))
 				rot_b = i;
 			rotate(NULL, &r->b, 0);
 		}
@@ -141,20 +163,61 @@ int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 	ft_printf("\n");
 	rot_a = i_cor > i_incor ? i_cor - i_incor : i_incor - i_cor;
 	if (rot_a <= (r->nb_a / 2))
-		rot_a = (rot_a * 2) + 4;
+		rot_a += 2;
 	else
-		rot_a = ((r->nb_a - rot_a) * 2) + 4;
+		rot_a = (r->nb_a - rot_a) + 2;
 
 	find_best_rotation(r, r->b_rot, 0);
 	rot_b = (rot_b <= (r->nb_b / 2)) ? rot_b + 1 : (r->nb_b - rot_b) + 1;
 
 	ft_printf("nb_a = [%2d] rot_a = [%2d]\tnb_b = [%2d] rot_b = [%2d]\n", r->nb_a, rot_a, r->nb_b, rot_b);
 
-	if (rot_a <= rot_b)
+	if (rot_a <= rot_b/* || (rot_a == 2 && rot_b >= 2)*/)
 	{
 		ft_printf("{yellow}{underline}{bold}insetion dans a!!!{eoc}\n");
-//		ft_printf("{red}{underline}END\tFIND BEST PUSH{eoc}\n\n");/////////////
-//		return (1);
+		i = 0;
+		if (i_cor > i_incor)
+		{
+			ft_printf("test 1\n");
+			if (rot_a == 3)
+			{
+				r_rotate(r, &r->a, 'a');
+				swap(r, &r->a, 'a');
+				r->a.low->bd = 0;
+				ft_printf("{red}{underline}END\tFIND BEST PUSH{eoc} rot_a = 1\n\n", rot_a);/////////////
+				return (1);
+			}
+			else
+			{
+				simple_push(r, &r->a, &r->b, 'b');
+				while (++i <= (i_cor - i_incor))
+					rotate(r, &r->a, 'a');
+				simple_push(r, &r->b, &r->a, 'a');
+				ft_printf("{red}{underline}END\tFIND BEST PUSH{eoc} rot_a = %d\n\n", rot_a);/////////////
+				return (1);
+			}
+		}
+		else
+		{
+			ft_printf("test 2\n");
+			if (rot_a > 3)
+			{
+				simple_push(r, &r->a, &r->b, 'b');
+				while (--i >= (i_cor - i_incor))
+					r_rotate(r, &r->a, 'a');
+				simple_push(r, &r->b, &r->a, 'a');
+				ft_printf("{red}{underline}END\tFIND BEST PUSH{eoc} rot_a = %d\n\n", rot_a);/////////////
+				return (1);
+			}
+			else
+			{
+				rotate(r, &r->a, 'a');
+				swap(r, &r->a, 'a');
+				r->a.low->bd = 0;
+				ft_printf("{red}{underline}END\tFIND BEST PUSH{eoc} rot_a = 1\n\n", rot_a);/////////////
+				return (1);
+			}
+		}
 	}
 	ft_printf("{red}{bold}END\tFIND BEST PUSH{eoc}\n\n");/////////////
 	return (0);

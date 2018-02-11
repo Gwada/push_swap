@@ -78,19 +78,19 @@ void			push_swap(t_roll *r, char **p, int size)
 		if (go_to_best_rotation(r, r->nb_a, -1))
 			break ;
 //	ft_printf("{red}{bold}{underline}END WHILE{eoc}\n\n");///////////////////////
-//	int test = 0;
-//	while (!(r->bd & GOOD))
-//	{
-//		go_to_last_value(r, r->nb_a);
-//		error_verif(r, r->nb_a, -1, -1);
-//		if (++test == 42)
-//		{
-//			ft_printf("grosse merde!!\n");
-//			break ;
-//		}
-//		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
-//		ft_printf("-------------------------------------------------\n\n\n");////
-//	}
+	int test = 0;
+	while (!(r->bd & GOOD))
+	{
+		go_to_last_value(r, r->nb_a);
+		error_verif(r, r->nb_a, -1, -1);
+		if (++test == 42)
+		{
+			ft_printf("grosse merde!!\n");
+			break ;
+		}
+		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
+		ft_printf("-------------------------------------------------\n\n\n");////
+	}
 //	while (r->nb_b)
 //	{
 //		go_to_start_of_end(r);

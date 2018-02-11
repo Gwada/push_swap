@@ -21,16 +21,31 @@ static	void	init_t(t_roll *r, int *t, int size, int i)
 	i = -1;
 	while (++i < size)
 	{
-		ft_printf("t[%3d] = {green}%d{eoc}\tr->a.LNBR = {magenta}%d{eoc}\n", i, t[i], r->a.LNBR);//
+		ft_printf("t[%3d] = [{green}%10d{eoc}]\tr->a.LNBR = [{magenta}%10d{eoc}] ", i, t[i], r->a.LNBR);//
 		if (t[i] == r->a.LNBR)
+		{
 			r->a.low->bd |= GOOD;
-		else if (t[i] == r->a.low->LNBR && i + 1 <= size && t[i + 1] == r->a.LNBR)
+			ft_printf("GOOD");
+		}
+		else if (t[i] == r->a.low->LNBR && i + 1 < size && t[i + 1] == r->a.LNBR)
 		{
 			r->a.low->bd |= SWAP;
 			r->a.low->low->bd |= GOOD;
+			ft_printf("SWAP");
 		}
-		else if (!(r->a.low->bd & GOOD))
-			r->a.low->bd |= PUSH;
+		else if (t[i] != r->a.LNBR)
+		{
+			if ((i > 0 && r->a.LNBR == t[i - 1]) || (t[i + 1] == r->a.LNBR) || (i == size - 1 && t[0] == r->a.LNBR))
+			{
+				r->a.low->bd |= GOOD;
+				ft_printf("GOOD");
+			}
+			else if (!(r->a.low->bd & GOOD))
+			{
+				r->a.low->bd |= PUSH;
+				ft_printf("PUSH");
+			}
+		}
 		if (!fst && !lst && !(r->a.low->bd & GOOD))
 		{
 			fst = i;
@@ -38,6 +53,7 @@ static	void	init_t(t_roll *r, int *t, int size, int i)
 		}
 		if (lst && i > lst && !(r->a.low->bd & GOOD))
 			lst = i;
+		ft_printf("\n");
 		rotate(NULL, &r->a, 0);
 	}
 	ft_printf("\nfirst dif = %d\tlast dif = %d\n", fst, lst);/////////////////////////
