@@ -162,22 +162,21 @@ int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 		}
 	}
 	ft_printf("\n");
+
 	rot_a = i_cor > i_incor ? i_cor - i_incor : i_incor - i_cor;
-	if (rot_a <= (r->nb_a / 2))
-		rot_a += 2;
-	else
-		rot_a = (r->nb_a - rot_a) + 2;
+	rot_a > r->nb_a / 2 ? rot_a = r->nb_a - rot_a : 0;
 
 	find_best_rotation(r, r->b_rot, 0);
-	rot_b = (rot_b <= (r->nb_b / 2)) ? rot_b + 1 : (r->nb_b - rot_b) + 1;
+	rot_b > r->nb_b / 2 ? rot_b = r->nb_b - rot_b : 0;
 
 	ft_printf("r->b_rot = [%2d]\n", r->b_rot);
-	ft_printf("nb_a = [%2d] rot_a = [%2d]\tnb_b = [%2d] rot_b = [%2d]\n", r->nb_a, rot_a, r->nb_b, rot_b);
+	ft_printf("nb_a = [%2d] rot_a = [%2d]\tnb_b = [%2d] rot_b = [%2d]\n", r->nb_a, rot_a + 2, r->nb_b, rot_b + 1);
 
-	if (rot_a <= rot_b)
+	if ((rot_a += 2) <= ++rot_b)
 	{
 		ft_printf("{yellow}{underline}{bold}insetion dans a!!!{eoc}\n");
-		if (r->nb_a - (rot_a - 2) <= (r->nb_a / 2))
+		if ((i_cor > i_incor && (r->nb_a - (i_cor - i_incor)) >= (r->nb_a / 2))
+		|| (i_incor > i_cor && (r->nb_a - (i_incor - i_cor)) < (r->nb_a / 2)))
 		{
 			ft_printf("test 1\n");
 			if (rot_a == 3)

@@ -79,16 +79,16 @@ void			push_swap(t_roll *r, char **p, int size)
 	ft_printf("-------------------------------------------------\n\n\n");////
 	ft_printf("{red}{bold}{underline}END OF FIRST STEP{eoc}\n\n\n");///////////////
 	ft_printf("-------------------------------------------------\n\n\n");////
-	int test = 0;
+//	int test = 0;
 	while (!(r->bd & GOOD))
 	{
 		go_to_last_value(r, r->nb_a);
 		error_verif(r, r->nb_a, -1, -1);
-		if (++test == 5)
-		{
-			ft_printf("STOP VERIF\n");
-			break ;
-		}
+//		if (++test == 10)
+//		{
+//			ft_printf("STOP VERIF\n");
+//			break ;
+//		}
 		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
 		ft_printf("-------------------------------------------------\n\n\n");////
 	}
