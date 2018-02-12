@@ -17,7 +17,7 @@ static	void	init_t(t_roll *r, int *t, int size, int i)
 	ft_qsort(t, size, 0, 0);
 	find_best_combinaison(t, r, -1);
 	find_best_rotation(r, size - r->b_rot, 0);
-	ft_printf("go trouver l'indice de la dif la plus proche\n");//////////////////////////////////////////
+	ft_printf("go trouver l'indice de la dif la plus proche\tr->b_rot = %2d\n", r->b_rot);//
 	i = -1;
 	while (++i < size)
 	{
@@ -46,13 +46,26 @@ static	void	init_t(t_roll *r, int *t, int size, int i)
 				ft_printf("PUSH");
 			}
 		}
-		if (!fst && !lst && !(r->a.low->bd & GOOD))
+		if (!(r->a.low->bd & GOOD))
 		{
-			fst = i;
-			lst = i;
+			if (!fst && !lst)
+			{
+				fst = (i < size - r->b_rot) ? r->b_rot + i : i - (size - r->b_rot);
+				lst = (i < size - r->b_rot) ? r->b_rot + i : i - (size - r->b_rot);
+			}
+			else
+			{
+				if (i < (size - r->b_rot) && r->b_rot + i < fst)
+					fst = r->b_rot + i;
+				else if (i > (size - r->b_rot) && i - r->b_rot < fst)
+						fst = i - (size - r->b_rot);
+
+				if (i < (size - r->b_rot) && r->b_rot + i > lst)
+					lst = r->b_rot + i;
+				else if (i > (size - r->b_rot) && i - r->b_rot > lst)
+					lst = i - (size - r->b_rot);
+			}
 		}
-		if (lst && i > lst && !(r->a.low->bd & GOOD))
-			lst = i;
 		ft_printf("\n");
 		rotate(NULL, &r->a, 0);
 	}
@@ -163,5 +176,5 @@ void			go_to_last_value(t_roll *r, int size)
 	//		return ;/////////////////////////////////////////////////////////////
 			return (swap(r, &r->a, 'a'));
 	//	}////////////////////////////////////////////////////////////////////////
-	ft_printf("{yellow}{bold}{underline}END\tGO TO LAST VALUE{eoc}\n");//////////
+//	ft_printf("{yellow}{bold}{underline}END\tGO TO LAST VALUE{eoc}\n");//////////
 }

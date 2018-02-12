@@ -21,26 +21,30 @@ void		find_best_sort(int *t, t_roll *r, int size, int i)
 	init_best(r, best, -1);
 	while (++i < r->nb_a)
 	{
-		if (best[i] != t[i] && i + 1 < r->nb_a)
+		if (best[i] != t[i])
 		{
-//			if (i + 1 <= r->nb_a)
-//			{
-				if ((best[i] == t[i + 1] && best[i + 1] == t[i]))
-				{
-					r->a.low->bd |= SWAP;
-					rotate(NULL, &r->a, 0);
-					++i;
-				}
-				else if ((t[i + 1] == best[i]) || (i == r->nb_a - 1 && t[0] == best[i]))
-					r->a.low->bd |= GOOD;
-				else
-					r->a.low->bd |= PUSH;
-//			}
-//			else
-//				r->a.low->bd |= PUSH;
+			if ((best[i] == t[i + 1] && best[i + 1] == t[i]))
+			{
+				r->a.low->bd |= SWAP;
+				rotate(NULL, &r->a, 0);
+				r->a.low->bd |= GOOD;
+				++i;
+			}
+			else if (i == r->nb_a - 1 && t[0] == best[0] && t[1] == best[i])
+				r->a.low->bd |= SWAP;
+			else if ((i < r->nb_a - 1 && t[i + 1] == best[i])
+			|| (i == r->nb_a - 1 && t[0] == best[i])
+			|| (i && t[i - 1] == best[i]) || (!i && t[r->nb_a - 1] == best[i]))
+				r->a.low->bd |= GOOD;
+			else
+				r->a.low->bd |= PUSH;
 		}
 		else
+		{
 			r->a.low->bd |= GOOD;
+			if (i && i < r->nb_a - 1 && best[i - 1] == t[i + 1])
+				r->a.top->bd = SWAP;
+		}
 		rotate(NULL, &r->a, 0);
 	}
 	find_best_rotation(r, r->b_rot, 0);

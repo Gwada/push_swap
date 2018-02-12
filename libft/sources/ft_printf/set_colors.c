@@ -72,5 +72,5 @@ void		ft_set_color(t_data *d, int len)
 		ft_buffering(d, UNDERLINE, 4);
 	else
 		ft_set_color_part2(d, &len);
-	d->ft += len;
+	len ? (d->ft += len) : ft_buffering(d, d->ft++, 1);
 }

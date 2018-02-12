@@ -67,25 +67,26 @@ void			error_verif(t_roll *r, int size, int i, int j)
 
 void			push_swap(t_roll *r, char **p, int size)
 {
-	ft_printf("{yellow}{bold}{underline}IN\tPUSH SWAP{eoc}\n");//////////////////
+//	ft_printf("{yellow}{bold}{underline}IN\tPUSH SWAP{eoc}\n");//////////////////
 	t_tab		t[size];
 
 	init_tab(t, r, p, -1);
 	if (r->bd & ERR || r->bd & GOOD)
 		return ;
-//	ft_printf("{yellow}{bold}{underline}WHILE{eoc}\n");//////////////////////////
 	while (check_sort(&r->a, r->nb_a, -1))
 		if (go_to_best_rotation(r, r->nb_a, -1))
 			break ;
-//	ft_printf("{red}{bold}{underline}END WHILE{eoc}\n\n");///////////////////////
+	ft_printf("-------------------------------------------------\n\n\n");////
+	ft_printf("{red}{bold}{underline}END OF FIRST STEP{eoc}\n\n\n");///////////////
+	ft_printf("-------------------------------------------------\n\n\n");////
 	int test = 0;
 	while (!(r->bd & GOOD))
 	{
 		go_to_last_value(r, r->nb_a);
 		error_verif(r, r->nb_a, -1, -1);
-		if (++test == 42)
+		if (++test == 5)
 		{
-			ft_printf("grosse merde!!\n");
+			ft_printf("STOP VERIF\n");
 			break ;
 		}
 		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
@@ -96,7 +97,25 @@ void			push_swap(t_roll *r, char **p, int size)
 //		go_to_start_of_end(r);
 
 //	}
-	ft_printf("{red}{bold}{underline}\t\t--- END BEST ROT ---{eoc}\n\n");////////
-	ft_printf("{yellow}{bold}{underline}END\tPUSH SWAP{eoc}\n");/////////////////
-//	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
+	int test2[r->nb_a];
+	int i = -1;
+	while (++i < r->nb_a)
+	{
+		test2[i] = r->a.LNBR;
+		rotate(NULL, &r->a, 0);
+	}
+	ft_qsort(test2, r->nb_a, 0, 0);
+	i = -1;
+	while(++i < r->nb_a)
+	{
+		ft_printf("test[%2d] = [%10d]\t\tr->a.LNBR = [%10d]", i, test2[i], r->a.LNBR);
+		if (r->a.low->bd & GOOD)
+			ft_printf("\t{green}GOOD{eoc}");
+		if (r->a.low->bd & SWAP)
+			ft_printf("\t{magenta}SWAP{eoc}");
+		if (r->a.low->bd & PUSH)
+			ft_printf("\t{red}PUSH{eoc}");
+		rotate(NULL, &r->a, 0);
+		ft_printf("\n");
+	}
 }
