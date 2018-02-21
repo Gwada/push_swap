@@ -73,12 +73,14 @@ void			push_swap(t_roll *r, char **p, int size)
 	init_tab(t, r, p, -1);
 	if (r->bd & ERR || r->bd & GOOD)
 		return ;
+	ft_printf("\n\n");
+	display_piles(r, &r->a, &r->b);
 	while (check_sort(&r->a, r->nb_a, -1))
 		if (go_to_best_rotation(r, r->nb_a, -1))
 			break ;
-	ft_printf("-------------------------------------------------\n\n\n");////
-	ft_printf("{red}{bold}{underline}END OF FIRST STEP{eoc}\n\n\n");///////////////
-	ft_printf("-------------------------------------------------\n\n\n");////
+	ft_printf("\n\n{red}{bold}-------------------------------------------------\n\n\n");//
+	ft_printf("\t\t{underline}END OF FIRST STEP{runderline}\n\n\n");////////////////////////
+	ft_printf("-------------------------------------------------{eoc}\n\n\n");///
 //	int test = 0;
 	while (!(r->bd & GOOD))
 	{
@@ -89,15 +91,15 @@ void			push_swap(t_roll *r, char **p, int size)
 //			ft_printf("STOP VERIF\n");
 //			break ;
 //		}
-		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
-		ft_printf("-------------------------------------------------\n\n\n");////
+//		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
+//		ft_printf("-------------------------------------------------\n\n\n");////
 	}
 //	while (r->nb_b)
 //	{
 //		go_to_start_of_end(r);
 
 //	}
-	int test2[r->nb_a];
+/*	int test2[r->nb_a];
 	int i = -1;
 	while (++i < r->nb_a)
 	{
@@ -117,5 +119,7 @@ void			push_swap(t_roll *r, char **p, int size)
 			ft_printf("\t{red}PUSH{eoc}");
 		rotate(NULL, &r->a, 0);
 		ft_printf("\n");
-	}
+	}*/
+//	display_piles(r, &r->a, &r->b);
+		ft_printf("size = %d\n", r->size);
 }

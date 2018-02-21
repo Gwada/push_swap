@@ -77,7 +77,7 @@ int			go_to_best_rotation(t_roll *r, int size, int i)
 	while (r->a.low->bd & (ROT | R_ROT | PUSH))
 	{
 		test = 0;
-		if (r->a.low->bd & PUSH/* && !check_push(r, r->nb_a, -1)*/)
+		if (r->a.low->bd & PUSH)
 			return (push_that(r, -1));
 		else if (r->a.low->bd & SWAP)
 			return (swap_that(r, -1));

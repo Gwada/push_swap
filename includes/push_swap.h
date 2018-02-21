@@ -34,8 +34,8 @@
 # define COLOR		(1 << 6)
 # define ERR		(1 << 7)
 
-# define ONLY_R		(1 << 1)
-# define MORE		(1 << 2)
+# define NO_CHECK	(1 << 1)
+# define CHECK		(1 << 2)
 # define SWAP		(1 << 3)
 # define ROT		(1 << 4)
 # define R_ROT		(1 << 5)
@@ -119,6 +119,7 @@ void				d_r_rotate(t_roll *r, int state);
 
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);
+void				finition_sort(t_roll *r, int *t, int start, int end);
 
 void				push_swap(t_roll *r, char **p, int size);
 
