@@ -50,6 +50,7 @@ static	int	swap_that(t_roll *r, int i)
 int			go_to_best_rotation(t_roll *r, int size, int i)
 {
 //	ft_printf("{black}{bold}{underline}IN\tGO TO BEST ROTATION{eoc} size = %d\n", size);//
+	int		test;
 	int		t[size];
 
 	while (++i < size)
@@ -73,10 +74,9 @@ int			go_to_best_rotation(t_roll *r, int size, int i)
 //		rotate(NULL, &r->a, 0);//////////////////////////////////////////////////
 //	}////////////////////////////////////////////////////////////////////////////
 //	ft_printf("\n\n");///////////////////////////////////////////////////////////
-	int test = 1;
+	test = r->a.low->bd & (ROT | R_ROT | PUSH) ? 0 : 1;
 	while (r->a.low->bd & (ROT | R_ROT | PUSH))
 	{
-		test = 0;
 		if (r->a.low->bd & PUSH)
 			return (push_that(r, -1));
 		else if (r->a.low->bd & SWAP)

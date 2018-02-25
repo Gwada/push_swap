@@ -33,7 +33,7 @@ void		swap(t_roll *r, t_pile *p, char pile)
 	if (pile)
 	{
 		if (r->bd & COLOR)
-			ft_printf("{magenta}s%c{eoc}\n", pile);
+			ft_printf("{magenta}{bold}s%c{eoc}\n", pile);
 		else
 			ft_printf("s%c\n", pile);
 	}
@@ -44,6 +44,6 @@ void		d_swap(t_roll *r)
 {
 	swap(NULL, &r->a, 0);
 	swap(NULL, &r->b, 0);
-	r->bd & COLOR ? ft_printf("{magenta}ss{eoc}\n") : ft_printf("ss\n");
+	r->bd & COLOR ? ft_printf("{magenta}{bold}ss{eoc}\n") : ft_printf("ss\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }

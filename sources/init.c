@@ -59,7 +59,6 @@ int				init_struct(t_roll *r, char **nbr, int size)
 
 void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 {
-//	ft_printf("{magenta}{bold}IN INIT TAB{eoc}\n");//////////////////////////////
 	while (*a && ++i < r->size)
 	{
 		ft_bzero(&t[i], sizeof(*t));
@@ -69,9 +68,8 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 			while (**a && **a >= '0' && **a <= '9')
 			{
 				t[i].n = t[i].n * 10 + *((*a)++) - '0';
-				if (t[i].n > IMAX && !(r->bd & MINUS)  && (r->bd |= ERR))
-					return ;
-				if (t[i].n > -IMIN && r->bd & MINUS && (r->bd |= ERR))
+				if (((t[i].n > IMAX && r->bd ^ MINUS)
+				|| (t[i].n > -IMIN && r->bd & MINUS)) && (r->bd |= ERR))
 					return ;
 			}
 			r->bd & MINUS ? t[i].n = -t[i].n : 0;
@@ -82,25 +80,25 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 		}
 		**a != ' ' ? ++a : 0;
 	}
-//	ft_printf("{magenta}{bold}END INIT TAB{eoc}\n\n");///////////////////////////
 	r->bd ^ ERR ? init_sort(t, r, -1) : 0;
 }
 
 void			init_sort(t_tab *t, t_roll *r, int i)
 {
 	ft_ps_qsort(t, r->size, 0, 0);
-	r->nb_a = (unsigned)r->size;
+	r->nb_a = r->size;
+	r->nb_b = 0;
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;
 	r->bd |= GOOD;
 	while (r->bd ^ ERR && ++i < r->size)
 	{
-		(i < r->size - 1) && (t[i].n == t[i + 1].n) ? r->bd |= ERR : 0;
-		t[i].n != t[i].m.nbr ? (r->bd &= ~GOOD) : 0;
+		t[i].n == t[i + 1].n ? r->bd |= ERR : 0;
+		t[i].n != t[i].m.nbr ? r->bd &= ~GOOD : 0;
 		t[i].n == t[i].m.nbr ? ++r->cor : 0;
-		t[i].m.nbr == r->a_max ? t[i].m.bd |= MAX : 0;
-		t[i].m.nbr == r->a_min ? t[i].m.bd |= MIN : 0;
-		t[i].m.pos = i;
+//		t[i].m.nbr == r->a_max ? t[i].m.bd |= MAX : 0;///////////////////////////
+//		t[i].m.nbr == r->a_min ? t[i].m.bd |= MIN : 0;///////////////////////////
+//		t[i].m.pos = i;//////////////////////////////////////////////////////////
 		t[i].m.low = &r->a;
 		t[i].m.top = r->a.top ? r->a.top : &r->a;
 		r->a.low ? (r->a.top->low = &t[i].m) : (r->a.low = &t[i].m);

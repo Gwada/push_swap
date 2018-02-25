@@ -26,6 +26,7 @@
 */
 
 # define GOOD		(1 << 0)
+
 # define MIN		(1 << 1)
 # define MAX		(1 << 2)
 # define STRING		(1 << 3)
@@ -55,7 +56,6 @@ typedef struct		s_pile
 {
 	char			bd;
 
-	int				pos;
 	int				nbr;
 
 	struct s_pile	*root;
@@ -106,7 +106,7 @@ void				find_best_rotation(t_roll *r, int rot, int state);
 void				find_best_combinaison(int *t, t_roll *r, int i);
 int					check_sort(t_pile *p, int size, int i);
 
-void				go_to_last_value(t_roll *r, int size);
+void				first_step(t_roll *r, int size);
 
 int					find_best_push(t_roll *r, int value, int rot_a, int rot_b);
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
@@ -119,6 +119,7 @@ void				d_r_rotate(t_roll *r, int state);
 
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);
+void				pile_sort(t_roll *r, int *t, int size, int i);
 void				finition_sort(t_roll *r, int *t, int start, int end);
 
 void				push_swap(t_roll *r, char **p, int size);

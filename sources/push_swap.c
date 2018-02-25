@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int				check_sort(t_pile *p, int size, int i)
+/*int				check_sort(t_pile *p, int size, int i)
 {
 //	ft_printf("{black}{bold}IN check_sort{eoc}\n");//////////////////////////////
 	int			verif;
@@ -42,12 +42,7 @@ void			error_verif(t_roll *r, int size, int i, int j)
 	int			t[size];
 
 	total = 0;
-	while (++i < size)
-	{
-		t[i] = r->a.LNBR;
-		rotate(NULL, &r->a, 0);
-	}
-	ft_qsort(t, size, 0, 0);
+	pile_sort(r, t, size, -1);
 	i = 0;
 	while (t[i] != r->a.LNBR)
 		++i;
@@ -57,13 +52,13 @@ void			error_verif(t_roll *r, int size, int i, int j)
 		i + j == size ? i = -j : 0;
 //		ft_printf("t[%2d] = %10d\tr->a.LNBR = %10d\n", i+j, t[i+j], r->a.LNBR);//
 		t[i + j] == r->a.LNBR ? ++total : 0;
-		t[i + j] == r->a.LNBR ? r->a.low->bd |= GOOD : 0;
+//		t[i + j] == r->a.LNBR ? r->a.low->bd |= GOOD : 0;
 		rotate(NULL, &r->a, 0);
 	}
 //	ft_printf("total = %d size = %d\n", total, size);////////////////////////////
 	total == size ? r->bd |= GOOD : 0;
 //	ft_printf("{black}{bold}END\tERROR VERIF{eoc}\n\n");/////////////////////////
-}
+}*/
 
 void			push_swap(t_roll *r, char **p, int size)
 {
@@ -75,51 +70,29 @@ void			push_swap(t_roll *r, char **p, int size)
 		return ;
 	ft_printf("\n\n");
 	display_piles(r, &r->a, &r->b);
-	while (check_sort(&r->a, r->nb_a, -1))
-		if (go_to_best_rotation(r, r->nb_a, -1))
-			break ;
-	ft_printf("\n\n{red}{bold}-------------------------------------------------\n\n\n");//
-	ft_printf("\t\t{underline}END OF FIRST STEP{runderline}\n\n\n");////////////////////////
-	ft_printf("-------------------------------------------------{eoc}\n\n\n");///
-//	int test = 0;
-	while (!(r->bd & GOOD))
-	{
-		go_to_last_value(r, r->nb_a);
-		error_verif(r, r->nb_a, -1, -1);
-//		if (++test == 10)
-//		{
-//			ft_printf("STOP VERIF\n");
-//			break ;
-//		}
+	first_step(r, r->nb_a);
+/*//	while (check_sort(&r->a, r->nb_a, -1))///////////////////////////////////
+//		if (go_to_best_rotation(r, r->nb_a, -1))/////////////////////////////////
+//			break ;//////////////////////////////////////////////////////////////
+//	ft_printf("\n\n{red}{bold}-------------------------------------------------\n\n\n");//
+//	ft_printf("\t\t{underline}END OF FIRST STEP{runderline}\n\n\n");/////////////
+//	ft_printf("-------------------------------------------------{eoc}\n\n\n");///
+//	int test = 1;////////////////////////////////////////////////////////////////
+//	while (!(r->bd & GOOD))//////////////////////////////////////////////////////
+//	{*/
+
+//		error_verif(r, r->nb_a, -1, -1);/////////////////////////////////////////
+//		if (!--test)	break ;//////////////////////////////////////////////////
 //		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
 //		ft_printf("-------------------------------------------------\n\n\n");////
-	}
-//	while (r->nb_b)
-//	{
-//		go_to_start_of_end(r);
-
-//	}
-/*	int test2[r->nb_a];
-	int i = -1;
-	while (++i < r->nb_a)
-	{
-		test2[i] = r->a.LNBR;
-		rotate(NULL, &r->a, 0);
-	}
-	ft_qsort(test2, r->nb_a, 0, 0);
-	i = -1;
-	while(++i < r->nb_a)
-	{
-		ft_printf("test[%2d] = [%10d]\t\tr->a.LNBR = [%10d]", i, test2[i], r->a.LNBR);
-		if (r->a.low->bd & GOOD)
-			ft_printf("\t{green}GOOD{eoc}");
-		if (r->a.low->bd & SWAP)
-			ft_printf("\t{magenta}SWAP{eoc}");
-		if (r->a.low->bd & PUSH)
-			ft_printf("\t{red}PUSH{eoc}");
-		rotate(NULL, &r->a, 0);
-		ft_printf("\n");
-	}*/
-//	display_piles(r, &r->a, &r->b);
-		ft_printf("size = %d\n", r->size);
+//	}////////////////////////////////////////////////////////////////////////////
+	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
+	int i = -1, total = 0;///////////////////////////////////////////////////////
+	while (++i < r->size)////////////////////////////////////////////////////////
+	{////////////////////////////////////////////////////////////////////////////
+		if (r->a.low->bd & GOOD || r->a.low->bd & CHECK || r->a.low->bd & SWAP || r->a.low->bd & NO_CHECK)//
+			++total;/////////////////////////////////////////////////////////////
+		rotate(NULL, &r->a, 0);//////////////////////////////////////////////////
+	}////////////////////////////////////////////////////////////////////////////
+	ft_printf("size = %d total = %d\n", r->size, total);/////////////////////////
 }

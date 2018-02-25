@@ -30,8 +30,14 @@ void		display_pile(t_roll *r, t_pile *p, char pile)
 		r->bd & COLOR ? ft_printf("{red}<-{eoc}") : ft_printf("<-");
 		while(!p->low->root)
 		{
-			p->low->bd & GOOD ? ft_printf("{green}[%d]{eoc}", p->low->nbr) : 0;
-			!(p->low->bd & GOOD) ? ft_printf("[%d]", p->low->nbr) : 0;
+			if (p->low->bd & GOOD)
+				ft_printf("{green}[%d]{eoc}", p->LNBR);
+			else if (p->low->bd & CHECK)
+				ft_printf("{cyan}[%d]{eoc}", p->LNBR);
+			else if (p->low->bd & NO_CHECK)
+				ft_printf("{magenta}[%d]{eoc}", p->LNBR);
+			else
+				ft_printf("[%d]", p->low->nbr);
 			p = p->low;
 			if (!p->low->root)
 				r->bd & COLOR ? ft_printf("{yellow}<->{eoc}", pile) : 0;

@@ -89,7 +89,7 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 		r->nb_b += (pile == 'b') ? 1 : -1;
 		find_max(r);
 		tmp->bd = GOOD;
-		r->bd & COLOR ? ft_printf("{red}p%c\n{eoc}", pile) : 0;
+		r->bd & COLOR ? ft_printf("{red}{bold}p%c\n{eoc}", pile) : 0;
 		!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
 		r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	}
@@ -110,7 +110,7 @@ void		simple_push(t_roll*r, t_pile *src, t_pile *dst, char pile)
 	r->nb_a += (pile == 'a') ? 1 : -1;
 	r->nb_b += (pile == 'b') ? 1 : -1;
 	find_max(r);
-	r->bd & COLOR ? ft_printf("{red}p%c\n{eoc}", pile) : 0;
+	r->bd & COLOR ? ft_printf("{red}{bold}p%c\n{eoc}", pile) : 0;
 	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
@@ -144,21 +144,16 @@ int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 			t1[i] == value ? i_cor = i : 0;
 			r->a.LNBR == value ? i_incor = i : 0;
 			ft_printf("{yellow}t1[%3d]{eoc} =\t[{green}%10d{eoc}]\t{magenta}p->LNBR = [%10d]{eoc} ", i, t1[i], r->a.LNBR);
-		//	if (r->a.low->bd & GOOD || i == r->nb_a - 1)
-		//	{
-		//		i - start > 1 ? finition_sort(r, t1, start, 1) : 0;
-				if (r->a.low->bd & GOOD)
-		//		{
-					ft_printf("{green}GOOD{eoc} ");
-		//			start = i;
-		//		}
-//			}
+			if (r->a.low->bd & GOOD)
+				ft_printf("{green}GOOD ");
 			if (r->a.low->bd & PUSH)
-				ft_printf("{red}PUSH{eoc} ");
+				ft_printf("{red}PUSH ");
 			if (r->a.low->bd & SWAP)
-				ft_printf("{yellow}SWAP{eoc} ");
+				ft_printf("{yellow}SWAP ");
+			if (t1[i] == r->a.LNBR)
+				ft_printf("t1[i] == r->a.LNBR");
 			rotate(NULL, &r->a, 0);
-			ft_printf("\n");
+			ft_printf("{eoc}\n");
 		}
 		if (i < r->nb_b)
 		{
@@ -177,16 +172,16 @@ int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 	rot_b > r->nb_b / 2 ? rot_b = r->nb_b - rot_b : 0;
 
 	ft_printf("r->b_rot = [%2d]\n", r->b_rot);
-	ft_printf("nb_a = [%2d] rot_a = [%2d]\tnb_b = [%2d] rot_b = [%2d]\n", r->nb_a, rot_a + 2, r->nb_b, rot_b + 1);
+	ft_printf("nb_a = [%2d] rot_a = [%2d]\tnb_b = [%2d] rot_b = [%2d]\n", r->nb_a, rot_a + 2, r->nb_b, rot_b+1);
 
-	if ((rot_a += 2) <= ++rot_b)
+	if (rot_a <= rot_b)
 	{
 		ft_printf("{yellow}{underline}{bold}insetion dans a!!!{eoc}\n");
 		if ((i_cor > i_incor && (r->nb_a - (i_cor - i_incor)) >= (r->nb_a / 2))
 		|| (i_incor > i_cor && (r->nb_a - (i_incor - i_cor)) < (r->nb_a / 2)))
 		{
 		//	ft_printf("test 1\n");
-			if (rot_a == 3)
+			if (rot_a == 1)
 			{
 				r_rotate(r, &r->a, 'a');
 				swap(r, &r->a, 'a');
@@ -195,7 +190,7 @@ int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 			else
 			{
 				simple_push(r, &r->a, &r->b, 'b');
-				while (rot_a-- - 2)
+				while (rot_a--)
 				{
 					rotate(r, &r->a, 'a');
 					r->a.low->bd & SWAP ? swap(r, &r->a, 'a') : 0;
@@ -207,10 +202,10 @@ int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
 		else
 		{
 		//	ft_printf("test 2\n");
-			if (rot_a > 3)
+			if (rot_a > 1)
 			{
 				simple_push(r, &r->a, &r->b, 'b');
-				while (rot_a-- - 2)
+				while (rot_a--)
 				{
 					r_rotate(r, &r->a, 'a');
 					r->a.low->bd & SWAP ? swap(r, &r->a, 'a') : 0;
