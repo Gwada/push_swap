@@ -67,62 +67,74 @@ void		finition_sort(t_roll *r, int *t, int start, int end)
 		rotate(NULL, &r->a, 0);
 	}
 	i = -1;
-	ft_printf("\n");/////////////////////////////////////////////////////////////
+//	ft_printf("\n");/////////////////////////////////////////////////////////////
 	ft_qsort(cor_sort, nb_cor, 0, 0);
 	int		check_cor = 0;
 
-	while (++i < nb_cor)/////////////////////////////////////////////////////////
-	{////////////////////////////////////////////////////////////////////////////
-		ft_printf("cor_sort[%3d] = {green}%10d{eoc}\t", i, cor_sort[i]);/////////
-		ft_printf("verif[%3d] = {magenta}%10d{eoc}\t", i, verif[i]);/////////////
-		cor_sort[i] == verif[i] ? ft_printf("{green}{bold}GOOD{eoc}\n") : ft_printf("\n");//
-	}////////////////////////////////////////////////////////////////////////////
-	ft_printf("\n");
-
-	if ((j = 0) < nb_cor)
+//	while (++i < nb_cor)/////////////////////////////////////////////////////////
+//	{////////////////////////////////////////////////////////////////////////////
+//		ft_printf("cor_sort[%3d]\t= {green}[%10d]{eoc}\t", i, cor_sort[i]);/////////
+//		ft_printf("verif[%3d]\t= {magenta}[%10d]{eoc}\t", i, verif[i]);/////////////
+//		cor_sort[i] == verif[i] ? ft_printf("{green}{bold}GOOD{eoc}\n") : ft_printf("\n");//
+//	}////////////////////////////////////////////////////////////////////////////
+//	ft_printf("\n");
+	if (!nb_cor)
 	{
-		i = 0;
-		while (++i <= end - start)
-			r_rotate(NULL, &r->a, 0);
-		i = -1;
-//		int debut = 0;
-//		int fin = 0;
-		while (++i <= end - start - 1)
-		{
-			if (r->a.LNBR == verif[j])
-			{
-				if (cor_sort[j] == verif[j])
-				{
-					r->a.low->bd |= GOOD;
-					r->a.low->bd &= ~NO_CHECK;
-				//	t[start + i] != r->a.LNBR ? r->a.low->bd &= ~NO_CHECK : 0;
-					t[start + i] != r->a.LNBR ? r->a.low->bd |= CHECK : 0;
-					t[start + i] == r->a.LNBR ? r->a.low->bd &= ~CHECK : 0;
-				//	t[start + i] == r->a.LNBR ? r->a.low->bd &= ~NO_CHECK : 0;
-				//	r->a.low->bd = t[start + i] == r->a.LNBR ? GOOD : GOOD | CHECK;
-				}
-				if (r->a.low->bd & GOOD)
-				{
-			//		ft_printf("{red}test\n\n");
-				}
-				++j;
-			}
-			ft_printf("t[%3d] = {green}[%10d]{eoc}\t", start + i, t[start + i]);/////
-			ft_printf("r->a.LNBR = {red}[%10d]{eoc}\t", r->a.LNBR);//////////////////
-			r->a.low->bd & SWAP ? ft_printf("{yellow}{bold}SWAP{eoc} ") : 0;
-			(t[i + start] == r->a.LNBR) || (r->a.low->bd & GOOD) ? ft_printf("{green}{bold}%-10s", "GOOD") : 0;//
-			if (r->a.LNBR >= min && r->a.LNBR <= max)////////////////////////////
-			{////////////////////////////////////////////////////////////////////
-				if (r->a.low->bd & NO_CHECK)	ft_printf("{magenta}{bold}%-10s", "NO_CHECK");//
-				else if (r->a.low->bd & CHECK)	ft_printf("{cyan}{bold}%-10s", "CHECK");//
-			}////////////////////////////////////////////////////////////////////
-			else	ft_printf("{red}{bold}%-10s", "PUSH");///////////////////////
-			ft_printf("{eoc}\n");
-			r->a.low->bd & GOOD ? ++check_cor: 0;
-			rotate(NULL, &r->a, 0);
-		}
+		ft_printf("{bold}{red}END\tFINITION{eoc}\n\n");//////////////////////////
+		return ;
 	}
-	ft_printf("\nafter\t: r->a.LNBR %d\tcheck_cor = %d\n", r->a.LNBR, check_cor);//
+	i = 0;
+	while (++i <= end - start)
+		r_rotate(NULL, &r->a, 0);
+	i = -1;
+	j = 0;
+	min = *cor_sort;
+	while (++i <= end - start - 1)
+	{
+		if (r->a.LNBR == verif[j] && cor_sort[j] == verif[j])
+		{
+			j ? ft_printf("\n") : 0;/////////////////////////////////////////////
+			ft_printf("{bold}r->a.LNBR = %d\n", r->a.LNBR);//////////////////////
+			ft_printf("cor_sort[%3d]\t= {green}[%10d]{eoc}\t", j, cor_sort[j]);//
+			ft_printf("verif[%3d]\t= {magenta}[%10d]{eoc}\t", j, verif[j]);//////
+			cor_sort[i] == verif[i] ? ft_printf("{green}{bold}GOOD{eoc}\n") : ft_printf("\n");//
+		//	min = t[start + i];
+			max = r->a.LNBR;
+		//	ft_printf("{bold}test r->a.LNBR = %d\n", r->a.LNBR);/////////////////
+			ft_printf("min = %d max = %d\n", min, max);//////////////////////////
+			if (j)
+			{
+			}
+	//		else	ft_printf("\n");/////////////////////////////////////////////
+			r->a.low->bd |= GOOD;
+			r->a.low->bd &= ~NO_CHECK;
+		//	t[start + i] != r->a.LNBR ? r->a.low->bd &= ~NO_CHECK : 0;///////////
+			t[start + i] != r->a.LNBR ? r->a.low->bd |= CHECK : 0;
+			t[start + i] == r->a.LNBR ? r->a.low->bd &= ~CHECK : 0;
+		//	t[start + i] == r->a.LNBR ? r->a.low->bd &= ~NO_CHECK : 0;///////////
+		//	r->a.low->bd = t[start + i] == r->a.LNBR ? GOOD : GOOD | CHECK;//////
+			min = r->a.LNBR;
+			++j;
+	//		ft_printf("\n");/////////////////////////////////////////////////////
+		}
+		ft_printf("t[%3d]\t\t= {green}[%10d]{eoc}\t", start + i, t[start + i]);//
+		ft_printf("r->a.LNBR\t= {red}[%10d]{eoc}\t", r->a.LNBR);/////////////////
+		r->a.low->bd & SWAP ? ft_printf("{yellow}{bold}SWAP{eoc} ") : 0;/////////
+		(t[i + start] == r->a.LNBR) || (r->a.low->bd & GOOD) ? ft_printf("{green}{bold}%-10s", "GOOD") : 0;//
+		if (r->a.LNBR >= min && r->a.LNBR <= max)////////////////////////////////
+		{////////////////////////////////////////////////////////////////////////
+			if (r->a.low->bd & NO_CHECK)	ft_printf("{magenta}{bold}%-10s", "NO_CHECK");//
+			else if (r->a.low->bd & CHECK)	ft_printf("{cyan}{bold}%-10s", "CHECK");//
+		}////////////////////////////////////////////////////////////////////////
+		else	ft_printf("{red}{bold}%-10s", "PUSH");///////////////////////////
+		ft_printf("{eoc}\n");////////////////////////////////////////////////////
+		r->a.low->bd & GOOD ? ++check_cor: 0;
+		rotate(NULL, &r->a, 0);
+	}
+	ft_printf("\n{bold}after\n");////////////////////////////////////////////////
+	ft_printf("r->a.LNBR\t= %10d\n", r->a.LNBR);/////////////////////////////////
+	ft_printf("check_cor\t= %10d\n", check_cor);/////////////////////////////////
+	ft_printf("min\t\t= %10d\nmax\t\t= %10d\n", min, max);///////////////////////
 	ft_printf("{bold}{red}END\tFINITION{eoc}\n\n");//////////////////////////////
 }
 
