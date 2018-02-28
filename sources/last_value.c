@@ -29,7 +29,7 @@ static	void	last_and_first(t_roll *r, int *fst, int *lst, int i)
 
 static	void	init_pile(t_roll *r, int *t, int size, int i)
 {
-	ft_printf("\n{magenta}{bold}{underline}IN\tINIT PILE{eoc} size = %d\n", size);//
+//	ft_printf("\n{magenta}{bold}{underline}IN\tINIT PILE{eoc} size = %d\n", size);//
 	int			fst;
 	int			lst;
 	int			start;
@@ -45,18 +45,19 @@ static	void	init_pile(t_roll *r, int *t, int size, int i)
 	section_sort_v2(r, start, (i = -1), 0);
 	ft_qsort(t, size, 0, 0);
 	while (++i < size)
-	{
+//	{
 	//	if (r->a.low->bd & GOOD || r->a.low->bd & CHECK || r->a.LBD & NO_CHECK)
 	//	{
-			ft_printf("{bold}tab[%3d] = [%11d]\tr->a.LNBR\t= [%11d]\t", i, t[i], r->a.LNBR);//
-			r->a.low->bd & GOOD ? ft_printf("{green}GOOD") : 0;//////////////////
-			r->a.low->bd & CHECK ? ft_printf("{cyan}CHECK") : 0;/////////////////
-			r->a.low->bd & NO_CHECK ? ft_printf("{magenta}NO_CHECK") : 0;////////
-			ft_printf("{eoc}\n");////////////////////////////////////////////////
+//			ft_printf("{bold}tab[%3d] = [%11d]\tr->a.LNBR\t= [%11d]\t", i, t[i], r->a.LNBR);//
+//			r->a.low->bd & GOOD ? ft_printf("{green}%10s", "GOOD") : 0;//////////////////
+//			r->a.low->bd & CHECK ? ft_printf("{cyan}%10s", "CHECK") : 0;/////////////////
+//			r->a.low->bd & NO_CHECK ? ft_printf("{magenta}%10s", "NO_CHECK") : 0;////////
+//			r->a.low->bd & PUSH ? ft_printf("{red}%10s", "PUSH") : 0;////////////////////
+//			ft_printf("{eoc}\n");////////////////////////////////////////////////
 	//	}
 		last_and_first(r, &fst, &lst, i);
-	}
-	ft_printf("{magenta}{bold}{underline}END\tINIT PILE{eoc}\n\n");//////////////
+//	}
+//	ft_printf("{magenta}{bold}{underline}END\tINIT PILE{eoc}\n\n");//////////////
 	find_best_rotation(r, r->b_rot, 0);
 	r->b_rot = (size - (size - fst) <= size - lst) ? fst : lst;
 

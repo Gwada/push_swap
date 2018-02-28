@@ -48,6 +48,7 @@
 # define LNBR		low->nbr
 # define TNBR		top->nbr
 # define LBD		low->bd
+# define TBD		top->bd
 
 /*
 ** STRUCTURES
