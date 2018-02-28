@@ -39,54 +39,64 @@ static	void	init_pile(t_roll *r, int *t, int size, int i)
 	pile_sort(r, t, size, -1);
 	find_best_combinaison(t, r, -1);
 	find_best_rotation(r, size - r->b_rot, 0);
-	ft_printf("indice dif la plus proche\tr->b_rot = %2d\tindice st %d\n", r->b_rot, size - r->b_rot);//
 	i = -1;
 	while (++i < size)
 	{
-		if (t[i] == r->a.LNBR)
-		{
-			if ((i == size - 1 && t[i - 1] == r->a.low->LNBR) || (i && t[i - 1] == r->a.low->LNBR))
-				r->a.low->bd = SWAP;
-			else
-				r->a.low->bd = GOOD;
-		}
-		else
-		{
-			if ((t[i] == r->a.low->LNBR && i + 1 < size && t[i + 1] == r->a.LNBR)
-			|| (i < size - 2 && t[i + 1] == r->a.low->LNBR && t[i + 2] == r->a.LNBR)
-			|| (i == size -1 && t[0] == r->a.LNBR && r->a.low->LNBR == t[i]))
-				r->a.low->bd = SWAP;
-			else if ((i > 0 && r->a.LNBR == t[i - 1])
-			|| (i > 1 && t[i - 1] == r->a.TNBR && t[i - 2] == r->a.LNBR)
-			|| (i < size - 1 && t[i + 1] == r->a.LNBR)
-			|| (i == size - 1 && ((t[0] == r->a.LNBR) || (t[i - 1] == r->a.LNBR)))
-			|| (!i && ((t[size - 1] == r->a.LNBR) || (t[size - 1] == r->a.TNBR && r->a.LNBR == t[size - 2]))))
-				r->a.low->bd = GOOD;
-			else
-				r->a.low->bd = PUSH;
-		}
-		if (r->a.LNBR == t[i] || i == r->nb_a - 1)
-			i - start > 1 ? finition_sort(r, t, start, i) : 0;
-		r->a.LNBR == t[i] ? start = i : 0;
+		r->a.low->bd = (t[i] == r->a.LNBR ? GOOD : PUSH);
+		if (((r->a.low->bd & GOOD) || (i == r->nb_a - 1)) && i - start > 1)
+			section_sort(r, (i - start), t[start], t[i]);
+		t[i] == r->a.LNBR ? start = i : 0;
 		rotate(NULL, &r->a, 0);
 	}
 	i = -1;
+	int test = 0;
 	while (++i < size)
 	{////////////////////////////////////////////////////////////////////////////
-		ft_printf("t[%3d] = [{green}%10d{eoc}]\t", i, t[i]);/////////////////////
-		ft_printf("r->a.LNBR = [{magenta}%10d{eoc}] {bold}", r->a.LNBR);/////////
-		r->a.low->bd & SWAP ? ft_printf("{yellow}SWAP ") : 0;/////////////////////
-		r->a.low->bd & GOOD ? ft_printf("{green}GOOD ") : 0;/////////////////////
-		r->a.low->bd & PUSH ? ft_printf("{red}PUSH") : 0;////////////////////////
-		r->a.low->bd & NO_CHECK ? ft_printf("{magenta}NO_CHECK") : 0;////////////////////////
-		r->a.low->bd & CHECK ? ft_printf("{cyan}CHECK") : 0;////////////////////////////////////
-		ft_printf("{eoc}\n");////////////////////////////////////////////////////
+//		ft_printf("t[%3d] = [{green}%10d{eoc}]\t", i, t[i]);/////////////////////
+//		ft_printf("r->a.LNBR = [{magenta}%10d{eoc}] {bold}", r->a.LNBR);/////////
+//		r->a.low->bd & SWAP ? ft_printf("{yellow}SWAP ") : 0;/////////////////////
+//		r->a.low->bd & GOOD ? ft_printf("{green}GOOD ") : 0;/////////////////////
+//		r->a.low->bd & PUSH ? ft_printf("{red}PUSH") : 0;////////////////////////
+//		r->a.low->bd & NO_CHECK ? ft_printf("{magenta}NO_CHECK") : 0;////////////////////////
+//		r->a.low->bd & CHECK ? ft_printf("{cyan}CHECK") : 0;////////////////////////////////////
+//		ft_printf("{eoc}\n");////////////////////////////////////////////////////
 		last_and_first(r, &fst, &lst, i);
+		if (r->a.low->bd & GOOD || r->a.low->bd & CHECK || r->a.low->bd & NO_CHECK)
+			++test;
 	}////////////////////////////////////////////////////////////////////////////
-	ft_printf("\nfirst dif = %3d\tlast dif = %3d\n", fst, lst);//////////////////
+	int tabtest[test];
+	i = -1;
+	int j = 0;
+	while(++i < size)
+	{
+		if (r->a.low->bd & GOOD || r->a.low->bd & CHECK)
+		{
+			tabtest[j] = r->a.LNBR;
+			++j;
+		}
+		rotate(NULL, &r->a, 0);
+	}
+	ft_qsort(tabtest, test, 0, 0);
+//	ft_printf("\nfirst dif = %3d\tlast dif = %3d\n", fst, lst);///
+	i = -1;
+	j = 0;
+	while (++i < size)
+	{
+		if (r->a.low->bd & GOOD || r->a.low->bd & CHECK || r->a.LBD & NO_CHECK)
+		{
+			ft_printf("{bold}tabtest[%3d] = {green}[%11d]{eoc}\t", j, tabtest[j]);/////////////////
+			ft_printf("{bold}r->a.LNBR = {magenta}[%11d]{eoc}\t", r->a.LNBR);/////
+			r->a.low->bd & GOOD ? ft_printf("{bold}{green}GOOD{eoc}") : 0;/////////////////
+			r->a.low->bd & CHECK ? ft_printf("{bold}{cyan}CHECK{eoc}") : 0;/////////////////
+			r->a.low->bd & NO_CHECK ? ft_printf("{bold}{magenta}NO_CHECK{eoc}") : 0;/////////////////
+			++j;
+			ft_printf("\n");////////////////////////////////////////////////
+		}
+		rotate(NULL, &r->a, 0);
+	}
 	find_best_rotation(r, r->b_rot, 0);
 	r->b_rot = (size - (size - fst) <= size - lst) ? fst : lst;
-	ft_printf("best rot = %3d\n", r->b_rot);/////////////////////////////////////
+//	ft_printf("best rot = %3d\n", r->b_rot);/////////////////////////////////////
 	ft_printf("{magenta}{bold}{underline}END\tINIT PILE{eoc}\n\n");//////////////
 }
 

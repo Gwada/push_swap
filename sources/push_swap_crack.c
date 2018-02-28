@@ -22,137 +22,91 @@ void		pile_sort(t_roll *r, int *t, int size, int i)
 	ft_qsort(t, size, 0, 0);
 }
 
-void		finition_sort(t_roll *r, int *t, int start, int end)
+static	int		is_present(int *t, int n, int value)
 {
-	ft_printf("{red}{bold}IN\tFINITION{eoc}\n");/////////////////////////////////
-	ft_printf("{bold}before\t: r->a.LNBR %d\n", r->a.LNBR);//////////////////////
-	int		min = t[start];
-	int		max = t[end];
-	int		i = 0;
-	int		nb_cor = 0;
+	int i;
 
-	ft_printf("{bold}{yellow}indice : start\t= [%2d] end = [%2d]\n", start, end);//
-	ft_printf("valeur : min\t= [%2d] max = [%2d]{eoc}\n\n", min, max);///////////
-	while (++i <= end - start)
-	{
-		r_rotate(NULL, &r->a, 0);
-		r->a.LNBR >= min && r->a.LNBR <= max ? ++nb_cor : 0;
-	}
-
-	int		verif[nb_cor];
-	int		cor_sort[nb_cor];
-	i = -1;//////////////////////////////////////////////////////////////////////
-	int		j = -1;//////////////////////////////////////////////////////////////
-	while (++i <= end - start - 1)
-	{
-//		ft_printf("t[%3d] = {green}[%10d]{eoc}\t", start + i, t[start + i]);/////
-//		ft_printf("r->a.LNBR = {red}[%10d]{eoc}\t", r->a.LNBR);//////////////////
-//		t[i + start] == r->a.LNBR ? ft_printf("{green}{bold}%-10s", "GOOD") : 0;//
-		if (r->a.LNBR >= min && r->a.LNBR <= max)
-		{
-			++j;
-			r->a.low->bd &= ~PUSH;
-			r->a.low->bd |= t[start + i] == r->a.LNBR ? CHECK : NO_CHECK;
-			verif[j] = r->a.LNBR;
-			cor_sort[j] = r->a.LNBR;
-//			if (r->a.low->bd & NO_CHECK)/////////////////////////////////////////
-//				ft_printf("{magenta}{bold}%-10s", "NO_CHECK");///////////////////
-//			else if (r->a.low->bd & CHECK)///////////////////////////////////////
-//				ft_printf("{cyan}{bold}%-10s", "CHECK");/////////////////////////
-//			ft_printf("{eoc}\n");////////////////////////////////////////////////
-		}////////////////////////////////////////////////////////////////////////
-//		else/////////////////////////////////////////////////////////////////////
-//			ft_printf("{red}{bold}PUSH{eoc}\n");/////////////////////////////////
-		rotate(NULL, &r->a, 0);
-	}
 	i = -1;
-	ft_printf("\n");/////////////////////////////////////////////////////////////
-	ft_qsort(cor_sort, nb_cor, 0, 0);
-	int		check_cor = 0;///////////////////////////////////////////////////////
+	while (++i < n)
+	{
+		if (t[i] == value)
+			return (1);
+	}
+	return (0);
+}
 
-	while (++i < nb_cor)/////////////////////////////////////////////////////////
-	{////////////////////////////////////////////////////////////////////////////
-		ft_printf("{bold}cor_sort[%3d]\t= {green}[%10d]{eoc}\t", i, cor_sort[i]);//
-		ft_printf("{bold}verif[%3d]\t= {magenta}[%10d]{eoc}\t", i, verif[i]);////
-		cor_sort[i] == verif[i] ? ft_printf("{green}{bold}GOOD{eoc}\n") : ft_printf("\n");//
-	}////////////////////////////////////////////////////////////////////////////
-	if (!nb_cor)
-	{////////////////////////////////////////////////////////////////////////////
-		ft_printf("{bold}after\n");//////////////////////////////////////////////
-		ft_printf("r->a.LNBR\t= %10d\n", r->a.LNBR);/////////////////////////////
-		ft_printf("check_cor\t= %10d\n", check_cor);/////////////////////////////
-		ft_printf("min\t\t= %10d\nmax\t\t= %10d\n", min, max);///////////////////
-		ft_printf("{red}END\tFINITION{eoc}\n\n");////////////////////////////////
-		return ;
-	}////////////////////////////////////////////////////////////////////////////
-	else/////////////////////////////////////////////////////////////////////////
-		ft_printf("\n\n");///////////////////////////////////////////////////////
+static	void	finition_sort(t_roll *r, int *t, int size, int nb_cor)
+{
+	ft_printf("\n{cyan}{bold}IN\tFINITION\tsize = %d\tnb_cor = %d{eoc}\n\n", size, nb_cor);//
+	int			i;
+	int			j;
+	int			k;
+
 	i = 0;
-	while (++i <= end - start)
-		r_rotate(NULL, &r->a, 0);
-	i = -1;
 	j = 0;
-	while (++i <= end - start - 1)
+	while (++i < size)
 	{
-		if (r->a.LNBR == verif[j])
+		if (r->a.LBD & NO_CHECK && nb_cor && is_present(t, nb_cor, r->a.LNBR))
 		{
-			if (cor_sort[j] == verif[j])
+			if (r->a.LNBR >= *t && r->a.LNBR <= t[j])
 			{
-		//		j ? ft_printf("\n") : 0;/////////////////////////////////////////
-		//		ft_printf("{bold}{yellow}r->a.LNBR = %d{eoc}\n", r->a.LNBR);/////
-		//		ft_printf("{bold}cor_sort[%3d]\t= {green}[%10d]{eoc}\t", j, cor_sort[j]);//
-		//		ft_printf("verif[%3d]\t= {magenta}[%10d]{eoc}\t", j, verif[j]);//////
-		//		cor_sort[i] == verif[i] ? ft_printf("{green}{bold}GOOD{eoc}\n") : ft_printf("\n");//
-			//	min = t[start + i];//////////////////////////////////////////////
-			//	max = r->a.LNBR;/////////////////////////////////////////////////
-		//		ft_printf("min = %d max = %d\n", min, max);//////////////////////
-		//		if (j)
-		//		{
-				//	--j;
-				//	while (r->a.LNBR != *verif)
-				//	{
-				//		
-				//		if ()
-				//			r_rotate(NULL, &r->a, 0);
-				//	}
-			//	}
-			//		else	ft_printf("\n");/////////////////////////////////////
-				r->a.low->bd |= GOOD;
-				r->a.low->bd &= ~NO_CHECK;
-			//	t[start + i] != r->a.LNBR ? r->a.low->bd &= ~NO_CHECK : 0;///////
-				t[start + i] != r->a.LNBR ? r->a.low->bd |= CHECK : 0;
-				t[start + i] == r->a.LNBR ? r->a.low->bd &= ~CHECK : 0;
-			//	t[start + i] == r->a.LNBR ? r->a.low->bd &= ~NO_CHECK : 0;///////
-			//	r->a.low->bd = t[start + i] == r->a.LNBR ? GOOD : GOOD | CHECK;//
-				min = r->a.LNBR;
-			//		ft_printf("\n");/////////////////////////////////////////////
+				r->a.LBD = GOOD;
+				while(*t < r->a.LNBR)
+				{
+					++t;
+					--nb_cor;
+				}
+				j = 0;
+				while (++j < nb_cor)
+					t[j - 1] = t[j];
+				j = 0;
 			}
-			else if (j + 1 < nb_cor && verif[j] > min && verif[j] < verif[j + 1])
+			else
 			{
-				r->a.low->bd = (GOOD | CHECK);
-				min = r->a.LNBR;
+				k = 0;
+				r->a.LBD = CHECK;
+				while (t[k] < r->a.LNBR)
+					++k;
+				while (++k < nb_cor)
+					t[k - 1] = t[k];
+				++j;
 			}
-			++j;
+			--nb_cor;
 		}
-		ft_printf("t[%3d]\t\t= {green}[%10d]{eoc}\t", start + i, t[start + i]);//
-		ft_printf("r->a.LNBR\t= {red}[%10d]{eoc}\t", r->a.LNBR);/////////////////
-		r->a.low->bd & SWAP ? ft_printf("{yellow}{bold}SWAP{eoc} ") : 0;/////////
-		(t[i + start] == r->a.LNBR) || (r->a.low->bd & GOOD) ? ft_printf("{green}{bold}%-10s", "GOOD") : 0;//
-		if (r->a.LNBR >= min && r->a.LNBR <= max)////////////////////////////////
-		{////////////////////////////////////////////////////////////////////////
-			if (r->a.low->bd & NO_CHECK)	ft_printf("{magenta}{bold}%-10s", "NO_CHECK");//
-			else if (r->a.low->bd & CHECK)	ft_printf("{cyan}{bold}%-10s", "CHECK");//
-		}////////////////////////////////////////////////////////////////////////
-		else	ft_printf("{red}{bold}%-10s", "PUSH");///////////////////////////
-		ft_printf("{eoc}\n");////////////////////////////////////////////////////
-		r->a.low->bd & GOOD ? ++check_cor: 0;
 		rotate(NULL, &r->a, 0);
 	}
-	ft_printf("\n{bold}after\n");////////////////////////////////////////////////
+	rotate(NULL, &r->a, 0);
+	ft_printf("\n{cyan}{bold}END\tFINITION\tsize = %d{eoc}\n", size);///////////////
+}
+
+void		section_sort(t_roll *r, int size, int min, int max)
+{
+	ft_printf("{red}{bold}IN\tSECTION\tsize = %d{eoc}\n", size);////////////////
+	ft_printf("{bold}{yellow}{underline}before{runderline}\n");//////////////////
 	ft_printf("r->a.LNBR\t= %10d\n", r->a.LNBR);/////////////////////////////////
-	ft_printf("check_cor\t= %10d\n", check_cor);/////////////////////////////////
+	int		i;
+	int		nb_check;
+	int		verif[size];
+
+	i = -1;
+	nb_check = 0;
+	ft_printf("min\t\t= %10d\nmax\t\t= %10d{eoc}\n", min, max);///////////////////////
+	while (++i < size)
+	{
+		r_rotate(NULL, &r->a, 0);
+		if (r->a.LNBR >= min && r->a.LNBR <= max && r->a.low->bd ^ GOOD)
+		{
+			r->a.low->bd = NO_CHECK;
+			verif[nb_check] = r->a.LNBR;
+			++nb_check;
+		}
+	}
+	nb_check > 1 ? ft_qsort(verif, nb_check, 0, 0) : 0;
+	finition_sort(r, verif, size, nb_check);
+	ft_printf("\n{bold}{yellow}{underline}after{runderline}\n");/////////////////
+	ft_printf("r->a.LNBR\t= %10d\n", r->a.LNBR);/////////////////////////////////
 	ft_printf("min\t\t= %10d\nmax\t\t= %10d\n", min, max);///////////////////////
-	ft_printf("{bold}{red}END\tFINITION{eoc}\n\n");//////////////////////////////
+	ft_printf("{bold}{red}END\tSECTION{eoc}\n\n");//////////////////////////////
 }
 
 void		find_best_sort(int *t, t_roll *r, int size, int i)

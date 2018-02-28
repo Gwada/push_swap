@@ -47,6 +47,7 @@
 # define ISNUM		"0123456789"
 # define LNBR		low->nbr
 # define TNBR		top->nbr
+# define LBD		low->bd
 
 /*
 ** STRUCTURES
@@ -120,7 +121,7 @@ void				d_r_rotate(t_roll *r, int state);
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);
 void				pile_sort(t_roll *r, int *t, int size, int i);
-void				finition_sort(t_roll *r, int *t, int start, int end);
+void				section_sort(t_roll *r, int size, int min, int max);
 
 void				push_swap(t_roll *r, char **p, int size);
 
