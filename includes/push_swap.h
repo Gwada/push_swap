@@ -107,7 +107,7 @@ void				find_best_rotation(t_roll *r, int rot, int state);
 void				find_best_combinaison(int *t, t_roll *r, int i);
 int					check_sort(t_pile *p, int size, int i);
 
-void				first_step(t_roll *r, int size);
+void				first_step(t_roll *r, int size, int i, int start);
 
 int					find_best_push(t_roll *r, int value, int rot_a, int rot_b);
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
@@ -122,6 +122,7 @@ void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);
 void				pile_sort(t_roll *r, int *t, int size, int i);
 void				section_sort(t_roll *r, int size, int min, int max);
+void				section_sort_v2(t_roll *r, int size, int i, int j);
 
 void				push_swap(t_roll *r, char **p, int size);
 

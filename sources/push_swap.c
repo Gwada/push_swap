@@ -70,7 +70,9 @@ void			push_swap(t_roll *r, char **p, int size)
 		return ;
 	ft_printf("\n\n");
 	display_piles(r, &r->a, &r->b);
-	first_step(r, r->nb_a);
+	first_step(r, r->nb_a, -1, 0);
+//	while (r->a.LBD & PUSH)
+//		push(r, &r->a, &r->b, 'b');
 /*//	while (check_sort(&r->a, r->nb_a, -1))///////////////////////////////////
 //		if (go_to_best_rotation(r, r->nb_a, -1))/////////////////////////////////
 //			break ;//////////////////////////////////////////////////////////////

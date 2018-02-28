@@ -116,7 +116,7 @@ gops:
 	@clear
 	@make clean_PS
 	@make $(PUSH_SWAP)
-#	@time ./push_swap $(NUM)
+#	@time ./push_swap $(NUM3)
 	./push_swap $(NUM3)
 
 
