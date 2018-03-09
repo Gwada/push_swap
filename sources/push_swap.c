@@ -12,52 +12,14 @@
 
 #include "push_swap.h"
 
-/*int				check_sort(t_pile *p, int size, int i)
+/*static	int		error_checker(t_roll *r, int total, int i)
 {
-//	ft_printf("{black}{bold}IN check_sort{eoc}\n");//////////////////////////////
-	int			verif;
-	int			tab[size];
-
-	verif = 0;
-	while (++i < size)
+	while (++i < r->nb_a)
 	{
-		tab[i] = p->LNBR;
-		rotate(NULL, p, 0);
-	}
-	ft_qsort(tab, size, 0, 0);
-	i = -1;
-	while (++i < size)
-	{
-		tab[i] != p->LNBR ? verif = 1 : 0;
-		rotate(NULL, p, 0);
-	}
-//	ft_printf("{black}{bold}end check verif = %d{eoc}\n\n", verif);//////////////
-	return (verif);
-}
-
-void			error_verif(t_roll *r, int size, int i, int j)
-{
-//	ft_printf("{black}{bold}IN\tERROR VERIF{eoc}\n");////////////////////////////
-	int			total;
-	int			t[size];
-
-	total = 0;
-	pile_sort(r, t, size, -1);
-	i = 0;
-	while (t[i] != r->a.LNBR)
-		++i;
-//	ft_printf("t[%d] = %d\n", i, t[i]);//////////////////////////////////////////
-	while (++j < size)
-	{
-		i + j == size ? i = -j : 0;
-//		ft_printf("t[%2d] = %10d\tr->a.LNBR = %10d\n", i+j, t[i+j], r->a.LNBR);//
-		t[i + j] == r->a.LNBR ? ++total : 0;
-//		t[i + j] == r->a.LNBR ? r->a.low->bd |= GOOD : 0;
+		r->a.LBD & PUSH ? ++total : 0;
 		rotate(NULL, &r->a, 0);
 	}
-//	ft_printf("total = %d size = %d\n", total, size);////////////////////////////
-	total == size ? r->bd |= GOOD : 0;
-//	ft_printf("{black}{bold}END\tERROR VERIF{eoc}\n\n");/////////////////////////
+	return (total);
 }*/
 
 void			push_swap(t_roll *r, char **p, int size)
@@ -68,39 +30,25 @@ void			push_swap(t_roll *r, char **p, int size)
 	init_tab(t, r, p, -1);
 	if (r->bd & ERR || r->bd & GOOD)
 		return ;
-	ft_printf("\n\n");
-	display_piles(r, &r->a, &r->b);
+	find_best_rot(r, t, 0, -1);
 	first_step(r, r->nb_a, -1, 0);
-	int i = -1;
-	while (++i < 10)
-	{
-		r->a.LBD & PUSH || r->a.LBD & NO_CHECK ? push(r, &r->a, &r->b, 'b') : 0;
-		r->a.LBD ^ PUSH && r->a.LBD ^ NO_CHECK ? r_rotate(r, &r->a, 'a') : 0;
-		first_step(r, r->nb_a, -1, 0);
-	}
-/*//	while (check_sort(&r->a, r->nb_a, -1))///////////////////////////////////
-//		if (go_to_best_rotation(r, r->nb_a, -1))/////////////////////////////////
-//			break ;//////////////////////////////////////////////////////////////
-//	ft_printf("\n\n{red}{bold}-------------------------------------------------\n\n\n");//
-//	ft_printf("\t\t{underline}END OF FIRST STEP{runderline}\n\n\n");/////////////
-//	ft_printf("-------------------------------------------------{eoc}\n\n\n");///
-//	int test = 1;////////////////////////////////////////////////////////////////
-//	while (!(r->bd & GOOD))//////////////////////////////////////////////////////
-//	{*/
-
-//		error_verif(r, r->nb_a, -1, -1);/////////////////////////////////////////
-//		if (!--test)	break ;//////////////////////////////////////////////////
-//		ft_printf("{blue}{underline}{bold}END BOUCLE{eoc}\n");///////////////////
-//		ft_printf("-------------------------------------------------\n\n\n");////
-//	}////////////////////////////////////////////////////////////////////////////
-	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
-	i = -1;
-	int total = 0;///////////////////////////////////////////////////////
+//	second_step(r, r->nb_a, -1, -1);
+	int i = -1, total = 0;
+	find_best_rotation(r, r->nb_a - r->b_rot, 0);
 	while (++i < r->nb_a)////////////////////////////////////////////////////////
 	{////////////////////////////////////////////////////////////////////////////
-		if (r->a.low->bd & GOOD || r->a.low->bd & CHECK)//
-			++total;/////////////////////////////////////////////////////////////
+		if (ALBD & GOOD/* || ALBD & CHECK || ALBD & NO_CHECK*/)//////////////////
+		{
+			++total;///////////////////////////////////////////////
+			ft_printf("{bold}ALNBR = %11d ", ALNBR);//
+			ALBD & GOOD ? ft_printf("{green}GOOD{eoc}\t", ALNBR) : 0;//
+			ALBD & CHECK ? ft_printf("{cyan}CHECK{eoc}\t", ALNBR) : 0;//
+			ALBD & NO_CHECK ? ft_printf("{magenta}NO_CHECK{eoc}\t", ALNBR) : 0;//
+			ft_printf("\n");//
+		}
 		rotate(NULL, &r->a, 0);//////////////////////////////////////////////////
 	}////////////////////////////////////////////////////////////////////////////
-	ft_printf("size = %d total = %d\n", r->size, total);/////////////////////////
+	find_best_rotation(r, r->b_rot, 0);
+	display_piles(r, &r->a, &r->b);
+	ft_printf("size = %d dep = %d total = %d\n", r->size, r->dep, total);////////
 }

@@ -49,6 +49,10 @@
 # define TNBR		top->nbr
 # define LBD		low->bd
 # define TBD		top->bd
+# define ALNBR		r->a.LNBR
+# define ATNBR		r->a.TNBR
+# define ALBD		r->a.LBD
+# define ATBD		r->a.TBD
 
 /*
 ** STRUCTURES
@@ -89,6 +93,7 @@ typedef	struct		s_roll
 	int				b_min;
 	int				nb_a;
 	int				nb_b;
+	int				dep;
 }					t_roll;
 
 /*
@@ -106,9 +111,11 @@ void				find_best_sort(int *t, t_roll *r, int size, int i);
 int					go_to_best_rotation(t_roll *r, int size, int i);
 void				find_best_rotation(t_roll *r, int rot, int state);
 void				find_best_combinaison(int *t, t_roll *r, int i);
-int					check_sort(t_pile *p, int size, int i);
+void				fixe_best_rotate(t_roll *r, int min, int max, int i);
+void				find_best_rot(t_roll *r, t_tab *t, int b_rot, int i);
 
 void				first_step(t_roll *r, int size, int i, int start);
+void				second_step(t_roll *r, int size, int i, int j);
 
 int					find_best_push(t_roll *r, int value, int rot_a, int rot_b);
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
@@ -122,8 +129,6 @@ void				d_r_rotate(t_roll *r, int state);
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);
 void				pile_sort(t_roll *r, int *t, int size, int i);
-void				section_sort(t_roll *r, int size, int min, int max);
-void				section_sort_v2(t_roll *r, int size, int i, int j);
 
 void				push_swap(t_roll *r, char **p, int size);
 

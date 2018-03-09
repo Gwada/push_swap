@@ -32,6 +32,7 @@ void		rotate(t_roll *r, t_pile *p, char pile)
 		if (r->bd & VISUAL)
 			display_piles(r, &r->a, &r->b);
 	}
+	++r->dep;
 }
 
 void		r_rotate(t_roll *r, t_pile *p, char pile)
@@ -45,6 +46,7 @@ void		r_rotate(t_roll *r, t_pile *p, char pile)
 	p->low->top = p;
 	if (!r)
 		return ;
+	++r->dep;
 	if (pile)
 	{
 		if (!(r->bd & COLOR))
@@ -53,6 +55,7 @@ void		r_rotate(t_roll *r, t_pile *p, char pile)
 			ft_printf("{green}{bold}rr%c{eoc}\n", pile);
 		r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	}
+
 }
 
 void		d_rotate(t_roll *r, int state)
@@ -63,6 +66,7 @@ void		d_rotate(t_roll *r, int state)
 		return ;
 	!(r->bd & COLOR) ? ft_printf("rr\n") : ft_printf("{green}{bold}rr{eoc}\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	++r->dep;
 }
 
 void		d_r_rotate(t_roll *r, int state)
@@ -73,4 +77,5 @@ void		d_r_rotate(t_roll *r, int state)
 		return ;
 	!(r->bd & COLOR) ? ft_printf("rrr\n") : ft_printf("{green}{bold}rrr{eoc}\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	++r->dep;
 }

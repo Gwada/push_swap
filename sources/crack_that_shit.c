@@ -89,3 +89,46 @@ int			go_to_best_rotation(t_roll *r, int size, int i)
 //	ft_printf("{black}{bold}{underline}END\tGO TO BEST ROTATION ret = %d{eoc}\n", test);//
 	return (test);
 }
+
+void		find_best_rot(t_roll *r, t_tab *t, int b_rot, int i)
+{
+	ft_printf("{bold}{red}{underline}IN\tBEST ROT\n{eoc}");
+	int		j;
+	int		total;
+	int		compare;
+
+	compare = 0;
+	while (++i < r->nb_a && (j = -1))
+	{
+		r->b_rot = i;
+		total = 0;
+		while (++j < r->nb_a)
+		{
+			ALBD = 0;
+			rotate(NULL, &r->a, 0);
+		}
+
+		ft_printf("i = %d\n{bold}{red}test 1\n{eoc}", i);
+		display_piles(r, &r->a, &r->b);
+
+		first_step(r, r->nb_a, -1, 0);
+
+		ft_printf("\n{bold}{red}test 2\n{eoc}");
+		display_piles(r, &r->a, &r->b);
+
+		j = -1;
+		while (++j < r->nb_a)
+		{
+			ALBD & GOOD ? ++total : 0;
+			rotate(NULL, &r->a, 0);
+		}
+		total > compare ? b_rot = i : 0;
+		rotate(NULL, &r->a, 0);
+		ft_printf("total = %d", total);
+		ft_printf("\n---------------------------------------------------\n");
+	}
+	r->b_rot = b_rot;
+	(void)t;
+	display_piles(r, &r->a, &r->b);
+	ft_printf("{bold}{red}{underline}END\tBEST ROT\n{eoc}");
+}

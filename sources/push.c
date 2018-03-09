@@ -77,6 +77,7 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 		return ;
 	if (!find_best_push(r, src->LNBR, 0, 0))
 	{
+		++r->dep;
 		tmp = src->low;
 		find_best_insert(r, dst, tmp->nbr, pile);
 		src->low = src->low->low;
@@ -113,6 +114,7 @@ void		simple_push(t_roll*r, t_pile *src, t_pile *dst, char pile)
 	r->bd & COLOR ? ft_printf("{red}{bold}p%c\n{eoc}", pile) : 0;
 	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	++r->dep;
 }
 
 int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)

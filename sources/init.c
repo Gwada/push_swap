@@ -93,15 +93,15 @@ void			init_sort(t_tab *t, t_roll *r, int i)
 	r->bd |= GOOD;
 	while (r->bd ^ ERR && ++i < r->size)
 	{
-		t[i].n == t[i + 1].n ? r->bd |= ERR : 0;
+		i < r->size - 1 && t[i].n == t[i + 1].n ? r->bd |= ERR : 0;
 		t[i].n != t[i].m.nbr ? r->bd &= ~GOOD : 0;
 		t[i].n == t[i].m.nbr ? ++r->cor : 0;
-//		t[i].m.nbr == r->a_max ? t[i].m.bd |= MAX : 0;///////////////////////////
-//		t[i].m.nbr == r->a_min ? t[i].m.bd |= MIN : 0;///////////////////////////
-//		t[i].m.pos = i;//////////////////////////////////////////////////////////
 		t[i].m.low = &r->a;
 		t[i].m.top = r->a.top ? r->a.top : &r->a;
-		r->a.low ? (r->a.top->low = &t[i].m) : (r->a.low = &t[i].m);
+		if (r->a.low)
+			r->a.top->low = &t[i].m;
+		else 
+			r->a.low = &t[i].m;
 		r->a.top = &t[i].m;
 	}
 }

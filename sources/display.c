@@ -16,7 +16,8 @@ void		display_piles(t_roll *r, t_pile *a, t_pile *b)
 {
 	display_pile(r, a, 'a');
 	display_pile(r, b, 'b');
-	ft_printf("\n");
+	ft_printf("r->dep = %d\n", r->dep);//////////////////////////////////////////
+
 }
 
 void		display_pile(t_roll *r, t_pile *p, char pile)
