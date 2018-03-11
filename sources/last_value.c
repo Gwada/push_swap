@@ -1,34 +1,20 @@
 #include "push_swap.h"
 
-/*static	void	last_and_first(t_roll *r, int *fst, int *lst, int i)
+void			nearest_dif_finder(t_roll *r, int i, int fst, int lst)
 {
-	int			size;
-
-	size = r->nb_a;
-	if (ALBD & PUSH)
+	while (++i < r->nb_a)
 	{
-		if (*fst == r->nb_a && !*lst)
-		{
-			*fst = (i < size - r->b_rot) ? r->b_rot + i : i - (size - r->b_rot);
-			*lst = (i < size - r->b_rot) ? r->b_rot + i : i - (size - r->b_rot);
-		}
-		else
-		{
-			if (i < (size - r->b_rot) && (size - r->b_rot) - i < *fst)
-				*fst = r->b_rot + i;
-			else if (i >= (size - r->b_rot) && i - (size - r->b_rot) < *fst)
-				*fst = i - (size - r->b_rot);
-			if (i < (size - r->b_rot) && r->b_rot + i > *lst)
-				*lst = r->b_rot + i;
-			else if (i > (size - r->b_rot) && i - (size - r->b_rot) > *lst)
-				*lst = i - (size - r->b_rot);
-		}
+		fst == r->nb_a && ALBD ^ GOOD ? fst = i: 0;
+		rotate(NULL, &r->a, 0);
 	}
-	rotate(NULL, &r->a, 0);
-}*/
-
-/*static	void	init_pile(t_roll *r, int *t, int size, int i)
-{
-	while (++i < size)
-		last_and_first(r, &fst, &lst, i);
-}*/
+	while (i-- > 0)
+	{
+		!lst && ALBD ^ GOOD ? lst = i + 1 : 0;
+		r_rotate(NULL, &r->a, 0);
+	}
+	r->b_rot = (r->nb_a - (r->nb_a - fst) <= r->nb_a - lst) ? fst : lst;
+	find_best_rotation(r, r->nb_a - r->b_rot, 0);
+	find_best_rotation(r, r->b_rot, ROT | R_ROT);
+	while (ALBD & ROT || ALBD & R_ROT)
+		ALBD & ROT ? rotate(r, &r->a, 'a') : r_rotate(r, &r->a, 'a');
+}

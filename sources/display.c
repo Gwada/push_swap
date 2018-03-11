@@ -12,15 +12,7 @@
 
 #include "push_swap.h"
 
-void		display_piles(t_roll *r, t_pile *a, t_pile *b)
-{
-	display_pile(r, a, 'a');
-	display_pile(r, b, 'b');
-	ft_printf("r->dep = %d\n", r->dep);//////////////////////////////////////////
-
-}
-
-void		display_pile(t_roll *r, t_pile *p, char pile)
+static	void	display_pile(t_roll *r, t_pile *p, char pile)
 {
 	r->bd & COLOR ? ft_printf("{blue}{bold}Pile %c{eoc} = ", pile) : 0;
 	!(r->bd & COLOR) ? ft_printf("Pile %c = ", pile) : 0;
@@ -47,3 +39,12 @@ void		display_pile(t_roll *r, t_pile *p, char pile)
 		r->bd & COLOR ? ft_printf("{red}->{eoc}\n") : ft_printf("->\n");
 	}
 }
+
+void			display_piles(t_roll *r, t_pile *a, t_pile *b)
+{
+	display_pile(r, a, 'a');
+	display_pile(r, b, 'b');
+	ft_printf("r->dep = %d\n", r->dep);//////////////////////////////////////////
+}
+
+

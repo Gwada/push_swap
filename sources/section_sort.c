@@ -84,22 +84,19 @@ static	void	section_sort_v2(t_roll *r, int size, int i, int j)
 	}
 }
 
-void			first_step(t_roll *r, int size, int i, int start)
+void			first_step(t_roll *r, t_tab *t, int i, int start)
 {
 //	ft_printf("{red}{bold}-------------------------------------------------\n");//
 //	ft_printf("|\t\t{underline}IN FIRST STEP{runderline}\t\t\t|\n");/////////////
 //	ft_printf("-------------------------------------------------{eoc}\n");///////
-	int			t[size];
 
-	pile_sort(r, t, size, -1);
-//	find_best_combinaison(t, r, -1);
-	find_best_rotation(r, size - r->b_rot, 0);
-	while (++i < size)
+	find_best_rotation(r, r->nb_a - r->b_rot, 0);
+	while (++i < r->nb_a)
 	{
-		ALBD = t[i] == ALNBR ? GOOD : PUSH;
-		if ((t[i] == ALNBR || (i == size - 1)) && i - start > 1)
-			section_sort(r, i - start, t[start], t[i]);
-		t[i] == ALNBR ? start = i : 0;
+		ALBD = (int)t[i].n == ALNBR ? GOOD : PUSH;
+		if (((int)t[i].n == ALNBR || (i == r->nb_a - 1)) && i - start > 1)
+			section_sort(r, i - start, (int)t[start].n, (int)t[i].n);
+		(int)t[i].n == ALNBR ? start = i : 0;
 		rotate(NULL, &r->a, 0);
 	}
 	start = 0;
@@ -109,13 +106,9 @@ void			first_step(t_roll *r, int size, int i, int start)
 		rotate(NULL, &r->a, 0);
 	}
 	section_sort_v2(r, start, -1, 0);
-	ft_printf("{red}{bold}test3{eoc}\n");//
-	display_piles(r, &r->a, &r->b);
 	fixe_best_rotate(r, r->a_min, r->a_min, -1);
-	ft_printf("{red}{bold}test4{eoc}\n");//
-	display_piles(r, &r->a, &r->b);
 
 //	ft_printf("{red}{bold}-------------------------------------------------\n");//
 //	ft_printf("|\t\t{underline}END OF FIRST STEP{runderline}\t\t|\n");///////////
-//	ft_printf("-------------------------------------------------{eoc}\n\n\n");///
+//	ft_printf("-------------------------------------------------{eoc}\n");///
 }

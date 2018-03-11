@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void		parse_nbr(t_roll *r, char *n, int *size)
+static	void	parse_nbr(t_roll *r, char *n, int *size)
 {
 	!CHR("-+0123456789", *n) ? r->bd |= ERR : 0;
 	while (*n && r->bd ^ ERR)
@@ -57,6 +57,29 @@ int				init_struct(t_roll *r, char **nbr, int size)
 	return (size);
 }
 
+static	void	init_sort(t_tab *t, t_roll *r, int i)
+{
+	ft_ps_qsort(t, r->size, 0, 0);
+	r->nb_a = r->size;
+	r->nb_b = 0;
+	r->a_max = (int)t[r->size - 1].n;
+	r->a_min = (int)(*t).n;
+	r->bd |= GOOD;
+	while (r->bd ^ ERR && ++i < r->size)
+	{
+		i < r->size - 1 && t[i].n == t[i + 1].n ? r->bd |= ERR : 0;
+		t[i].n != t[i].m.nbr ? r->bd &= ~GOOD : 0;
+		t[i].n == t[i].m.nbr ? ++r->cor : 0;
+		t[i].m.low = &r->a;
+		t[i].m.top = r->a.top ? r->a.top : &r->a;
+		if (r->a.low)
+			r->a.top->low = &t[i].m;
+		else 
+			r->a.low = &t[i].m;
+		r->a.top = &t[i].m;
+	}
+}
+
 void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 {
 	while (*a && ++i < r->size)
@@ -81,27 +104,4 @@ void			init_tab(t_tab *t, t_roll *r, char **a, int i)
 		**a != ' ' ? ++a : 0;
 	}
 	r->bd ^ ERR ? init_sort(t, r, -1) : 0;
-}
-
-void			init_sort(t_tab *t, t_roll *r, int i)
-{
-	ft_ps_qsort(t, r->size, 0, 0);
-	r->nb_a = r->size;
-	r->nb_b = 0;
-	r->a_max = (int)t[r->size - 1].n;
-	r->a_min = (int)(*t).n;
-	r->bd |= GOOD;
-	while (r->bd ^ ERR && ++i < r->size)
-	{
-		i < r->size - 1 && t[i].n == t[i + 1].n ? r->bd |= ERR : 0;
-		t[i].n != t[i].m.nbr ? r->bd &= ~GOOD : 0;
-		t[i].n == t[i].m.nbr ? ++r->cor : 0;
-		t[i].m.low = &r->a;
-		t[i].m.top = r->a.top ? r->a.top : &r->a;
-		if (r->a.low)
-			r->a.top->low = &t[i].m;
-		else 
-			r->a.low = &t[i].m;
-		r->a.top = &t[i].m;
-	}
 }

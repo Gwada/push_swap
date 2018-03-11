@@ -34,7 +34,8 @@ SOURCES_PS		= $(SOURCES) \
 					push_swap_crack.c \
 					push_swap.c \
 					section_sort.c \
-					second_step.c
+					second_step.c \
+					last_value.c
 
 OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))
 OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))
@@ -118,7 +119,7 @@ gops:
 	@make clean_PS
 	@make $(PUSH_SWAP)
 #	@time ./push_swap $(NUM3)
-	./push_swap $(NUM2)
+	./push_swap $(NUM3)
 
 
 .PHONY: all re fclean clean 

@@ -12,123 +12,25 @@
 
 #include "push_swap.h"
 
-static	int	push_that(t_roll *r, int i)
-{
-	push(r, &r->a, &r->b, 'b');
-	while (++i < (int)r->nb_a)
-	{
-		r->a.low->bd = 0;
-		rotate(NULL, &r->a, 0);
-	}
-	return (0);
-}
-
-static	int	swap_that(t_roll *r, int i)
-{
-	r->a.low->bd &= ~SWAP;
-	r->a.low->bd |= GOOD;
-	r->a.low->low->bd |= GOOD;
-	swap(r, &r->a, 'a');
-	if (r->a.low->low->bd & R_ROT)
-	{
-		r_rotate(r, &r->a, 'a');
-		r_rotate(r, &r->a, 'a');
-	}
-	else if (r->a.low->low->bd & ROT)
-	{
-		rotate(r, &r->a, 'a');
-		rotate(r, &r->a, 'a');
-	}
-	while (++i < (int)r->nb_a)
-	{
-		r->a.low->bd = 0;
-		rotate(NULL, &r->a, 0);
-	}
-	return (0);
-}
-
-int			go_to_best_rotation(t_roll *r, int size, int i)
-{
-//	ft_printf("{black}{bold}{underline}IN\tGO TO BEST ROTATION{eoc} size = %d\n", size);//
-	int		test;
-	int		t[size];
-
-	while (++i < size)
-	{
-		t[i] = r->a.LNBR;
-		rotate(NULL, &r->a, 0);
-	}
-	ft_qsort(t, size, 0, 0);
-	find_best_combinaison(t, r, -1);
-//	find_best_sort(t, r, r->nb_a, -1);
-//	i = -1;//////////////////////////////////////////////////////////////////////
-//	while (++i < size)///////////////////////////////////////////////////////////
-//	{////////////////////////////////////////////////////////////////////////////
-//		ft_printf("[%d", r->a.LNBR);/////////////////////////////////////////////
-//		r->a.low->bd & ROT ? ft_printf("{magenta}(R){eoc}") : 0;/////////////////
-//		r->a.low->bd & R_ROT ? ft_printf("{yellow}(R_R){eoc}") : 0;//////////////
-//		r->a.low->bd & PUSH ? ft_printf("{red}(P){eoc}") : 0;////////////////////
-//		r->a.low->bd & SWAP ? ft_printf("{blue}(S){eoc}") : 0;///////////////////
-//		r->a.low->bd & GOOD ? ft_printf("{green}(G){eoc}") : 0;//////////////////
-//		ft_printf("] ");/////////////////////////////////////////////////////////
-//		rotate(NULL, &r->a, 0);//////////////////////////////////////////////////
-//	}////////////////////////////////////////////////////////////////////////////
-//	ft_printf("\n\n");///////////////////////////////////////////////////////////
-	test = r->a.low->bd & (ROT | R_ROT | PUSH) ? 0 : 1;
-	while (r->a.low->bd & (ROT | R_ROT | PUSH))
-	{
-		if (r->a.low->bd & PUSH)
-			return (push_that(r, -1));
-		else if (r->a.low->bd & SWAP)
-			return (swap_that(r, -1));
-		else if (r->a.low->bd & ROT)
-			rotate(r, &r->a, 'a');
-		else if (r->a.low->bd & R_ROT)
-			r_rotate(r, &r->a, 'a');
-	}
-//	ft_printf("{black}{bold}{underline}END\tGO TO BEST ROTATION ret = %d{eoc}\n", test);//
-	return (test);
-}
-
 void		find_best_rot(t_roll *r, t_tab *t, int b_rot, int i)
 {
-	ft_printf("{bold}{red}{underline}IN\tBEST ROT\n{eoc}");
 	int		j;
 	int		total;
 	int		compare;
 
 	compare = 0;
-	while (++i < r->nb_a && (j = -1))
+	while (++i < r->nb_a && (j = -1) && !(total = 0))
 	{
 		r->b_rot = i;
-		total = 0;
-		while (++j < r->nb_a)
-		{
-			ALBD = 0;
-			rotate(NULL, &r->a, 0);
-		}
-
-		ft_printf("i = %d\n{bold}{red}test 1\n{eoc}", i);
-		display_piles(r, &r->a, &r->b);
-
-		first_step(r, r->nb_a, -1, 0);
-
-		ft_printf("\n{bold}{red}test 2\n{eoc}");
-		display_piles(r, &r->a, &r->b);
-
-		j = -1;
+		first_step(r, t, -1, 0);
 		while (++j < r->nb_a)
 		{
 			ALBD & GOOD ? ++total : 0;
+			ALBD = 0;
 			rotate(NULL, &r->a, 0);
 		}
 		total > compare ? b_rot = i : 0;
-		rotate(NULL, &r->a, 0);
-		ft_printf("total = %d", total);
-		ft_printf("\n---------------------------------------------------\n");
+		total > compare ? compare = total : 0;
 	}
 	r->b_rot = b_rot;
-	(void)t;
-	display_piles(r, &r->a, &r->b);
-	ft_printf("{bold}{red}{underline}END\tBEST ROT\n{eoc}");
 }
