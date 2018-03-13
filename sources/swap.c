@@ -18,7 +18,7 @@ void		swap(t_roll *r, t_pile *p, char pile)
 
 	if (!p->low || p->low->root)
 		return ;
-	r ? ++r->dep : 0;
+
 	p->LBD = GOOD;
 	p->low->LBD = GOOD;
 	tmp = p->low;
@@ -28,15 +28,13 @@ void		swap(t_roll *r, t_pile *p, char pile)
 	tmp->top = p->low;
 	tmp->top->low = tmp;
 	tmp->low->top = tmp;
-	if (!r)
+	r ? ++r->dep : 0;
+	if (!r || !pile)
 		return ;
-	if (pile)
-	{
-		if (r->bd & COLOR)
-			ft_printf("{magenta}{bold}s%c{eoc}\n", pile);
-		else
-			ft_printf("s%c\n", pile);
-	}
+	if (r->bd & COLOR)
+		ft_printf("{magenta}{bold}s%c{eoc}\n", pile);
+	else
+		ft_printf("s%c\n", pile);
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
 

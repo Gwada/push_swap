@@ -57,6 +57,18 @@
 # define BLBD		r->b.LBD
 # define ATBD		r->a.TBD
 # define BTBD		r->b.TBD
+# define ALLNBR		r->a.low->LNBR
+# define BLLNBR		r->b.low->LNBR
+# define ALLBD		r->a.low->LBD
+# define BLLBD		r->b.low->LBD
+# define ATTBD		r->a.top->TBD
+# define BTTBD		r->b.top->TBD
+# define ATTNBR		r->a.top->TNBR
+# define BTTNBR		r->b.top->TNBR
+# define ALLLNBR	r->a.low->low->LNBR
+# define ATTTNBR	r->a.top->top->TNBR
+# define ALLLBD		r->a.low->low->LBD
+# define ATTTBD		r->a.top->top->TBD
 
 /*
 ** STRUCTURES
@@ -96,6 +108,8 @@ typedef	struct		s_roll
 	int				b_max;
 	int				b_min;
 	int				nb_a;
+	int				min;
+	int				max;
 	int				nb_b;
 	int				dep;
 }					t_roll;
@@ -114,11 +128,12 @@ void				fixe_best_rotate(t_roll *r, int min, int max, int i);
 void				find_best_rot(t_roll *r, t_tab *t, int b_rot, int i);
 
 void				first_step(t_roll *r, t_tab *t, int i, int start);
-void				second_step(t_roll *r, int size, int i, int j);
-void				nearest_dif_finder(t_roll *r, int i, int fst, int lst);
+void				second_step(t_roll *r);
+int					value_insert(t_roll *r, int *rot, int min, int max);
+void				b_push(t_roll *r, int min, int max);
 
-int					find_best_push(t_roll *r, int value, int rot_a, int rot_b);
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
+void				simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				swap(t_roll *r, t_pile *p, char pile);
 void				d_swap(t_roll *r);
 void				rotate(t_roll *r, t_pile *p, char pile);

@@ -60,6 +60,8 @@ int				init_struct(t_roll *r, char **nbr, int size)
 static	void	init_sort(t_tab *t, t_roll *r, int i)
 {
 	ft_ps_qsort(t, r->size, 0, 0);
+	r->min = (int)t[0].n;
+	r->max = (int)t[r->size - 1].n;
 	r->nb_a = r->size;
 	r->nb_b = 0;
 	r->a_max = (int)t[r->size - 1].n;

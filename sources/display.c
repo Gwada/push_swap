@@ -44,7 +44,7 @@ void			display_piles(t_roll *r, t_pile *a, t_pile *b)
 {
 	display_pile(r, a, 'a');
 	display_pile(r, b, 'b');
-	ft_printf("r->dep = %d\n", r->dep);//////////////////////////////////////////
+	ft_printf("r->dep = %d\n\n", r->dep);//////////////////////////////////////////
 }
 
 

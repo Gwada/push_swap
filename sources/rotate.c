@@ -14,48 +14,40 @@
 
 void		rotate(t_roll *r, t_pile *p, char pile)
 {
-	pile ? p->low->bd &= ~ROT : 0;
+	p->low->bd &= ~ROT;
 	p->low->top = p->top;
 	p->top->low = p->low;
 	p->top = p->low;
 	p->low->low->top = p;
 	p->low = p->low->low;
 	p->top->low = p;
-	if (!r)
+	r ? ++r->dep : 0;
+	if (!r || !pile)
 		return ;
-	if (pile)
-	{
-		if (!(r->bd & COLOR))
-			ft_printf("r%c\n", pile);
-		else
-			ft_printf("{green}{bold}r%c{eoc}\n", pile);
-		if (r->bd & VISUAL)
-			display_piles(r, &r->a, &r->b);
-	}
-	++r->dep;
+	if (r->bd & COLOR)
+		ft_printf("{green}{bold}r%c{eoc}\n", pile);
+	else
+		ft_printf("r%c\n", pile);
+	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
 
 void		r_rotate(t_roll *r, t_pile *p, char pile)
 {
-	pile ? p->low->bd &= ~R_ROT : 0;
+	p->low->bd &= ~R_ROT;
 	p->top->low = p->low;
 	p->low->top = p->top;
 	p->low = p->top;
 	p->top->top->low = p;
 	p->top = p->top->top;
 	p->low->top = p;
-	if (!r)
+	r ? ++r->dep : 0;
+	if (!r || !pile)
 		return ;
-	++r->dep;
-	if (pile)
-	{
-		if (!(r->bd & COLOR))
-			ft_printf("rr%c\n", pile);
-		else
-			ft_printf("{green}{bold}rr%c{eoc}\n", pile);
-		r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
-	}
-
+	if (r->bd & COLOR)
+		ft_printf("{green}{bold}rr%c{eoc}\n", pile);
+	else
+		ft_printf("rr%c\n", pile);
+	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
 
 void		d_rotate(t_roll *r, int state)
@@ -64,7 +56,7 @@ void		d_rotate(t_roll *r, int state)
 	rotate(NULL, &r->b, 0);
 	if (state ^ GOOD)
 		return ;
-	!(r->bd & COLOR) ? ft_printf("rr\n") : ft_printf("{green}{bold}rr{eoc}\n");
+	r->bd & COLOR ? ft_printf("{green}{bold}rr{eoc}\n") : ft_printf("rr\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	++r->dep;
 }
@@ -72,10 +64,10 @@ void		d_rotate(t_roll *r, int state)
 void		d_r_rotate(t_roll *r, int state)
 {
 	r_rotate(NULL, &r->a, 0);
-	r_rotate(NULL, &r->a, 0);
+	r_rotate(NULL, &r->b, 0);
 	if (state ^ GOOD)
 		return ;
-	!(r->bd & COLOR) ? ft_printf("rrr\n") : ft_printf("{green}{bold}rrr{eoc}\n");
+	r->bd & COLOR ? ft_printf("{green}{bold}rrr{eoc}\n") : ft_printf("rrr\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	++r->dep;
 }

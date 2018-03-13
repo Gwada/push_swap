@@ -26,21 +26,26 @@ void		find_best_rotation(t_roll *r, int rot, int state)
 		}
 }
 
-void		fixe_best_rotate(t_roll *r, int min, int max, int i)
+static	int	pre_fixe(t_roll *r)
 {
-	int		j;
-
 	while (ATBD ^ GOOD)
 	{
 		--r->b_rot < 0 ? r->b_rot = r->nb_a - 1 : 0;
 		r_rotate(NULL, &r->a, 0);
 	}
-	j = ALNBR;
+	return (ALNBR);
+}
+
+void		fixe_best_rotate(t_roll *r, int min, int max, int i)
+{
+	int		value;
+
+	value = pre_fixe(r);
 	while (++i < r->nb_a)
 	{
 		if (ALBD & GOOD && max >= min && (max = ALNBR))
 		{
-			while (ALNBR != j)
+			while (ALNBR != value)
 				r_rotate(NULL, &r->a, 0);
 			while (ALNBR != max)
 			{
@@ -48,7 +53,7 @@ void		fixe_best_rotate(t_roll *r, int min, int max, int i)
 				ALNBR >= min && ALNBR <= max ? min = ALNBR : 0;
 				rotate(NULL, &r->a, 0);
 			}
-			j = ALNBR;
+			value = ALNBR;
 			min = ALNBR;
 		}
 		ALBD & GOOD && ALNBR < min ? ALBD = NO_CHECK : 0;

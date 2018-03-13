@@ -67,14 +67,14 @@ static	void	find_best_insert(t_roll *r, t_pile *p, int value, char pile)
 	}
 }
 
-static	void	simple_push(t_roll*r, t_pile *src, t_pile *dst, char pile)
+void		simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 {
 //	ft_printf("{bold}{underline}{cyan}IN\tSIMPLE{eoc}\n");
 	t_pile		*tmp;
 
 	tmp = src->low;
 	src->low = src->low->low;
-	src->low->low->top = src;
+	tmp->low->top = src;
 	tmp->top = dst;
 	tmp->low = dst->low ? dst->low : dst;
 	dst->low ? (dst->low->top = tmp) : (dst->top = tmp);
@@ -84,8 +84,8 @@ static	void	simple_push(t_roll*r, t_pile *src, t_pile *dst, char pile)
 	find_max(r);
 	r->bd & COLOR ? ft_printf("{red}{bold}p%c\n{eoc}", pile) : 0;
 	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
-	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	++r->dep;
+	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 
 //	ft_printf("{bold}{underline}{cyan}END\tSIMPLE{eoc}\n");
 }
@@ -98,126 +98,8 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	size = (pile == 'a' ? r->nb_b : r->nb_a);
 	if (!(src->low) || src->low->root || !size)
 		return ;
-	if (find_best_push(r, src->LNBR, 0, 0))
-		return ;
 	find_best_insert(r, dst, ALNBR, pile);
 	src->low->bd = GOOD;
 	simple_push(r, src, dst, pile);
 //	ft_printf("{green}{bold}{underline}END\tPUSH{eoc}\n\n");/////////////////////
 }
-
-int			find_best_push(t_roll *r, int value, int rot_a, int rot_b)
-{
-	if (ATNBR - ALNBR == 1 && ATBD & GOOD)
-	{
-		r_rotate(r, &r->a, 'a');
-		swap(r, &r->a, 'a');
-		return (1);
-	}
-	else if (ALNBR - r->a.low->LNBR == 1 && r->a.low->LBD & GOOD)
-	{
-		//ALBD = GOOD;
-		//r->a.low->LBD = GOOD;
-		swap(r, &r->a, 'a');
-		return (1);
-	}
-
-(void)value;
-(void)rot_a;
-(void)rot_b;
-//	ft_printf("{red}{bold}END\tFIND BEST PUSH test{eoc}\n\n");/////////////
-	return (0);
-}
-/*	int		t1[r->nb_a];
-
-	pile_sort(r, t1, r->nb_a, (i = -1));
-	while (++i < r->size)
-	{
-		if (i >= r->nb_a && i >= r->nb_b)
-			break ;
-		if (i < r->nb_a)
-		{
-			t1[i] == value ? i_cor = i : 0;
-			r->a.LNBR == value ? i_incor = i : 0;
-
-			ft_printf("{magenta}p->LNBR = [%10d]{eoc} ", r->a.LNBR);/////////////
-			if (r->a.low->bd & GOOD)		ft_printf("{green}GOOD ");///////////
-			if (r->a.low->bd & PUSH)		ft_printf("{red}PUSH ");/////////////
-			if (r->a.low->bd & SWAP)		ft_printf("{yellow}SWAP ");//////////
-			if (r->a.low->bd & CHECK)		ft_printf("{cyan}CHECK ");///////////
-			if (r->a.low->bd & NO_CHECK)	ft_printf("{magenta}NO_CHECK ");/////
-			if (t1[i] == r->a.LNBR)			ft_printf("t1[i] == r->a.LNBR");/////
-			ft_printf("{eoc}\n");
-
-			rotate(NULL, &r->a, 0);
-		}
-		if (i < r->nb_b)
-		{
-			if ((value > r->b.LNBR && ((value < r->b.TNBR) || (r->b.LNBR == r->b_max)))
-			|| (r->b.TNBR == r->b_min && value < r->b.TNBR))
-				rot_b = i;
-			rotate(NULL, &r->b, 0);
-		}
-	}
-	ft_printf("\n");
-
-	rot_a = i_cor > i_incor ? i_cor - i_incor : i_incor - i_cor;
-	rot_a > r->nb_a / 2 ? rot_a = r->nb_a - rot_a : 0;
-
-	rot_b > r->nb_b / 2 ? rot_b = r->nb_b - rot_b : 0;
-
-	ft_printf("r->b_rot = [%2d]\n", r->b_rot);
-	ft_printf("nb_a = [%2d] rot_a = [%2d]\tnb_b = [%2d] rot_b = [%2d]\n", r->nb_a, rot_a + 2, r->nb_b, rot_b+1);
-
-	if (rot_a <= rot_b)
-	{
-		ft_printf("{yellow}{underline}{bold}insetion dans a!!!{eoc}\n");
-		if ((i_cor > i_incor && (r->nb_a - (i_cor - i_incor)) >= (r->nb_a / 2))
-		|| (i_incor > i_cor && (r->nb_a - (i_incor - i_cor)) < (r->nb_a / 2)))
-		{
-			ft_printf("test 1\n");
-			if (rot_a == 1)
-			{
-				r_rotate(r, &r->a, 'a');
-				swap(r, &r->a, 'a');
-				r->a.low->bd = 0;
-			}
-			else
-			{
-				simple_push(r, &r->a, &r->b, 'b');
-				while (rot_a--)
-				{
-					rotate(r, &r->a, 'a');
-					r->a.low->bd & SWAP ? swap(r, &r->a, 'a') : 0;
-				}
-				simple_push(r, &r->b, &r->a, 'a');
-				r->a.low->bd = GOOD;
-			}
-		}
-		else
-		{
-		//	ft_printf("test 2\n");
-			if (rot_a > 1)
-			{
-				simple_push(r, &r->a, &r->b, 'b');
-				while (rot_a--)
-				{
-					r_rotate(r, &r->a, 'a');
-					r->a.low->bd & SWAP ? swap(r, &r->a, 'a') : 0;
-				}
-				simple_push(r, &r->b, &r->a, 'a');
-				r->a.low->bd = GOOD;
-			}
-			else
-			{
-				rotate(r, &r->a, 'a');
-				swap(r, &r->a, 'a');
-				r->a.low->bd = 0;
-			}
-		}
-		ft_printf("{red}{underline}{bold}END\tFIND BEST PUSH{eoc}\n\n");/////////////
-		return (1);
-	}
-	ft_printf("{red}{bold}END\tFIND BEST PUSH test{eoc}\n\n");/////////////
-	return (0);
-}*/
