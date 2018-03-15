@@ -130,7 +130,7 @@ void				find_best_rot(t_roll *r, t_tab *t, int b_rot, int i);
 void				first_step(t_roll *r, t_tab *t, int i, int start);
 void				second_step(t_roll *r);
 int					value_insert(t_roll *r, int *rot, int min, int max);
-void				b_push(t_roll *r, int min, int max);
+int				b_push(t_roll *r, int min, int max);
 
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile);

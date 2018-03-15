@@ -32,9 +32,7 @@ static	void	display_pile(t_roll *r, t_pile *p, char pile)
 			else
 				ft_printf("[%d]", p->low->nbr);
 			p = p->low;
-			if (!p->low->root)
-				r->bd & COLOR ? ft_printf("{yellow}<->{eoc}", pile) : 0;
-			(!p->low->root && !(r->bd & COLOR)) ? ft_printf("<->", pile) : 0;
+			!p->low->root ? ft_printf("<->", pile) : 0;
 		}
 		r->bd & COLOR ? ft_printf("{red}->{eoc}\n") : ft_printf("->\n");
 	}
