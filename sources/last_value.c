@@ -27,16 +27,13 @@ static	void	hard_insert(t_roll *r, int rot, int min, int max)
 {
 	int			i;
 
-	i = -1;
-	while (r->b_min < min && ++i < r->nb_b)
+	i = r->nb_b;
+	while (i > 0)
 	{
-		BLNBR == r->b_min ? rot = i : 0;
-		rotate(NULL, &r->b, 0);
-	}
-	while (r->b_min > min && r->b_max > max && ++i < r->nb_b)
-	{
-		BLNBR == r->b_max ? rot = i : 0;
-		rotate(NULL, &r->b, 0);
+		rot == -1 && BLNBR == r->b_min ? rot = i : 0;
+		rot != -1 && BLNBR > r->b_min && BLNBR < min ? rot = i : 0;
+		r_rotate(NULL, &r->b, 0);
+		--i;
 	}
 	if (rot <= r->nb_b / 2)
 		while (rot-- > 0)
@@ -44,12 +41,8 @@ static	void	hard_insert(t_roll *r, int rot, int min, int max)
 	else
 		while (rot++ < r->nb_b)
 			r_rotate(r, &r->b, 'b');
-	r->b_min < min ? simple_push(r, &r->b, &r->a, 'a') : 0;
-	while (BTNBR < min)
-	{
-		r_rotate(r, &r->b, 'b');
+	while (BLNBR != r->b_max && BLNBR < min)
 		simple_push(r, &r->b, &r->a, 'a');
-	}
 	while (BLNBR > max)
 		simple_push(r, &r->b, &r->a, 'a');
 }
@@ -86,7 +79,7 @@ int			b_push(t_roll *r, int min, int max)
 	test = value_insert(r, &rot, min, max);
 //	display_piles(r, &r->a, &r->b);
 	test && min < max ? easy_insert(r, rot, min, max) : 0;
-	test && min > max ? hard_insert(r, rot, max, min) : 0;
+	test && min > max ? hard_insert(r, -1, max, min) : 0;
 //	display_piles(r, &r->a, &r->b);
 //	!test ? ft_printf("{red}{bold}NO\n{eoc}") : ft_printf("{red}{bold}YES\n{eoc}");
 //	ft_printf("test 3\n");
