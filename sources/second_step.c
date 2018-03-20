@@ -86,8 +86,8 @@ void	second_step(t_roll *r)
 
 	i = -1;
 	test = 0;//
-	sort[1] = NO_CHECK;
-	sort[0] = CHECK;
+	sort[0] = NO_CHECK;
+	sort[1] = CHECK;
 	while (++i < 3)
 	{
 		i == 0 ? ft_printf("\n\n\ntest CHECK\n\n\n") : 0;
@@ -98,6 +98,7 @@ void	second_step(t_roll *r)
 			ALBD ^ sort[i] ? nearest_rotation(r, sort[i], r->nb_a, 0) : 0;
 			ALBD & sort[i] ? fixe_that(r, r->nb_a, 0) : 0;
 		}
+//		clean_b(r);
 	}
 
 	i = -1;

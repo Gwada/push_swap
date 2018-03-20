@@ -37,7 +37,6 @@ void		find_best_rot(t_roll *r, t_tab *t, int b_rot, int i)
 
 void		fixe_push(t_roll *r, int i, int min, int max)
 {
-//	ft_printf("{bold}{green}{underline}IN\tFIXE_PUSH\n\n{eoc}");
 	int		j;
 	int		b_fst;
 	int		b_lst;
@@ -47,7 +46,6 @@ void		fixe_push(t_roll *r, int i, int min, int max)
 	{
 		if (ALBD & PUSH && (j = -1) && !(min = 0) && !(max = 0))
 		{
-//			ft_printf("{bold}{magenta}ALBD & PUSH ALNBR = %d\n{eoc}", ALNBR);
 			value = ALNBR;
 			while (++j < r->nb_a)
 			{
@@ -60,10 +58,7 @@ void		fixe_push(t_roll *r, int i, int min, int max)
 						r_rotate(NULL, &r->a, 0);
 					if (b_fst == -1 && ((min < max && value > min && value < max)
 					|| (min > max && (value > min || value < max))))
-					{
-//						ft_printf("min = %d max = %d\n", min, max);
 						b_fst = r->nb_a - (r->nb_a - j);
-					}
 				}
 				rotate(NULL, &r->a, 0);
 			}
@@ -78,19 +73,68 @@ void		fixe_push(t_roll *r, int i, int min, int max)
 						rotate(NULL, &r->a, 0);
 					if (b_lst == -1 && ((min < max && value > min && value < max)
 					|| (min > max && (value > min || value < max))))
-					{
-//						ft_printf("min = %d max = %d\n", min, max);
 						b_lst = r->nb_a - (j + 1);
-					}
 				}
 				r_rotate(NULL, &r->a, 0);
 			}
-//			ft_printf("b_fst = %d b_lst = %d\n", b_fst, b_lst);
 			ALBD = b_fst <= b_lst ? CHECK : NO_CHECK;
-//			ft_printf("\n-------------------------------------------\n\n");
 		}
 		rotate(NULL, &r->a, 0);
 	}
-//	display_piles(r, &r->a, &r->b);
-//	ft_printf("{bold}{green}{underline}IN\tFIXE_PUSH\n\n{eoc}");
+}
+
+void		clean_b(t_roll *r)
+{
+/*	int		i;
+	int		fst;
+	int		lst;
+	int		l_min;
+	int		l_max;
+	int		t_min;
+	int		t_max;
+
+	fst = r->nb_a;
+	lst = 0;
+	while (r->nb_b)
+	{
+		i = -1;
+		while (++i < r->nb_a)
+		{
+			if (ATBD & GOOD && fst r->nb_a)
+			{
+				l_min = ATNBR;
+				while (ALBD ^ GOOD)
+					rotate(NULL, &r->a, 0);
+				l_max = ALNBR;
+				while (ATBD ^ GOOD)
+					r_rotate(NULL, &r->a, 0);
+				value_insert(r, NULL, l_min, l_max) ? fst = i : 0;
+			}
+			rotate(NULL, &r->a, 0);
+		}
+		while (i-- > 0)
+		{
+			if (ALBD & GOOD && !lst)
+			{
+				t_max = ALNBR;
+				while (ATBD ^ GOOD)
+					r_rotate(NULL, &r->a, 0);
+				t_min = ATNBR;
+				while (ALBD ^ GOOD)
+					rotate(NULL, &r->a, 0);
+				value_insert(r, NULL, t_min, t_max) ? lst = i : 0;
+			}
+			rotate(NULL, &r->a, 0);
+		}
+		fst = r->nb_a - (r->nb_a - fst);
+		lst = r->nb_a - lst;
+		if (r->b_rot <= r->nb_a / 2)
+			while (r->b_rot-- > 0)
+				rotate(r, &r->a, 'a');
+		else
+			while (r->b_rot++ < r->nb_a)
+				r_rotate(r, &r->a, 'a');
+		b_push(r, );
+	}*/
+	(void)r;
 }

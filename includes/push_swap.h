@@ -101,7 +101,6 @@ typedef	struct		s_roll
 	t_pile			a;
 	t_pile			b;
 
-	int				fd;
 	int				cor;
 	int				b_rot;
 	int				a_max;
@@ -134,6 +133,7 @@ void				second_step(t_roll *r);
 void				nearest_rotation(t_roll *r, int checker, int fst, int lst);
 int					value_insert(t_roll *r, int *rot, int min, int max);
 int					b_push(t_roll *r, int min, int max);
+void				clean_b(t_roll *r);
 
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile);
