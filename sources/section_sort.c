@@ -86,10 +86,6 @@ static	void	section_sort_v2(t_roll *r, int size, int i, int j)
 
 void			first_step(t_roll *r, t_tab *t, int i, int start)
 {
-//	ft_printf("{red}{bold}-------------------------------------------------\n");//
-//	ft_printf("|\t\t{underline}IN FIRST STEP{runderline}\t\t\t|\n");/////////////
-//	ft_printf("-------------------------------------------------{eoc}\n");///////
-
 	find_best_rotation(r, r->nb_a - r->b_rot, 0);
 	while (++i < r->nb_a)
 	{
@@ -107,8 +103,4 @@ void			first_step(t_roll *r, t_tab *t, int i, int start)
 	}
 	section_sort_v2(r, start, -1, 0);
 	fixe_best_rotate(r, r->a_min, r->a_min, -1);
-
-//	ft_printf("{red}{bold}-------------------------------------------------\n");//
-//	ft_printf("|\t\t{underline}END OF FIRST STEP{runderline}\t\t|\n");///////////
-//	ft_printf("-------------------------------------------------{eoc}\n");///
 }

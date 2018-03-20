@@ -38,7 +38,7 @@ int			ft_dprintf(int fd, const char *format, ...)
 		*data.ft == '{' ? ft_set_color(&data, 0) : 0;
 		if (!data.error && !ft_strchr("%{", *data.ft))
 			ft_buffering(&data, data.ft, 1);
-		!ft_strchr("{%", *data.ft) ? ++data.i : 0;
+		!ft_strchr("%{", *data.ft) ? ++data.i : 0;
 		*data.ft && !ft_strchr("%{", *data.ft) ? ++data.ft : 0;
 	}
 	write(data.fd, data.buf, data.i_b);

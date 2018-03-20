@@ -14,6 +14,8 @@
 
 void		rotate(t_roll *r, t_pile *p, char pile)
 {
+	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
+		return ;
 	p->low->bd &= ~ROT;
 	p->low->top = p->top;
 	p->top->low = p->low;
@@ -33,6 +35,8 @@ void		rotate(t_roll *r, t_pile *p, char pile)
 
 void		r_rotate(t_roll *r, t_pile *p, char pile)
 {
+	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
+		return ;
 	p->low->bd &= ~R_ROT;
 	p->top->low = p->low;
 	p->low->top = p->top;

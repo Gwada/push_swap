@@ -35,7 +35,8 @@ SOURCES_PS		= $(SOURCES) \
 					push_swap.c \
 					section_sort.c \
 					second_step.c \
-					last_value.c
+					last_value.c \
+					nearest_dif.c
 
 OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))
 OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))
