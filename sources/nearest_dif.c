@@ -21,19 +21,20 @@ static	void	next_dif(t_roll *r, int checker, int *best_dif_dep)
 		!lst && ALBD & checker ? lst = i + 1 : 0;
 		r_rotate(NULL, &r->a, 0);
 	}
+//	ft_printf("in next dif\n");
+//	ft_printf("fst = %d lst = %d\n", fst, lst);
 	n_dep_fst = r->nb_a - (r->nb_a - fst);
 	n_dep_lst = r->nb_a - lst;
+//	ft_printf("dep fst = %d dep lst = %d\n", n_dep_fst, n_dep_lst);
 	*best_dif_dep = n_dep_fst <= n_dep_lst ? n_dep_fst : n_dep_lst;
 	r->b_rot = (r->nb_a - (r->nb_a - fst) <= r->nb_a - lst) ? fst : lst;
 }
 
 static	void	next_insert(t_roll *r, int best_dif_dep, int fst, int lst)
 {
-	ft_printf("{bold}{underline}{blue}IN\tNEXT INSERT\tdif dep = %d ALNBR = %d{eoc}\n", best_dif_dep, ALNBR);//
-	display_piles(r, &r->a, &r->b);
+//	ft_printf("{bold}{underline}{blue}IN\tNEXT INSERT\tdif dep = %d ALNBR = %d{eoc}\n", best_dif_dep, ALNBR);//
+//	display_piles(r, &r->a, &r->b);
 	int			i;
-//	int			min;
-//	int			max;
 	int			n_dep_fst;
 	int			n_dep_lst;
 	int			b_dep;
@@ -41,56 +42,36 @@ static	void	next_insert(t_roll *r, int best_dif_dep, int fst, int lst)
 	i = -1;
 	while (++i < r->nb_a)
 	{
-	/*	if (ATBD & GOOD && fst == r->nb_a)
-		{
-			min = ATNBR;
-			while (ALBD ^ GOOD)
-				rotate(NULL, &r->a, 0);
-			max = ALNBR;
-			while (ATBD ^ GOOD)
-				r_rotate(NULL, &r->a, 0);
-			value_insert(r, NULL, min, max) ? fst = i : 0;
-		}*/
 		if (ATBD & GOOD && ALBD & GOOD && fst == r->nb_a)
 			value_insert(r, NULL, ATNBR, ALNBR) ? fst = i : 0;
 		rotate(NULL, &r->a, 0);
 	}
 	while (i-- > 0)
 	{
-	/*	if (ALBD & GOOD && !lst)
-		{
-			max = ALNBR;
-			while (ATBD ^ GOOD)
-				r_rotate(NULL, &r->a, 0);
-			min = ATNBR;
-			while (ALBD ^ GOOD)
-				rotate(NULL, &r->a, 0);
-			value_insert(r, NULL, min, max) ? lst = i + 1 : 0;
-		}*/
 		if (ATBD & GOOD && ALBD & GOOD && !lst)
 			value_insert(r, NULL, ATNBR, ALNBR) ? lst = i + 1 : 0;
 		r_rotate(NULL, &r->a, 0);
 	}
 	fst == r->nb_a ? fst = r->nb_a / 2 : 0;
 	!lst ? lst = r->nb_a / 2 : 0;
-	ft_printf("fst = %d\tlst = %d\n", fst, lst);//
+//	ft_printf("fst = %d\tlst = %d\n", fst, lst);//
 
 	n_dep_fst = r->nb_a - (r->nb_a - fst);
 	n_dep_lst = r->nb_a - lst;
-	ft_printf("n dep fst = %d n dep lst = %d\n", n_dep_fst, n_dep_lst);
+//	ft_printf("n dep fst = %d n dep lst = %d\n", n_dep_fst, n_dep_lst);
 
 	b_dep = n_dep_fst <= n_dep_lst ? n_dep_fst : n_dep_lst;
-	ft_printf("best_dif_dep = %d b_dep = %d\n", best_dif_dep, b_dep);
-	b_dep > best_dif_dep ? ft_printf("{magenta}prochaine dif{eoc}\n") : 0;
+//	ft_printf("best_dif_dep = %d b_dep = %d\n", best_dif_dep, b_dep);
+//	b_dep > best_dif_dep ? ft_printf("{magenta}prochaine dif{eoc}\n") : 0;
 	if (b_dep < best_dif_dep)
-	{
-		ft_printf("{red}{bold}--------------------------------------------------------\n");
-		ft_printf("\t\t{underline}VIDAGE PILE B{runderline}\n");
-		ft_printf("--------------------------------------------------------{eoc}\n\n");
+//	{
+//		ft_printf("{red}{bold}--------------------------------------------------------\n");
+//		ft_printf("\t\t{underline}VIDAGE PILE B{runderline}\n");
+//		ft_printf("--------------------------------------------------------{eoc}\n\n");
 		r->b_rot = n_dep_fst <= n_dep_lst ? fst : lst;
-	}
-	display_piles(r, &r->a, &r->b);
-	ft_printf("{bold}{underline}{blue}END\tNEXT INSERT\tALNBR = %d{eoc}\n\n", ALNBR);//
+//	}
+//	display_piles(r, &r->a, &r->b);
+//	ft_printf("{bold}{underline}{blue}END\tNEXT INSERT\tALNBR = %d{eoc}\n\n", ALNBR);//
 }
 
 void			nearest_rotation(t_roll *r, int checker, int fst, int lst)

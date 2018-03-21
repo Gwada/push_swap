@@ -51,7 +51,6 @@ static	void	section_sort(t_roll *r, int size, int min, int max)
 	while (++i < size)
 	{
 		r_rotate(NULL, &r->a, 0);
-
 		if (ALNBR >= min && ALNBR <= max && ALBD ^ GOOD)
 		{
 			ALBD = NO_CHECK;
@@ -86,21 +85,28 @@ static	void	section_sort_v2(t_roll *r, int size, int i, int j)
 
 void			first_step(t_roll *r, t_tab *t, int i, int start)
 {
+	int			cor;
+
+	cor = 0;
 	find_best_rotation(r, r->nb_a - r->b_rot, 0);
 	while (++i < r->nb_a)
 	{
 		ALBD = (int)t[i].n == ALNBR ? GOOD : PUSH;
-		if (((int)t[i].n == ALNBR || (i == r->nb_a - 1)) && i - start > 1)
+		(int)t[i].n == ALNBR ? ++cor : 0;
+		if (((int)t[i].n == ALNBR) || (cor && i == r->nb_a - 1))
 			section_sort(r, i - start, (int)t[start].n, (int)t[i].n);
 		(int)t[i].n == ALNBR ? start = i : 0;
 		rotate(NULL, &r->a, 0);
 	}
-	start = 0;
-	while (--i >= 0)
+	if (cor)
 	{
-		(ALBD & GOOD || ALBD & CHECK) ? ++start : 0;
-		rotate(NULL, &r->a, 0);
+		start = 0;
+		while (--i >= 0)
+		{
+			(ALBD & GOOD || ALBD & CHECK) ? ++start : 0;
+			rotate(NULL, &r->a, 0);
+		}
+		section_sort_v2(r, start, -1, 0);
 	}
-	section_sort_v2(r, start, -1, 0);
-	fixe_best_rotate(r, r->a_min, r->a_min, -1);
+	find_best_rotation(r, r->b_rot, 0);
 }

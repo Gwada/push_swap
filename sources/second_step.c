@@ -90,16 +90,16 @@ void	second_step(t_roll *r)
 	sort[1] = CHECK;
 	while (++i < 3)
 	{
-		i == 0 ? ft_printf("\n\n\ntest CHECK\n\n\n") : 0;
-		i == 1 ? ft_printf("\n\n\ntest NO_CHECK\n\n\n") : 0;
+		i == 1 ? ft_printf("\n\n\ntest CHECK\n\n\n") : 0;
+		i == 0 ? ft_printf("\n\n\ntest NO_CHECK\n\n\n") : 0;
 		test = 0;
-		while (error_checker(r, sort[i]) && ++test /*<= 40*/ && !(r->b_rot = 0))
+		while (error_checker(r, sort[i]) && ++test && !(r->b_rot = 0))
 		{
 			ALBD ^ sort[i] ? nearest_rotation(r, sort[i], r->nb_a, 0) : 0;
 			ALBD & sort[i] ? fixe_that(r, r->nb_a, 0) : 0;
 		}
-//		clean_b(r);
 	}
+	clean_b(r);
 
 	i = -1;
 	while (++i < r->size)

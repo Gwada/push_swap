@@ -86,7 +86,7 @@ void			simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 
 static	int		a_insert(t_roll *r, int i, int value, int rot)
 {
-	ft_printf("\n{yellow}{bold}{underline}IN\tA_INSERT{eoc}\n");////////////////////////////////
+//	ft_printf("\n{yellow}{bold}{underline}IN\tA_INSERT{eoc}\n");////////////////////////////////
 //	ft_printf("nb_a = %d nb_b = %d\n\n", r->nb_a, r->nb_b);////////
 	int			min;
 	int			max;
@@ -147,34 +147,34 @@ static	int		a_insert(t_roll *r, int i, int value, int rot)
 
 	b_rot_a = n_dep_t < n_dep_l ? n_dep_t : n_dep_l;
 
-	ft_printf("n_dep_a = %d\n", b_rot_a);
-	ft_printf("n_dep_b = %d\n", rot_b);
+//	ft_printf("n_dep_a = %d\n", b_rot_a);
+//	ft_printf("n_dep_b = %d\n", rot_b);
 	if (b_rot_a > 1 && b_rot_a * 2 + 2 <= rot_b + 1)
 	{
-		ft_printf("{red}{bold}{underline}INSERTION DANS A\n");
-		ft_printf("rot = %d\trot_a = %d\tn_dep_t = %d\tn_dep_l = %d\n", rot, rot_a, n_dep_t, n_dep_l);
+//		ft_printf("{red}{bold}{underline}INSERTION DANS A\n");
+//		ft_printf("rot = %d\trot_a = %d\tn_dep_t = %d\tn_dep_l = %d\n", rot, rot_a, n_dep_t, n_dep_l);
 		rot = n_dep_t < n_dep_l ? rot_a : rot;
 		simple_push(r, &r->a, &r->b, 'b');
 	//	display_piles(r, &r->a, &r->b);
 		if (rot <= r->nb_a / 2)
 			while (ATNBR != min)
-			{
+//			{
 				rotate(r, &r->a, 'a');
 	//			display_piles(r, &r->a, &r->b);
-			}
+//			}
 		else
 			while (ALNBR != max)
-			{
+//			{
 				r_rotate(r, &r->a, 'a');
 	//			display_piles(r, &r->a, &r->b);
-			}
+//			}
 		BLBD = GOOD;
 		simple_push(r, &r->b, &r->a, 'a');
 	//	display_piles(r, &r->a, &r->b);
-		ft_printf("{bold}{green}insertion -> a\n{yellow}{underline}END\tA_INSERT{eoc}\n\n");/////////////////
+//		ft_printf("{bold}{green}insertion -> a\n{yellow}{underline}END\tA_INSERT{eoc}\n\n");/////////////////
 		return (0);
 	}
-	ft_printf("{yellow}{bold}{underline}END\tA_INSERT insertion -> b{eoc}\n\n");/////////////////
+//	ft_printf("{yellow}{bold}{underline}END\tA_INSERT insertion -> b{eoc}\n\n");/////////////////
 	return (1);
 }
 

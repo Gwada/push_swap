@@ -142,7 +142,6 @@ void				d_swap(t_roll *r);
 void				rotate(t_roll *r, t_pile *p, char pile);
 void				r_rotate(t_roll *r, t_pile *p, char pile);
 void				d_rotate(t_roll *r, int state);
-void				d_r_rotate(t_roll *r, int state);
 
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);
