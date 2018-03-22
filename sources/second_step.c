@@ -75,53 +75,25 @@ static	void	fixe_that(t_roll *r, int min, int max)
 	push(r, &r->a, &r->b, 'b');
 }
 
-void	second_step(t_roll *r)
+void	second_step(t_roll *r, int i)
 {
 	ft_printf("\n{yellow}{bold}-------------------------------------------------\n");
 	ft_printf("|\t\t{red}{underline}IN SECOND STEP{runderline}{yellow}\t\t\t|\n");
 	ft_printf("-------------------------------------------------{eoc}\n");
-	int	i;
-	int	test;//
 	int	sort[2];
 
-	i = -1;
-	test = 0;//
 	sort[0] = NO_CHECK;
 	sort[1] = CHECK;
 	while (++i < 3)
 	{
-		i == 1 ? ft_printf("\n\n\ntest CHECK\n\n\n") : 0;
-		i == 0 ? ft_printf("\n\n\ntest NO_CHECK\n\n\n") : 0;
-		test = 0;
-		while (error_checker(r, sort[i]) && ++test && !(r->b_rot = 0))
+		i == 0 ? ft_printf("\n\n\ntest CHECK\n\n\n") : 0;
+		i == 1 ? ft_printf("\n\n\ntest NO_CHECK\n\n\n") : 0;
+		while (error_checker(r, sort[i]) && !(r->b_rot = 0))
 		{
 			ALBD ^ sort[i] ? nearest_rotation(r, sort[i], r->nb_a, 0) : 0;
 			ALBD & sort[i] ? fixe_that(r, r->nb_a, 0) : 0;
 		}
 	}
-	clean_b(r);
-
-	i = -1;
-	while (++i < r->size)
-	{
-		if (i >= r->nb_a && i >= r->nb_b)
-			break ;
-		i < r->nb_a && ALNBR != r->a_min ? rotate(NULL, &r->a, 0) : 0;
-		i < r->nb_b && BLNBR != r->b_min ? rotate(NULL, &r->b, 0) : 0;
-	}
-	i = -1;
-	while (++i < r->size)
-	{
-		if (i >= r->nb_a && i >= r->nb_b)
-			break ;
-		i < r->nb_a ? ft_printf("{bold}{green}ALNBR = %12d{eoc}\t", ALNBR) : 0;
-		i < r->nb_a ? rotate(NULL, &r->a, 0) : 0;
-		i < r->nb_b ? ft_printf("{bold}{green}BLNBR = %12d{eoc}\t", BLNBR) : 0;
-		i < r->nb_b ? rotate(NULL, &r->b, 0) : 0;
-		ft_printf("\n");
-	}
-	ft_printf("{bold}{green}\n%s test = %d{eoc}\n\n", test >= 30 ? "test >= 30" : "ONLY GOOD", test);
-
 	ft_printf("{yellow}{bold}-------------------------------------------------\n");
 	ft_printf("|\t\t{red}{underline}END OF SECOND STEP{runderline}{yellow}\t\t|\n");
 	ft_printf("-------------------------------------------------{eoc}\n\n");

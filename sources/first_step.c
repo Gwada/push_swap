@@ -109,4 +109,5 @@ void			first_step(t_roll *r, t_tab *t, int i, int start)
 		section_sort_v2(r, start, -1, 0);
 	}
 	find_best_rotation(r, r->b_rot, 0);
+	fixe_push(r, -1, 0, 0);
 }
