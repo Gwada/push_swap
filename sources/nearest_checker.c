@@ -81,7 +81,8 @@ static	int		fourth_chech(t_roll *r, int *fst, int *lst)
 	*fst = ATTNBR;
 	while (ATBD ^ GOOD)
 		r_rotate(NULL, &r->a, 0);
-	if ((ALNBR > *fst && ALNBR < *lst) || (*fst > *lst && (ALNBR > *fst || ALNBR < *lst)))
+	if ((ALNBR > *fst && ALNBR < *lst)
+	|| (*fst > *lst && (ALNBR > *fst || ALNBR < *lst)))
 	{
 		r_rotate(r, &r->a, 'a');
 		swap(r, &r->a, 'a');

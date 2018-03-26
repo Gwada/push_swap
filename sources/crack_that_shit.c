@@ -12,6 +12,31 @@
 
 #include "push_swap.h"
 
+void		check_limits(t_roll *r, int i, int min, int max)
+{
+	int		value;
+
+	while (++i < r->size)
+	{
+		if (ALBD ^ GOOD)
+		{
+			value = ALNBR;
+			while (ATBD ^ GOOD)
+				r_rotate(NULL, &r->a, 0);
+			min = ATNBR;
+			while (ALBD ^ GOOD)
+				rotate(NULL, &r->a, 0);
+			max = ALNBR;
+			while (ALNBR != value)
+				r_rotate(NULL, &r->a, 0);
+			if ((ALNBR > min && ALNBR < max)
+			|| (min > max && (ALNBR > min || ALNBR < max)))
+				ALBD = GOOD;
+		}
+		rotate(NULL, &r->a, 0);
+	}
+}
+
 void		find_best_rot(t_roll *r, t_tab *t, int b_rot, int i)
 {
 	int		j;

@@ -128,11 +128,14 @@ void				fixe_best_rotate(t_roll *r, int min, int max, int i);
 void				find_best_rot(t_roll *r, t_tab *t, int b_rot, int i);
 
 void				first_step(t_roll *r, t_tab *t, int i, int start);
+void				check_limits(t_roll *r, int i, int min, int max);
 void				fixe_push(t_roll *r, int i, int min, int max);
 void				second_step(t_roll *r, int i);
 void				nearest_rotation(t_roll *r, int checker, int fst, int lst);
 int					nearest_checker(t_roll *r, int fst, int lst);
 int					value_insert(t_roll *r, int *rot, int min, int max);
+void				easy_insert(t_roll *r, int rot, int min, int max);
+void				hard_insert(t_roll *r, int rot, int min, int max);
 int					b_push(t_roll *r, int min, int max);
 void				last_step(t_roll *r, int i);
 
@@ -143,6 +146,7 @@ int					a_insert(t_roll *r, int rot_a, int value, int rot);
 void				rotate(t_roll *r, t_pile *p, char pile);
 void				r_rotate(t_roll *r, t_pile *p, char pile);
 void				d_rotate(t_roll *r, int state);
+int					calibrate_rot(t_roll *r, int rot);
 
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);

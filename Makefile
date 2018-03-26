@@ -35,10 +35,13 @@ SOURCES_PS		= $(SOURCES) \
 					push_swap.c \
 					first_step.c \
 					second_step.c \
-					last_value.c \
+					value_insert.c \
+					easy_insert.c \
+					hard_insert.c \
 					nearest_dif.c \
 					nearest_checker.c \
-					last_step.c
+					last_step.c \
+					calibrate_rot.c
 
 OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))
 OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))
