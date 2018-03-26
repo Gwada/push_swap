@@ -1,12 +1,33 @@
 #include "push_swap.h"
 
+static	int		calibrate(t_roll *r, int rot_a, int rot_b)
+{
+	if (!rot_b)
+		return (0);
+	if (rot_a >= r->nb_b)
+		return (1);
+	if (rot_a <= r->nb_a / 2)
+	{
+		if (rot_b <= r->nb_b / 2)
+			return (1);
+		else if (rot_b > r->nb_b / 2 && rot_a + (r->nb_b - rot_b) > rot_b)
+			return (1);
+	}
+	else
+	{
+		if (rot_b > r->nb_b / 2)
+			return (1);
+		if (rot_b <= r->nb_b / 2 && r->nb_a - rot_a >= r->nb_b - rot_b)
+			return (1);
+	}
+	return (0);
+}
+
 static	int		push_calibrate(t_roll *r, int rot, int i)
 {
 	ft_printf("{bold}{cyan}{underline}IN\tPUSH_CALIBRATE{eoc}\n");
-	int			ret;
 	int			rot_b;
 
-	ret = 0;
 	while (++i < r->nb_b)
 	{
 		if ((ALNBR > BTNBR && ALNBR < BLNBR)
@@ -14,22 +35,8 @@ static	int		push_calibrate(t_roll *r, int rot, int i)
 			rot_b = i;
 		rotate(NULL, &r->b, 0);
 	}
-	if (!rot_b)
-		return (0);
-	if (rot >= r->nb_b)
-		return (1);
-	if (rot <= r->nb_a / 2)
-	{
-		if ((rot_b <= r->nb_b / 2) || (rot < r->nb_b && r->nb_b - rot <= rot_b))
-			ret = 1;
-	}
-	else
-	{
-		if ((rot_b > r->nb_b / 2) || (r->nb_a - rot >= r->nb_b - rot_b))
-			ret = 1;
-	}
 	ft_printf("{bold}{cyan}{underline}END\tPUSH_CALIBRATE{eoc}\n");
-	return (ret);
+	return (calibrate(r, rot, rot_b));
 }
 
 int			calibrate_rot(t_roll *r, int rot, int i)
