@@ -146,7 +146,7 @@ int					a_insert(t_roll *r, int rot_a, int value, int rot);
 void				rotate(t_roll *r, t_pile *p, char pile);
 void				r_rotate(t_roll *r, t_pile *p, char pile);
 void				d_rotate(t_roll *r, int state);
-int					calibrate_rot(t_roll *r, int rot);
+int					calibrate_rot(t_roll *r, int rot, int i);
 
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);

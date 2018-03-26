@@ -17,7 +17,7 @@ void		rotate(t_roll *r, t_pile *p, char pile)
 	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
 		return ;
 	if (r && r->nb_b > 0 && pile == 'a' && BLBD & GOOD)
-		if (calibrate_rot(r, r->b_rot < 1 ? 1 : r->b_rot))
+		if (calibrate_rot(r, r->b_rot < 1 ? 1 : r->b_rot, -1))
 			return (d_rotate(r, ROT));
 	p->low->bd &= ~ROT;
 	p->low->top = p->top;
@@ -41,7 +41,7 @@ void		r_rotate(t_roll *r, t_pile *p, char pile)
 	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
 		return ;
 	if (r && r->nb_b > 0 && pile == 'a' && BLBD & GOOD)
-		if (calibrate_rot(r, r->b_rot < 1 ? 1 : r->b_rot))
+		if (calibrate_rot(r, r->b_rot < 1 ? 1 : r->b_rot, -1))
 			return (d_rotate(r, R_ROT));
 	p->low->bd &= ~R_ROT;
 	p->top->low = p->low;
