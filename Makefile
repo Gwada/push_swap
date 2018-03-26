@@ -37,6 +37,7 @@ SOURCES_PS		= $(SOURCES) \
 					second_step.c \
 					last_value.c \
 					nearest_dif.c \
+					nearest_checker.c \
 					last_step.c
 
 OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))

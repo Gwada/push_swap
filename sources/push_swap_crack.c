@@ -38,8 +38,6 @@ static	int	pre_fixe(t_roll *r)
 
 void		fixe_best_rotate(t_roll *r, int min, int max, int i)
 {
-//	ft_printf("in best rot\n");
-//	display_piles(r, &r->a, &r->b);
 	int		value;
 
 	value = pre_fixe(r);
@@ -61,5 +59,4 @@ void		fixe_best_rotate(t_roll *r, int min, int max, int i)
 		ALBD & GOOD && ALNBR < min ? ALBD = NO_CHECK : 0;
 		rotate(NULL, &r->a, 0);
 	}
-//	ft_printf("end best rot\n");
 }

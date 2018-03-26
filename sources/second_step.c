@@ -12,66 +12,56 @@ static	int		error_checker(t_roll *r, int checker)
 		ALBD & checker ? ++total : 0;
 		rotate(NULL, &r->a, 0);
 	}
-//	ft_printf("in error_checker ret = %d\n", total);
 	return (total);
 }
 
-static	void	fixe_that(t_roll *r, int min, int max)
+static	int		right_check(t_roll *r, int min, int max)
 {
-//	ft_printf("{bold}{underline}{magenta}IN\tFIXE{eoc}\tALNBR = %d\n", ALNBR);
+	while (ALLLBD ^ GOOD)
+		rotate(NULL, &r->a, 0);
+	max = ALLLNBR;
+	while (ALLBD ^ GOOD)
+		r_rotate(NULL, &r->a, 0);
+	if ((ALNBR > min && ALNBR < max)
+	|| (min > max && (ALNBR > min || ALNBR < max)))
+	{
+		swap(r, &r->a, 'a');
+		return (1);
+	}
+	return (0);
+}
 
-	if (ALLBD & GOOD && ((min = ALLNBR) || !(min = ALLNBR)))
+static	int		left_check(t_roll *r, int min, int max)
+{
+	while (ATTBD ^ GOOD)
+		r_rotate(NULL, &r->a, 0);
+	min = ATTNBR;
+	while (ATBD ^ GOOD)
+		rotate(NULL, &r->a, 0);
+	if ((ALNBR > min && ALNBR < max)
+	|| (min > max && (ALNBR > min || ALNBR < max)))
 	{
-//		ft_printf("ALLBD & GOOD\n");
-		while (ALLLBD ^ GOOD)
-			rotate(NULL, &r->a, 0);
-		max = ALLLNBR;
-		while (ALLBD ^ GOOD)
-			r_rotate(NULL, &r->a, 0);
-//		ft_printf("min = %d max = %d\n", min, max);
-		if ((min < max && ALNBR > min && ALNBR < max)
-		|| (min > max && (ALNBR > min || ALNBR < max)))
-		{
-//			ft_printf("(min < max && ALNBR > min && ALNBR < max) ||");
-//			ft_printf(" || (min > max && (ALNBR > min || ALNBR < max))");
-//			ft_printf(" -> SWAP -> return\n");
-			return (swap(r, &r->a, 'a'));
-		}
+		r_rotate(r, &r->a, 'a');
+		swap(r, &r->a, 'a');
+		return (1);
 	}
-	if (ATBD & GOOD && ((max = ATNBR) || !(max = ATNBR)))
-	{
-//		ft_printf("ATBD & GOOD\n");
-		while (ATTBD ^ GOOD)
-			r_rotate(NULL, &r->a, 0);
-		min = ATTNBR;
-		while (ATBD ^ GOOD)
-			rotate(NULL, &r->a, 0);
-//		ft_printf("min = %d max = %d\n", min, max);
-		if ((min < max && ALNBR > min && ALNBR < max)
-		|| (min > max && (ALNBR > min || ALNBR < max)))
-		{
-//			ft_printf("(min < max && ALNBR > min && ALNBR < max) ||");
-//			ft_printf(" || (min > max && (ALNBR > min || ALNBR < max))");
-//			ft_printf(" -> R_ROT -> SWAP -> return\n");
-			r_rotate(r, &r->a, 'a');
-			return (swap(r, &r->a, 'a'));
-		}
-		min = ATNBR;
-		while (ALLBD ^ GOOD)
-			rotate(NULL, &r->a, 0);
-		max = ALLNBR;
-		while (ATBD ^ GOOD)
-			r_rotate(NULL, &r->a, 0);
-//		ft_printf("min = %d max = %d\n", min, max);
-		if (max - min != 1 && b_push(r, min, max))
-//		if (max - min != 1 && value_insert(r, NULL, min, max))
-//		{
-//			ft_printf("max - min != 1 && value_insert(r, NULL, min, max) -> B_PUSH -> return\n");
-//			b_push(r, min, max);
-			return ;
-//		}
-	}
-//	ft_printf("{bold}{underline}{yellow}NO THINGS TO DO -> PUSH\n");
+	min = ATNBR;
+	while (ALLBD ^ GOOD)
+		rotate(NULL, &r->a, 0);
+	max = ALLNBR;
+	while (ATBD ^ GOOD)
+		r_rotate(NULL, &r->a, 0);
+	if (max - min != 1 && b_push(r, min, max))
+		return (1);
+	return (0);
+}
+
+static	void	fixe_that(t_roll *r)
+{
+	if (ALLBD & GOOD && right_check(r, ALLNBR, 0))
+		return ;
+	if (ATBD & GOOD && left_check(r, 0, ATNBR))
+		return ;
 	push(r, &r->a, &r->b, 'b');
 }
 
@@ -86,12 +76,12 @@ void	second_step(t_roll *r, int i)
 	sort[1] = CHECK;
 	while (++i < 3)
 	{
-		i == 0 ? ft_printf("\n\n\ntest CHECK\n\n\n") : 0;
-		i == 1 ? ft_printf("\n\n\ntest NO_CHECK\n\n\n") : 0;
+		i == 0 ? ft_printf("\n\n\n{bold}{cyan}test CHECK{eoc}\n\n") : 0;
+		i == 1 ? ft_printf("\n\n\n{bold}{magenta}test NO_CHECK\n\n{eoc}") : 0;
 		while (error_checker(r, sort[i]) && !(r->b_rot = 0))
 		{
 			ALBD ^ sort[i] ? nearest_rotation(r, sort[i], r->nb_a, 0) : 0;
-			ALBD & sort[i] ? fixe_that(r, r->nb_a, 0) : 0;
+			ALBD & sort[i] ? fixe_that(r) : 0;
 		}
 	}
 	ft_printf("{yellow}{bold}-------------------------------------------------\n");

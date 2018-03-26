@@ -63,7 +63,6 @@ static	void	find_best_insert(t_roll *r, int rot, int i)
 
 void			simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 {
-//	ft_printf("{bold}{underline}{cyan}IN\tSIMPLE{eoc}\n");
 	t_pile		*tmp;
 
 	tmp = src->low;
@@ -80,107 +79,10 @@ void			simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
 	++r->dep;
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
-
-//	ft_printf("{bold}{underline}{cyan}END\tSIMPLE{eoc}\n");
-}
-
-static	int		a_insert(t_roll *r, int i, int value, int rot)
-{
-//	ft_printf("\n{yellow}{bold}{underline}IN\tA_INSERT{eoc}\n");////////////////////////////////
-//	ft_printf("nb_a = %d nb_b = %d\n\n", r->nb_a, r->nb_b);////////
-	int			min;
-	int			max;
-	int			rot_a;
-	int			rot_b;
-	int			n_dep_l;
-	int			n_dep_t;
-	int			b_rot_a;
-
-	rot_a = -1;
-	rot_b = -1;
-
-	// Calcule nb dep min pour insertion dans b
-	while (++i < r->nb_b)
-	{
-		if (rot_b == -1
-		&& ((BTNBR > BLNBR && (value > BTNBR || value < BLNBR))
-		|| (BTNBR < BLNBR && value > BTNBR && value < BLNBR)))
-			rot_b = i > (r->nb_b / 2) ? r->nb_b - i : i;
-		rotate(NULL, &r->b, 0);
-	}
-//	ft_printf("{underline}{bold}insertion dans b{runderline}{eoc}\n");
-//	ft_printf("%d %s + 1 push\n\n", rot_b, rot_b < 2 ? "deplacement" : "deplacements");
-
-	// Calcule nb dep min pour insertion dans a
-	i = -1;
-	while (++i < r->nb_a)
-	{
-		if (ATBD & GOOD && rot == -1)
-		{
-			min = ATNBR;
-			rot_a = r->nb_a - i;
-			while (ALBD ^ GOOD && --rot_a != r->nb_a + 1)
-				rotate(NULL, &r->a, 0);
-			max = ALNBR;
-			while (ATBD ^ GOOD)
-				r_rotate(NULL, &r->a, 0);
-			if ((min > max && (value > min || value < max))
-			|| (min < max && value > min && value < max))
-				rot = i <= r->nb_a / 2 ? i - 1 : i;
-		}
-		rotate(NULL, &r->a, 0);
-	}
-
-//	ft_printf("{underline}{bold}insertion dans a{runderline}{eoc}\t");
-//	ft_printf("min = %d max = %d ATNBR = %d\n\n", min, max, ATNBR);
-
-	n_dep_l = rot > (r->nb_a / 2) ? r->nb_a - rot : rot;
-	n_dep_t = rot_a > (r->nb_a / 2) ? r->nb_a - rot_a : rot_a;
-
-//	ft_printf("{underline}{bold}{cyan}LOW{runderline}{eoc}\nrot = %d\n", rot);
-//	ft_printf("%d ", n_dep_l);
-//	ft_printf("deplacement(s) + 2 push\n\n");
-
-//	ft_printf("{underline}{bold}{yellow}TOP{runderline}{eoc}\n");
-//	ft_printf("rot_a = %d\n", (rot_a > r->nb_a / 2 ? ++rot_a : rot_a));
-//	ft_printf("%d deplacement(s) + 2 push\n\n", n_dep_t);
-
-	b_rot_a = n_dep_t < n_dep_l ? n_dep_t : n_dep_l;
-
-//	ft_printf("n_dep_a = %d\n", b_rot_a);
-//	ft_printf("n_dep_b = %d\n", rot_b);
-	if (b_rot_a > 1 && b_rot_a * 2 + 2 <= rot_b + 1)
-	{
-//		ft_printf("{red}{bold}{underline}INSERTION DANS A\n");
-//		ft_printf("rot = %d\trot_a = %d\tn_dep_t = %d\tn_dep_l = %d\n", rot, rot_a, n_dep_t, n_dep_l);
-		rot = n_dep_t < n_dep_l ? rot_a : rot;
-		simple_push(r, &r->a, &r->b, 'b');
-	//	display_piles(r, &r->a, &r->b);
-		if (rot <= r->nb_a / 2)
-			while (ATNBR != min)
-//			{
-				rotate(r, &r->a, 'a');
-	//			display_piles(r, &r->a, &r->b);
-//			}
-		else
-			while (ALNBR != max)
-//			{
-				r_rotate(r, &r->a, 'a');
-	//			display_piles(r, &r->a, &r->b);
-//			}
-		BLBD = GOOD;
-		simple_push(r, &r->b, &r->a, 'a');
-	//	display_piles(r, &r->a, &r->b);
-//		ft_printf("{bold}{green}insertion -> a\n{yellow}{underline}END\tA_INSERT{eoc}\n\n");/////////////////
-		return (0);
-	}
-//	ft_printf("{yellow}{bold}{underline}END\tA_INSERT insertion -> b{eoc}\n\n");/////////////////
-	return (1);
 }
 
 void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 {
-//	ft_printf("{red}{bold}{underline}IN\tPUSH{eoc}\n");//////////////////////
 	int			size;
 
 	size = (pile == 'a' ? r->nb_b : r->nb_a);
@@ -198,5 +100,4 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 		src->low->bd = GOOD;
 		simple_push(r, src, dst, pile);
 	}
-//	ft_printf("{red}{bold}{underline}END\tPUSH{eoc}\n");/////////////////////
 }

@@ -109,5 +109,25 @@ void			first_step(t_roll *r, t_tab *t, int i, int start)
 		section_sort_v2(r, start, -1, 0);
 	}
 	find_best_rotation(r, r->b_rot, 0);
-	fixe_push(r, -1, 0, 0);
+	i = -1;
+	int value, min, max;
+	while (cor > 0 && ++i < r->size)
+	{
+		if (ALBD ^ GOOD)
+		{
+			value = ALNBR;
+			while (ATBD ^ GOOD)
+				r_rotate(NULL, &r->a, 0);
+			min = ATNBR;
+			while (ALBD ^ GOOD)
+				rotate(NULL, &r->a, 0);
+			max = ALNBR;
+			while (ALNBR != value)
+				r_rotate(NULL, &r->a, 0);
+			if ((ALNBR > min && ALNBR < max)
+			|| (min > max && (ALNBR > min || ALNBR < max)))
+				ALBD = GOOD;
+		}
+		rotate(NULL, &r->a, 0);
+	}
 }

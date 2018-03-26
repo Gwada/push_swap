@@ -22,7 +22,7 @@ static	void	easy_insert(t_roll *r, int rot, int min, int max)
 		else
 			while (rot++ < r->nb_b)
 				r_rotate(r, &r->b, 'b');
-		while (r->nb_b && BLNBR > ATNBR && BLNBR < max)
+		while (r->nb_b > 0 && BLNBR > ATNBR && BLNBR < max)
 		{
 			simple_push(r, &r->b, &r->a, 'a');
 			ALBD = GOOD;
@@ -44,7 +44,7 @@ static	void	easy_insert(t_roll *r, int rot, int min, int max)
 		else
 			while (rot++ < r->nb_b)
 				r_rotate(r, &r->b, 'b');
-		while (r->nb_b && BLNBR > min && BLNBR < ALNBR)
+		while (r->nb_b > 0 && BLNBR > min && BLNBR < ALNBR)
 		{
 			simple_push(r, &r->b, &r->a, 'a');
 			ALBD = GOOD;
@@ -77,7 +77,7 @@ static	void	hard_insert(t_roll *r, int rot, int min, int max)
 			else
 				while (rot++ < r->nb_b)
 					r_rotate(r, &r->b, 'b');
-			while (r->nb_b && BLNBR > ALNBR && BLNBR > max)
+			while (r->nb_b > 0 && BLNBR > ALNBR && BLNBR > max)
 			{
 				simple_push(r, &r->b, &r->a, 'a');
 				ALBD = GOOD;
@@ -100,7 +100,7 @@ static	void	hard_insert(t_roll *r, int rot, int min, int max)
 			else
 				while (rot++ < r->nb_b)
 					r_rotate(r, &r->b, 'b');
-			while (r->nb_b && BLNBR < min && BLNBR < ALNBR)
+			while (r->nb_b > 0 && BLNBR < min && BLNBR < ALNBR)
 			{
 				simple_push(r, &r->b, &r->a, 'a');
 				ALBD = GOOD;
@@ -127,7 +127,7 @@ static	void	hard_insert(t_roll *r, int rot, int min, int max)
 			else
 				while (rot++ < r->nb_b)
 					r_rotate(r, &r->b, 'b');
-			while (BLNBR > ALNBR && BLNBR > max)
+			while (r->nb_b > 0 && BLNBR > ALNBR && BLNBR > max)
 			{
 				simple_push(r, &r->b, &r->a, 'a');
 				ALBD = GOOD;
@@ -150,7 +150,7 @@ static	void	hard_insert(t_roll *r, int rot, int min, int max)
 			else
 				while (rot++ < r->nb_b)
 					r_rotate(r, &r->b, 'b');
-			while (BLNBR < min && BLNBR < ALNBR)
+			while (r->nb_b > 0 && BLNBR < min && BLNBR < ALNBR)
 			{
 				simple_push(r, &r->b, &r->a, 'a');
 				ALBD = GOOD;
