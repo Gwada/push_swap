@@ -52,8 +52,11 @@ void	hard_insert(t_roll *r, int rot, int min, int max)
 	}
 	else if (ATBD & GOOD)
 	{
-		r->b_max > max ? max_insert(r, rot, -1, max) : 0;
-		rotate(r, &r->a, 'a');
+		if (r->b_max > max)
+		{
+			max_insert(r, rot, -1, max);
+			rotate(r, &r->a, 'a');
+		}
 		r->b_min < min ? min_insert(r, rot, -1, min) : 0;
 	}
 }
