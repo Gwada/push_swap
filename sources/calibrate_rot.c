@@ -88,7 +88,7 @@ static	int		i_calibrate(t_roll *r, int rot_a, int i)
 		ft_printf("rot_b = %d\n", rot_b);
 	}
 	else
-		ft_printf("min > max\n");
+		ft_printf("{bold}{red}min > max{eoc}\n");
 	ft_printf("{bold}{magenta}{underline}END\tINSERT_CALIBRATE{eoc}\n");
 	return (calibrate(r, rot_a, rot_b));
 }

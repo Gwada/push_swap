@@ -1,12 +1,26 @@
 #include "push_swap.h"
 
-static	void	max_insert(t_roll *r, int rot, int i, int max)
+void			i_b_max_finder(t_roll *r, int *rot, int i)
 {
 	while (++i < r->nb_b)
 	{
-		BLNBR == r->b_max ? rot = i : 0;
+		BLNBR == r->b_max ? *rot = i : 0;
 		rotate(NULL, &r->b, 0);
 	}
+}
+
+void			i_b_min_finder(t_roll *r, int *rot, int i)
+{
+	while (++i < r->nb_b)
+	{
+		BLNBR == r->b_min ? *rot = i : 0;
+		rotate(NULL, &r->b, 0);
+	}
+}
+
+static	void	max_insert(t_roll *r, int rot, int i, int max)
+{
+	i_b_max_finder(r, &rot, i);
 	if (rot <= r->nb_b / 2)
 		while (rot-- > 0)
 			rotate(r, &r->b, 'b');
@@ -23,11 +37,7 @@ static	void	max_insert(t_roll *r, int rot, int i, int max)
 
 static	void	min_insert(t_roll *r, int rot, int i, int min)
 {
-	while (++i < r->nb_b)
-	{
-		BLNBR == r->b_min ? rot = i : 0;
-		rotate(NULL, &r->b, 0);
-	}
+	i_b_min_finder(r, &rot, i);
 	if (rot <= r->nb_b / 2)
 		while (rot-- > 0)
 			rotate(r, &r->b, 'b');
