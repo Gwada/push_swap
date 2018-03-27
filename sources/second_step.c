@@ -63,6 +63,7 @@ static	int		left_check(t_roll *r, int min, int max)
 	if ((ALNBR > min && ALNBR < max)
 	|| (min > max && (ALNBR > min || ALNBR < max)))
 	{
+		ft_printf("1 min %d max %d\n", min , max);
 		r_rotate(r, &r->a, 'a');
 		swap(r, &r->a, 'a');
 		return (1);
@@ -74,7 +75,10 @@ static	int		left_check(t_roll *r, int min, int max)
 	while (ATBD ^ GOOD)
 		r_rotate(NULL, &r->a, 0);
 	if (max - min != 1 && b_push(r, min, max))
+	{
+		ft_printf("2 min %d max %d\n", min , max);
 		return (1);
+	}
 	return (0);
 }
 
@@ -113,6 +117,7 @@ void	second_step(t_roll *r, int i)
 		{
 			ALBD ^ sort[i] ? nearest_rotation(r, sort[i], r->nb_a, 0) : 0;
 			ALBD & sort[i] ? fixe_that(r) : 0;
+		//	r->nb_b > (r->size * 40) / 100 ? clean_b(r, r->nb_a, 0, 0) : 0;
 		}
 	}
 	ft_printf("{yellow}{bold}-------------------------------------------------\n");
