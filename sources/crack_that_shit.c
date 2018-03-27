@@ -60,7 +60,7 @@ void		find_best_rot(t_roll *r, t_tab *t, int b_rot, int i)
 	r->b_rot = b_rot;
 }
 
-static	void	fixe_fst(t_roll *r, int min, int max, int *b_fst)
+/*static	void	fixe_fst(t_roll *r, int min, int max, int *b_fst)
 {
 	int			i;
 	int			value;
@@ -108,11 +108,23 @@ static	void	fixe_lst(t_roll *r, int min, int max, int *b_lst)
 		}
 		r_rotate(NULL, &r->a, 0);
 	}
-}
+}*/
 
 void			fixe_push(t_roll *r, int i, int min, int max)
 {
-	int			b_fst;
+//	find_best_rotation(r, r->nb_a - r->b_rot, 0);
+//	display_piles(r, &r->a, &r->b);
+	while (++i < r->size)
+	{
+		if (ALBD ^ GOOD)
+				ALBD = ALNBR <= r->pvt ? CHECK : NO_CHECK;
+		rotate(NULL, &r->a, 0);
+	}
+	(void)max;
+	(void)min;
+//	find_best_rotation(r, r->b_rot, 0);
+//	display_piles(r, &r->a, &r->b);
+/*	int			b_fst;
 	int			b_lst;
 
 	while (++i < r->nb_a)
@@ -126,5 +138,5 @@ void			fixe_push(t_roll *r, int i, int min, int max)
 			ALBD = b_fst <= b_lst ? CHECK : NO_CHECK;
 		}
 		rotate(NULL, &r->a, 0);
-	}
+	}*/
 }

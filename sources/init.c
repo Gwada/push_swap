@@ -64,6 +64,8 @@ static	void	init_sort(t_tab *t, t_roll *r, int i)
 	r->max = (int)t[r->size - 1].n;
 	r->nb_a = r->size;
 	r->nb_b = 0;
+	r->dep = 0;
+	r->pvt = (int)t[r->size / 2].n;
 	r->a_max = (int)t[r->size - 1].n;
 	r->a_min = (int)(*t).n;
 	r->bd |= GOOD;

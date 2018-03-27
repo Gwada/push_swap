@@ -18,7 +18,6 @@ void		swap(t_roll *r, t_pile *p, char pile)
 
 	if (!p->low || p->low->root)
 		return ;
-
 	p->LBD = GOOD;
 	p->low->LBD = GOOD;
 	tmp = p->low;
@@ -36,6 +35,7 @@ void		swap(t_roll *r, t_pile *p, char pile)
 	else
 		ft_printf("s%c\n", pile);
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	r->b_rot = 0;
 }
 
 static	int	b_rot(t_roll *r, int value)
@@ -96,11 +96,17 @@ int			a_insert(t_roll *r, int rot_a, int value, int rot)
 	n_dep_l = rot > (r->nb_a / 2) ? r->nb_a - rot : rot;
 	n_dep_t = rot_a > (r->nb_a / 2) ? r->nb_a - rot_a : rot_a;
 	b_rot_a = n_dep_t < n_dep_l ? n_dep_t : n_dep_l;
+
+	ft_printf("b_rot_a = %d\n", b_rot_a);
 	if (b_rot_a > 1 && b_rot_a * 2 + 2 <= b_rot(r, value) + 1)
 	{
-		rot = n_dep_t < n_dep_l ? rot_a : rot;
+		ft_printf("{red}{bold}......................................................{eoc}\n");
+		ft_printf("{red}{bold}\t\tINSERTION DANS A{eoc}\n");
+		ft_printf("{red}{bold}......................................................{eoc}\n");
+		r->b_rot = n_dep_t < n_dep_l ? rot : rot_a;
+		ft_printf("r->b_rot = %d\nrot_a = %d\nrot = %d\n", r->b_rot, rot_a, rot);
 		simple_push(r, &r->a, &r->b, 'b');
-		if (rot <= r->nb_a / 2)
+		if (r->b_rot <= r->nb_a / 2)
 			while (ATNBR != min)
 				rotate(r, &r->a, 'a');
 		else

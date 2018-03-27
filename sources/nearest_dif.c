@@ -58,10 +58,11 @@ static	void	next_insert(t_roll *r, int best_dif_dep, int fst, int lst)
 
 void			nearest_rotation(t_roll *r, int checker, int fst, int lst)
 {
+	ft_printf("{yellow}{bold}IN\tNEAREST_ROTATION\n{eoc}");
 	int			best_dif_dep;
 
 	next_dif(r, checker, &best_dif_dep);
-	next_insert(r, best_dif_dep, fst, lst);
+	checker ^ CHECK ? next_insert(r, best_dif_dep, fst, lst) : 0;
 	ALBD |= r->b_rot < r->nb_a / 2 ? ROT : R_ROT;
 	if (ALBD & ROT)
 	{

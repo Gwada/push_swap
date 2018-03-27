@@ -48,9 +48,9 @@ static	void	min_insert(t_roll *r, int rot, int i, int min)
 	{
 		simple_push(r, &r->b, &r->a, 'a');
 		ALBD = GOOD;
-		r->nb_b > 0 ? rotate(r, &r->a, 'a') : 0;
+		if (r->nb_b > 0 && BLNBR < min && BLNBR < ALNBR)
+			rotate(r, &r->a, 'a');
 	}
-	rotate(r, &r->a, 'a');
 }
 
 void	hard_insert(t_roll *r, int rot, int min, int max)

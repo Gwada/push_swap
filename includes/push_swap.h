@@ -112,6 +112,7 @@ typedef	struct		s_roll
 	int				max;
 	int				nb_b;
 	int				dep;
+	int				pvt;
 }					t_roll;
 
 /*
@@ -135,11 +136,14 @@ void				nearest_rotation(t_roll *r, int checker, int fst, int lst);
 int					nearest_checker(t_roll *r, int fst, int lst);
 int					value_insert(t_roll *r, int *rot, int min, int max);
 void				easy_insert(t_roll *r, int rot, int min, int max);
+void				i_b_right_insert(t_roll *r, int *rot, int min, int max);
+void				i_b_left_insert(t_roll *r, int *rot, int min, int max);
 void				hard_insert(t_roll *r, int rot, int min, int max);
 void				i_b_max_finder(t_roll *r, int *rot, int i);
 void				i_b_min_finder(t_roll *r, int *rot, int i);
 int					b_push(t_roll *r, int min, int max);
 void				last_step(t_roll *r, int i);
+void				clean_b(t_roll *r, int fst, int lst, int value);
 
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile);

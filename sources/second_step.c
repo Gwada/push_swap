@@ -12,6 +12,28 @@ static	int		error_checker(t_roll *r, int checker)
 		ALBD & checker ? ++total : 0;
 		rotate(NULL, &r->a, 0);
 	}
+	if (!total && r->nb_b > 0 && checker & NO_CHECK)
+	{
+		while (i-- > 0)
+		{
+			if (ATBD & GOOD && ATNBR >= r->pvt)
+			{
+				while (ALBD ^ GOOD)
+					rotate(NULL, &r->a, 0);
+				if (ALNBR >= r->pvt)
+					while (ATBD ^ GOOD)
+					{
+						r_rotate(NULL, &r->a, 0);
+						ALBD ^ GOOD && ALNBR < r->pvt ? ALBD = checker : 0;
+						ALBD ^ GOOD && ALNBR < r->pvt ? ++total : 0;
+					}
+				else
+					while (ATBD ^ GOOD)
+						r_rotate(NULL, &r->a, 0);
+			}
+			rotate(NULL, &r->a, 0);
+		}
+	}
 	return (total);
 }
 
@@ -61,12 +83,12 @@ static	void	fixe_that(t_roll *r)
 	ft_printf("in fixe\n");//
 	if (ALLBD & GOOD && right_check(r, ALLNBR, 0))
 	{
-		ft_printf("end fixe\n");//
+		ft_printf("right end fixe\n");//
 		return ;
 	}
 	if (ATBD & GOOD && left_check(r, 0, ATNBR))
 	{
-		ft_printf("end fixe\n");//
+		ft_printf("left end fixe\n");//
 		return ;
 	}
 	ft_printf("end fixe\n");//
@@ -82,10 +104,11 @@ void	second_step(t_roll *r, int i)
 
 	sort[0] = NO_CHECK;
 	sort[1] = CHECK;
-	while (++i < 3)
+	while (++i < 2)
 	{
-		i == 1 ? ft_printf("\n\n\n{bold}{cyan}test CHECK{eoc}\n\n") : 0;
-		i == 0 ? ft_printf("\n\n\n{bold}{magenta}test NO_CHECK\n\n{eoc}") : 0;
+		i == 1 ? ft_printf("\n\n\n{bold}{cyan}test CHECK{eoc}\n") : 0;
+		i == 0 ? ft_printf("\n\n\n{bold}{magenta}test NO_CHECK\n{eoc}") : 0;
+		ft_printf("{bold}r->pvt = %d\n\n{eoc}", r->pvt);
 		while (error_checker(r, sort[i]) && !(r->b_rot = 0))
 		{
 			ALBD ^ sort[i] ? nearest_rotation(r, sort[i], r->nb_a, 0) : 0;
