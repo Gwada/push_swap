@@ -97,13 +97,14 @@ int			a_insert(t_roll *r, int rot_a, int value, int rot)
 	n_dep_t = rot_a > (r->nb_a / 2) ? r->nb_a - rot_a : rot_a;
 	b_rot_a = n_dep_t < n_dep_l ? n_dep_t : n_dep_l;
 
-	ft_printf("b_rot_a = %d\n", b_rot_a);
+	ft_printf("r->nb_a = %d\tb_rot_a = %d\n", r->nb_a, b_rot_a);
 	if (b_rot_a > 1 && b_rot_a * 2 + 2 <= b_rot(r, value) + 1)
 	{
 		ft_printf("{red}{bold}......................................................{eoc}\n");
 		ft_printf("{red}{bold}\t\tINSERTION DANS A{eoc}\n");
 		ft_printf("{red}{bold}......................................................{eoc}\n");
-		r->b_rot = n_dep_t < n_dep_l ? rot : rot_a;
+		r->b_rot = n_dep_t <= n_dep_l ? rot : rot_a;
+		ft_printf("n_dep_t = %d\tn_dep_l = %d\n", n_dep_t, n_dep_l);
 		ft_printf("r->b_rot = %d\nrot_a = %d\nrot = %d\n", r->b_rot, rot_a, rot);
 		simple_push(r, &r->a, &r->b, 'b');
 		if (r->b_rot <= r->nb_a / 2)

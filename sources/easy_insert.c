@@ -86,11 +86,12 @@ void	easy_insert(t_roll *r, int rot, int min, int max)
 	left = 0;
 	right = 0;
 	value = ALNBR;
-	while (ATBD & GOOD && ++left && ++i < r->nb_a )
+	while (ATBD & GOOD && ++left && ++i < r->nb_a)
 		r_rotate(NULL, &r->a, 0);
 	while (ALNBR != value)
 		rotate(NULL, &r->a, 0);
-	while (ALBD & GOOD && ++right && --i > 0)
+	i = -1;
+	while (ALBD & GOOD && ++right && ++i < r->nb_a)
 		rotate(NULL, &r->a, 0);
 	while (ALNBR != value)
 		r_rotate(NULL, &r->a, 0);
