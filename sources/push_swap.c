@@ -22,11 +22,20 @@ void		push_swap(t_roll *r, char **p, int size)
 	find_best_rot(r, t, 0, -1);
 	first_step(r, t, -1, 0);
 	int		i = -1, test;
-	while (++i < 4)
 	fixe_push(r, -1, 0, 0);
 	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 	second_step(r, -1);
 	last_step(r, -1);
+/*	while (++i < r->nb_a)
+	{
+		if (ALBD ^ GOOD)
+		//	ALBD = ALNBR <= r->pvt ? CHECK : NO_CHECK;
+			ALNBR <= r->pvt ? ALBD = CHECK : 0;
+		rotate(NULL, &r->a, 0);
+	}
+	second_step(r, -1);
+	last_step(r, -1);*/
+
 //	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 
 
@@ -40,8 +49,8 @@ void		push_swap(t_roll *r, char **p, int size)
 		(int)t[i].n != ALNBR ? ++test : 0;
 		rotate(NULL, &r->a, 0);
 	}
-	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
-	ft_printf("{bold}{yellow}size = %d\tr->dep = %d\t{eoc}", r->size, r->dep);///
+//	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
+	ft_printf("{bold}{yellow}size = %d\tr->dep = %d r->pvt = %d\t{eoc}", r->size, r->dep, r->pvt);///
 	test ? ft_printf("{red}{bold}{underline}error!!{eoc}\n") : 0;////////////////
 	!test ? ft_printf("{green}{bold}{underline}TRI OK!!{eoc}\n") : 0;////////////
 }

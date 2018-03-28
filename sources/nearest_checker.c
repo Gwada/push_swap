@@ -103,21 +103,21 @@ static	int		fourth_chech(t_roll *r, int *fst, int *lst)
 
 int				nearest_checker(t_roll *r, int fst, int lst)
 {
-//	ft_printf("{bold}{yellow}in nearest checker{eoc}\n");
+//	ft_printf("{bold}{yellow}in nearest checker{eoc}\n");////////////////////////
 	if (ALBD & GOOD)
 	{
-//		ft_printf("{bold}{red}1.{eoc}\n");
+//		ft_printf("{bold}{red}1.{eoc}\n");///////////////////////////////////////
 		if (first_check(r, &fst, &lst))
 			return (1);
 		if (ATBD ^ GOOD && second_check(r, &fst, &lst))
 			return (1);
 		if (fst - lst != 1 && b_push(r, fst, lst))
 			return (1);
-//		ft_printf("{bold}{red}.1{eoc}\n");
+//		ft_printf("{bold}{red}.1{eoc}\n");///////////////////////////////////////
 	}
 	else if (ALLBD & GOOD)
 	{
-//		ft_printf("{bold}{red}2.{eoc}\n");
+//		ft_printf("{bold}{red}2.{eoc}\n");///////////////////////////////////////
 		if (third_check(r, &fst, &lst))
 			return (1);
 		if (ATBD ^ GOOD && fst - lst != 1 && value_insert(r, NULL, fst, lst))
@@ -127,11 +127,11 @@ int				nearest_checker(t_roll *r, int fst, int lst)
 			b_push(r, fst, lst);
 			return (1);
 		}
-//		ft_printf("{bold}{red}.2{eoc}\n");
+//		ft_printf("{bold}{red}.2{eoc}\n");///////////////////////////////////////
 	}
 	else if (ATBD & GOOD && fourth_chech(r, &fst, &lst))
 	{
-//		ft_printf("{bold}{red}3{eoc}\n");
+//		ft_printf("{bold}{red}3{eoc}\n");////////////////////////////////////////
 		return (1);
 	}
 	return (0);

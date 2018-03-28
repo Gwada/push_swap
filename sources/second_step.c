@@ -13,6 +13,7 @@ static	int		error_checker(t_roll *r, int checker)
 		rotate(NULL, &r->a, 0);
 	}
 	if (!total && r->nb_b > 0 && checker & NO_CHECK)
+	{
 		while (i-- > 0)
 		{
 			if (ATBD & GOOD && ATNBR >= r->pvt)
@@ -32,6 +33,8 @@ static	int		error_checker(t_roll *r, int checker)
 			}
 			rotate(NULL, &r->a, 0);
 		}
+	//	clean_b(r, r->nb_a, 0, 0);
+	}
 	return (total);
 }
 
@@ -61,7 +64,7 @@ static	int		left_check(t_roll *r, int min, int max)
 	if ((ALNBR > min && ALNBR < max)
 	|| (min > max && (ALNBR > min || ALNBR < max)))
 	{
-		ft_printf("1 min %d max %d\n", min , max);
+//		ft_printf("1 min %d max %d\n", min , max);
 		r_rotate(r, &r->a, 'a');
 		swap(r, &r->a, 'a');
 		return (1);
@@ -74,7 +77,7 @@ static	int		left_check(t_roll *r, int min, int max)
 		r_rotate(NULL, &r->a, 0);
 	if (max - min != 1 && b_push(r, min, max))
 	{
-		ft_printf("2 min %d max %d\n", min , max);
+//		ft_printf("2 min %d max %d\n", min , max);
 		return (1);
 	}
 	return (0);
@@ -82,18 +85,18 @@ static	int		left_check(t_roll *r, int min, int max)
 
 static	void	fixe_that(t_roll *r)
 {
-	ft_printf("in fixe\n");//
+//	ft_printf("in fixe\n");//
 	if (ALLBD & GOOD && right_check(r, ALLNBR, 0))
 	{
-		ft_printf("right end fixe\n");//
+//		ft_printf("right end fixe\n");//
 		return ;
 	}
 	if (ATBD & GOOD && left_check(r, 0, ATNBR))
 	{
-		ft_printf("left end fixe\n");//
+//		ft_printf("left end fixe\n");//
 		return ;
 	}
-	ft_printf("end fixe\n");//
+//	ft_printf("end fixe\n");//
 	push(r, &r->a, &r->b, 'b');
 }
 
@@ -108,14 +111,13 @@ void	second_step(t_roll *r, int i)
 	sort[1] = CHECK;
 	while (++i < 2)
 	{
-		i == 1 ? ft_printf("\n\n\n{bold}{cyan}test CHECK{eoc}\n") : 0;
-		i == 0 ? ft_printf("\n\n\n{bold}{magenta}test NO_CHECK\n{eoc}") : 0;
+		i == 1 ? ft_printf("\n\n\n{bold}{cyan}CHECK{eoc}\n") : 0;
+		i == 0 ? ft_printf("\n\n\n{bold}{magenta}NO_CHECK\n{eoc}") : 0;
 		ft_printf("{bold}r->pvt = %d\n\n{eoc}", r->pvt);
 		while (error_checker(r, sort[i]))
 		{
 			ALBD ^ sort[i] ? nearest_rotation(r, sort[i], r->nb_a, 0) : 0;
 			ALBD & sort[i] ? fixe_that(r) : 0;
-
 		}
 	}
 	ft_printf("{yellow}{bold}-------------------------------------------------\n");

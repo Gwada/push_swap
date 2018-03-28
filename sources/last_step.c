@@ -19,7 +19,7 @@ static	void	fixe_low(t_roll *r, int *fst, int *l_min, int *l_max)
 			if (value_insert(r, NULL, *l_min, *l_max))
 			{
 				*fst = i;
-				ft_printf("fst = %d l_min = %d l_max = %d\n", *fst, *l_min, *l_max);
+//				ft_printf("fst = %d l_min = %d l_max = %d\n", *fst, *l_min, *l_max);//
 			}
 		}
 		rotate(NULL, &r->a, 0);
@@ -28,7 +28,7 @@ static	void	fixe_low(t_roll *r, int *fst, int *l_min, int *l_max)
 
 static	void	fixe_top(t_roll *r, int *lst, int *t_min, int *t_max)
 {
-	ft_printf("{bold}{yellow}IN\tFIXE_TOP{eoc}\n");
+//	ft_printf("{bold}{yellow}IN\tFIXE_TOP{eoc}\n");//////////////////////////////
 	int			i;
 
 	i = r->nb_a + 1;
@@ -46,17 +46,17 @@ static	void	fixe_top(t_roll *r, int *lst, int *t_min, int *t_max)
 			if (value_insert(r, NULL, *t_min, *t_max))
 			{
 				*lst = i;
-				ft_printf("lst = %d t_min = %d t_max = %d\n", *lst, *t_min, *t_max);
+//				ft_printf("lst = %d t_min = %d t_max = %d\n", *lst, *t_min, *t_max);//
 			}
 		}
 		r_rotate(NULL, &r->a, 0);
 	}
-	ft_printf("{bold}{yellow}END\tFIXE_TOP{eoc}\n");
+//	ft_printf("{bold}{yellow}END\tFIXE_TOP{eoc}\n");/////////////////////////////
 }
 
 void			clean_b(t_roll *r, int fst, int lst, int value)
 {
-	ft_printf ("{green}{bold}{underline}IN CLEAN{eoc}\n");
+//	ft_printf ("{green}{bold}{underline}IN CLEAN{eoc}\n");///////////////////////
 	int			l_min;
 	int			l_max;
 	int			t_min;
@@ -68,16 +68,18 @@ void			clean_b(t_roll *r, int fst, int lst, int value)
 		fixe_top(r, &lst, &t_min, &t_max);
 		r->b_rot = r->nb_a - (r->nb_a - fst) <= r->nb_a - lst ? fst : lst;
 		value = r->b_rot;
-		ft_printf("r->b_rot = %d fst = %d lst = %d\n", r->b_rot, fst, lst);
+//		ft_printf("r->b_rot = %d fst = %d lst = %d\n", r->b_rot, fst, lst);//////
 		if (r->b_rot <= r->nb_a / 2)
 			while (r->b_rot-- > 0)
+			{
 				rotate(r, &r->a, 'a');
+			}
 		else
 			while (r->b_rot++ < r->nb_a)
 				r_rotate(r, &r->a, 'a');
 		value == fst ? b_push(r, l_min, l_max) : b_push(r, t_min, t_max);
 	}
-	ft_printf ("{green}{bold}{underline}END CLEAN{eoc}\n");
+//	ft_printf ("{green}{bold}{underline}END CLEAN{eoc}\n");//////////////////////
 }
 
 void			last_step(t_roll *r, int i)
