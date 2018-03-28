@@ -77,7 +77,10 @@ static	int	a_rot(t_roll *r, int *min, int *max, int *rot_a)
 				r_rotate(NULL, &r->a, 0);
 			if ((*min > *max && (value > *min || value < *max))
 			|| (value > *min && value < *max))
-				rot = i <= r->nb_a / 2 ? i - 1 : i;
+			{
+				ft_printf("min = %d max = %d\n", *min, *max);
+				rot = i;
+			}
 		}
 		rotate(NULL, &r->a, 0);
 	}
@@ -93,19 +96,27 @@ int			a_insert(t_roll *r, int rot_a, int value, int rot)
 	int		b_rot_a;
 
 	rot = a_rot(r, &min, &max, &rot_a);
+	ft_printf("1. rot = %d rot_a = %d\n", rot, rot_a);
+
 	n_dep_l = rot > (r->nb_a / 2) ? r->nb_a - rot : rot;
 	n_dep_t = rot_a > (r->nb_a / 2) ? r->nb_a - rot_a : rot_a;
 	b_rot_a = n_dep_t < n_dep_l ? n_dep_t : n_dep_l;
 
+	ft_printf("n_dep_t = %d\tn_dep_l = %d\n", n_dep_t, n_dep_l);
 	ft_printf("r->nb_a = %d\tb_rot_a = %d\n", r->nb_a, b_rot_a);
-	if (b_rot_a > 1 && b_rot_a * 2 + 2 <= b_rot(r, value) + 1)
+	ft_printf("%d rot total pour insertion dans b\n", b_rot(r, value));
+//	if (b_rot_a > 1 && b_rot_a * 2 + 2 <= b_rot(r, value) + 1)
+	if (b_rot_a > 1 && b_rot_a <= b_rot(r, value))
 	{
 		ft_printf("{red}{bold}......................................................{eoc}\n");
 		ft_printf("{red}{bold}\t\tINSERTION DANS A{eoc}\n");
 		ft_printf("{red}{bold}......................................................{eoc}\n");
-		r->b_rot = n_dep_t <= n_dep_l ? rot : rot_a;
+
+		r->b_rot = n_dep_l <= n_dep_t ? rot : rot_a;
+
 		ft_printf("n_dep_t = %d\tn_dep_l = %d\n", n_dep_t, n_dep_l);
 		ft_printf("r->b_rot = %d\nrot_a = %d\nrot = %d\n", r->b_rot, rot_a, rot);
+
 		simple_push(r, &r->a, &r->b, 'b');
 		if (r->b_rot <= r->nb_a / 2)
 			while (ATNBR != min)

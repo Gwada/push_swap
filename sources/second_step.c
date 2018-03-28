@@ -13,7 +13,6 @@ static	int		error_checker(t_roll *r, int checker)
 		rotate(NULL, &r->a, 0);
 	}
 	if (!total && r->nb_b > 0 && checker & NO_CHECK)
-	{
 		while (i-- > 0)
 		{
 			if (ATBD & GOOD && ATNBR >= r->pvt)
@@ -33,7 +32,6 @@ static	int		error_checker(t_roll *r, int checker)
 			}
 			rotate(NULL, &r->a, 0);
 		}
-	}
 	return (total);
 }
 
