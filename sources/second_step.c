@@ -111,11 +111,11 @@ void	second_step(t_roll *r, int i)
 		i == 1 ? ft_printf("\n\n\n{bold}{cyan}test CHECK{eoc}\n") : 0;
 		i == 0 ? ft_printf("\n\n\n{bold}{magenta}test NO_CHECK\n{eoc}") : 0;
 		ft_printf("{bold}r->pvt = %d\n\n{eoc}", r->pvt);
-		while (error_checker(r, sort[i]) && !(r->b_rot = 0))
+		while (error_checker(r, sort[i]))
 		{
 			ALBD ^ sort[i] ? nearest_rotation(r, sort[i], r->nb_a, 0) : 0;
 			ALBD & sort[i] ? fixe_that(r) : 0;
-		//	r->nb_b > (r->size * 40) / 100 ? clean_b(r, r->nb_a, 0, 0) : 0;
+
 		}
 	}
 	ft_printf("{yellow}{bold}-------------------------------------------------\n");

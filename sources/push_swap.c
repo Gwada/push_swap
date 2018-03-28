@@ -21,6 +21,8 @@ void		push_swap(t_roll *r, char **p, int size)
 		return ;
 	find_best_rot(r, t, 0, -1);
 	first_step(r, t, -1, 0);
+	int		i = -1, test;
+	while (++i < 4)
 	fixe_push(r, -1, 0, 0);
 	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 	second_step(r, -1);
@@ -28,7 +30,7 @@ void		push_swap(t_roll *r, char **p, int size)
 //	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 
 
-	int i = -1, test = 0;
+	i = -1, test = 0;
 	while (++i < r->size)
 	{
 //		ft_printf("{bold}{green}t[%3d].n = %11ld\t{eoc}", i, t[i].n);

@@ -105,7 +105,6 @@ int			a_insert(t_roll *r, int rot_a, int value, int rot)
 	ft_printf("n_dep_t = %d\tn_dep_l = %d\n", n_dep_t, n_dep_l);
 	ft_printf("r->nb_a = %d\tb_rot_a = %d\n", r->nb_a, b_rot_a);
 	ft_printf("%d rot total pour insertion dans b\n", b_rot(r, value));
-//	if (b_rot_a > 1 && b_rot_a * 2 + 2 <= b_rot(r, value) + 1)
 	if (b_rot_a > 1 && b_rot_a <= b_rot(r, value))
 	{
 		ft_printf("{red}{bold}......................................................{eoc}\n");

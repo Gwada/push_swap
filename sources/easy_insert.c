@@ -1,38 +1,48 @@
 #include "push_swap.h"
 
-void			i_b_right_insert(t_roll *r, int *rot, int min, int max)
+void		i_b_right_insert(t_roll *r, int *rot, int min, int max)
 {
-	int			i;
-	int			value;
+	int		i;
+	int		value;
 
 	i = -1;
 	value = min;
 	while (++i < r->nb_b)
 	{
-		if (BLNBR > min && BLNBR < max && BLNBR > value
-		&& ((value = BLNBR) || !(value = BLNBR)))
+		if (BLNBR > min && BLNBR < max && BLNBR > value)
+		{
+			value = BLNBR;
 			*rot = i;
+		}
 		rotate(NULL, &r->b, 0);
 	}
+
 }
 
-void			i_b_left_insert(t_roll *r, int *rot, int min, int max)
+void		i_b_left_insert(t_roll *r, int *rot, int min, int max)
 {
-	int			i;
-	int			value;
+	ft_printf("{bold}{red}IN\tI_B_LEFT_INSERT\n{eoc}");
+	ft_printf("min = %d max = %d\n", min, max);
+	int		i;
+	int		value;
 
-	i = r->nb_b;
-	value = BLNBR;
-	while (--i >= 0)
+	i = -1;
+	value = max;
+	while (++i < r->nb_b)
 	{
-		r_rotate(NULL, &r->b, 0);
-		if (BLNBR > min && BLNBR < max && BLNBR < value
-		&& ((value = BLNBR) || !(value = BLNBR)))
+
+		if (BLNBR > min && BLNBR < max && BLNBR < value)
+		{
+			value = BLNBR;
 			*rot = i;
+		}
+		rotate(NULL, &r->b, 0);
 	}
+	ft_printf("value = %d rot = %d\n", value , *rot);
+	ft_printf("{bold}{red}END\tI_B_LEFT_INSERT\n{eoc}");
 }
 
-static	void	left_insert(t_roll *r, int rot, int min, int max)
+void		left_insert(t_roll *r, int rot, int min, int max)
 {
 	ft_printf("{bold}{red}IN\tEASY_INSERT LEFT\n{eoc}");
 	!rot ? i_b_left_insert(r, &rot, min, max) : 0;
@@ -53,7 +63,7 @@ static	void	left_insert(t_roll *r, int rot, int min, int max)
 	ft_printf("{bold}{red}END\tEASY_INSERT LEFT\n{eoc}");
 }
 
-static	void	right_insert(t_roll *r, int rot, int min, int max)
+void		right_insert(t_roll *r, int rot, int min, int max)
 {
 	ft_printf("{bold}{red}IN\tEASY_INSERT RIGHT\n{eoc}");
 	i_b_right_insert(r, &rot, min, max);
@@ -73,35 +83,68 @@ static	void	right_insert(t_roll *r, int rot, int min, int max)
 	ft_printf("{bold}{red}END\tEASY_INSERT RIGHT\n{eoc}");
 }
 
-void	easy_insert(t_roll *r, int rot, int min, int max)
+int			easy_insert(t_roll *r, int value, int ret, int i)
 {
 	ft_printf("{bold}{red}IN\tEASY_INSERT\n{eoc}");
+	ft_printf("ALNBR %d\n", ALNBR);
 	ft_printf("r->nb_a = %d r->b_rot = %d\n", r->nb_a, r->b_rot);
-	int		i;
 	int		left;
 	int		right;
-	int		value;
+	int		min_t;
+	int		max_t;
+	int		min_l;
+	int		max_l;
 
-	i = -1;
 	left = 0;
 	right = 0;
-	value = ALNBR;
 	while (ATBD & GOOD && ++left && ++i < r->nb_a)
+	{
 		r_rotate(NULL, &r->a, 0);
+		max_t = ALNBR;
+		while (ATBD ^ GOOD)
+			r_rotate(NULL, &r->a, 0);
+		min_t = ATNBR;
+		if (value_insert(r, NULL, min_t, max_t) && ++left)
+		{
+			while (ALNBR != value)
+				rotate(NULL, &r->a, 0);
+			break ;
+		}
+		while (ALNBR != max_t)
+			rotate(NULL, &r->a, 0);
+	}
 	while (ALNBR != value)
 		rotate(NULL, &r->a, 0);
 	i = -1;
 	while (ALBD & GOOD && ++right && ++i < r->nb_a)
+	{
 		rotate(NULL, &r->a, 0);
+		min_l = ATNBR;
+		while (ALBD ^ GOOD)
+			rotate(NULL, &r->a, 0);
+		max_l = ALNBR;
+		if (value_insert(r, NULL, min_l, max_l) && ++right)
+		{
+			while (ALNBR != value)
+				r_rotate(NULL, &r->a, 0);
+			break ;
+		}
+		while (ATNBR != min_l)
+			r_rotate(NULL, &r->a, 0);
+	}
 	while (ALNBR != value)
 		r_rotate(NULL, &r->a, 0);
+	ft_printf("min_t = %d max_t = %d\n", min_t, max_t);
+	ft_printf("min_l = %d max_l = %d\n", min_l, max_l);
 	ft_printf("left = %d right = %d\n", left, right);
-	if (left <= right || (left == r->nb_a && right == r->nb_a - 1))
+	if (left == right && (i = -1))
 	{
-		if (left == r->nb_a && right == r->nb_a - 1 && ALNBR <= r->pvt)
-			return (left_insert(r, rot, min, max));
-		right_insert(r, rot, min, max);
+		while (++i < r->best_dif_dep)
+			rotate(NULL, &r->a, 0);
+		ALBD ^ NO_CHECK ? ret = 1 : 0;
+		while (ALNBR != value)
+			r_rotate(NULL, &r->a, 0);
 	}
-	else
-		left_insert(r, rot, min, max);
+	left < right ? ret = 1 : 0;
+	return (ret);
 }

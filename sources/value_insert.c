@@ -31,7 +31,13 @@ int			b_push(t_roll *r, int min, int max)
 	rot = 0;
 	test = value_insert(r, &rot, min, max);
 //	display_piles(r, &r->a, &r->b);
-	test && min < max ? easy_insert(r, rot, min, max) : 0;
+	if (test && min < max)
+	{
+		if (easy_insert(r, ALNBR, 2, -1) == 1)
+			right_insert(r, rot, min, max);
+		else
+			left_insert(r, rot, min, max);
+	}
 	test && min > max ? hard_insert(r, -1, max, min) : 0;
 //	display_piles(r, &r->a, &r->b);
 //	!test ? ft_printf("{red}{bold}NO\n{eoc}") : ft_printf("{red}{bold}YES\n{eoc}");
