@@ -22,21 +22,13 @@ void		push_swap(t_roll *r, char **p, int size)
 	find_best_rot(r, t, 0, -1);
 	first_step(r, t, -1, 0);
 	int		i = -1, test;
-	fixe_push(r, -1, 0, 0);
 	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
+	fixe_push(r, -1, 0, 0);
+//	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 	second_step(r, -1);
 	last_step(r, -1);
-/*	while (++i < r->nb_a)
-	{
-		if (ALBD ^ GOOD)
-		//	ALBD = ALNBR <= r->pvt ? CHECK : NO_CHECK;
-			ALNBR <= r->pvt ? ALBD = CHECK : 0;
-		rotate(NULL, &r->a, 0);
-	}
-	second_step(r, -1);
-	last_step(r, -1);*/
 
-//	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
+	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 
 
 	i = -1, test = 0;

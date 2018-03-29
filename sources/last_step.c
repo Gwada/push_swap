@@ -56,7 +56,7 @@ static	void	fixe_top(t_roll *r, int *lst, int *t_min, int *t_max)
 
 void			clean_b(t_roll *r, int fst, int lst, int value)
 {
-//	ft_printf ("{green}{bold}{underline}IN CLEAN{eoc}\n");///////////////////////
+	ft_printf ("{green}{bold}{underline}IN CLEAN{eoc}\n");///////////////////////
 	int			l_min;
 	int			l_max;
 	int			t_min;
@@ -79,7 +79,7 @@ void			clean_b(t_roll *r, int fst, int lst, int value)
 				r_rotate(r, &r->a, 'a');
 		value == fst ? b_push(r, l_min, l_max) : b_push(r, t_min, t_max);
 	}
-//	ft_printf ("{green}{bold}{underline}END CLEAN{eoc}\n");//////////////////////
+	ft_printf ("{green}{bold}{underline}END CLEAN{eoc}\n");//////////////////////
 }
 
 void			last_step(t_roll *r, int i)
