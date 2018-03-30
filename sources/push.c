@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:32:24 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/27 21:22:22 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/29 23:49:51 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static	void	find_best_insert(t_roll *r, int rot, int i)
 	{
 		while (++i < r->nb_b)
 		{
-			if (((ALNBR < min || ALNBR > max) && BLNBR == min)
-			|| (ALNBR > BTNBR && ALNBR < BLNBR))
+			if (((ALNBR < min || ALNBR > max) && BLNBR == max)
+			|| (ALNBR < BTNBR && ALNBR > BLNBR))
 				rot = i;
 			rotate(NULL, &r->b, 0);
 		}

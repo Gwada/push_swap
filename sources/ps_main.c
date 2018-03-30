@@ -6,7 +6,7 @@
 /*   By: dlavaury <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 17:17:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/27 11:19:57 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/30 18:56:38 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static	int		display_error(t_roll *r)
 {
 	r->bd |= ERR;
 	ft_dprintf(2, "Error\n");
-	//ft_printf("r->size = %d\n", r->size);//
 	return (0);
 }
 
@@ -38,10 +37,8 @@ int				main(int argc, char **argv)
 			}
 			r.bd & ERR && !**argv ? ++argv : 0;
 		}
-		//retirer les optons d'affichage
 		!(r.bd & ERR) && r.size ? push_swap(&r, argv, r.size) : 0;
 	}
-	//argc == 1 ? ft_printf("no argument end\n") : 0;//
 	r.bd & ERR ? display_error(&r) : 0;//
 	return (0);
 }

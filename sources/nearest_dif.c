@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   nearest_dif.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/29 21:43:57 by dlavaury          #+#    #+#             */
+/*   Updated: 2018/03/30 15:43:19 by dlavaury         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static	void	next_dif(t_roll *r, int checker, int fst, int lst)
@@ -23,9 +35,31 @@ static	void	next_dif(t_roll *r, int checker, int fst, int lst)
 	r->b_rot = (r->nb_a - (r->nb_a - fst) <= r->nb_a - lst) ? fst : lst;
 }
 
-static	void	next_insert(t_roll *r, int i, int fst, int lst)
+/*static	int		next_insert(t_roll *r, int i, int fst, int lst)
 {
-//	ft_printf("{bold}{yellow}{underline}IN\tNEXT_INSERT{eoc}\n");////////////////
+	int			ret;
+
+	i = ALNBR;
+	ret = 0;
+	while (ATBD ^ GOOD)
+		r_rotate(NULL, &r->a, 0);
+	lst = ATNBR;
+	while (ALBD ^ GOOD)
+		rotate(NULL, &r->a, 0);
+	fst = ALNBR;
+	while (ALNBR != i)
+		r_rotate(NULL, &r->a, 0);
+	while ((BLNBR > lst && BLNBR < fst) || (lst > fst && (BLNBR > lst || BLNBR < fst)))
+	{
+		simple_push(r, &r->b, &r->a, 'a');
+		!ret ? ret = 1 : 0;
+		if (!r->nb_b)
+			break ;
+	}
+	return (ret);
+}*/
+
+/*//	ft_printf("{bold}{yellow}{underline}IN\tNEXT_INSERT{eoc}\n");////////////////
 	int			n_dep_fst;
 	int			n_dep_lst;
 	int			b_dep;
@@ -66,13 +100,14 @@ static	void	next_insert(t_roll *r, int i, int fst, int lst)
 		}
 	}
 //	ft_printf("{bold}{yellow}{underline}END\tNEXT_INSERT{eoc}\n");///////////////
-}
+}*/
 
 void			nearest_rotation(t_roll *r, int checker, int fst, int lst)
 {
 //	ft_printf("{yellow}{bold}IN\tNEAREST_ROTATION\n{eoc}");//////////////////////
 	next_dif(r, checker, r->nb_a, 0);
-	r->nb_b > 0 ? next_insert(r, -1, -1, lst) : 0;
+//	if (r->nb_b > 0 && next_insert(r, -1, -1, lst))
+//		return ;
 	ALBD |= r->b_rot < r->nb_a / 2 ? ROT : R_ROT;
 	if (ALBD & ROT)
 	{

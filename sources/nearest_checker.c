@@ -32,11 +32,11 @@ static	int		second_check(t_roll *r, int *fst, int *lst)
 		swap(r, &r->a, 'a');
 		return (1);
 	}
-	if (*fst - *lst != 1 && value_insert(r, NULL, *fst, *lst) && (r->b_rot = 1))
-	{
-		rotate(r, &r->a, 'a');
-		return (b_push(r, *fst, *lst));
-	}
+//	if (*fst - *lst != 1 && value_insert(r, NULL, *fst, *lst) && (r->b_rot = 1))
+//	{
+//		rotate(r, &r->a, 'a');
+//		return (b_push(r, *fst, *lst));
+//	}
 	*lst = ALNBR;
 	while (ATBD ^ GOOD)
 		r_rotate(NULL, &r->a, 0);
@@ -87,7 +87,7 @@ static	int		fourth_chech(t_roll *r, int *fst, int *lst)
 		swap(r, &r->a, 'a');
 		return (1);
 	}
-	if (ALLBD ^ GOOD)
+/*	if (ALLBD ^ GOOD)
 	{
 		*fst = ATNBR;
 		while (ALLBD ^ GOOD)
@@ -97,7 +97,7 @@ static	int		fourth_chech(t_roll *r, int *fst, int *lst)
 			r_rotate(NULL, &r->a, 0);
 		if (*fst - *lst != 1 && b_push(r, *fst, *lst))
 			return(1);
-	}
+	}*/
 	return (0);
 }
 
@@ -111,8 +111,8 @@ int				nearest_checker(t_roll *r, int fst, int lst)
 			return (1);
 		if (ATBD ^ GOOD && second_check(r, &fst, &lst))
 			return (1);
-		if (fst - lst != 1 && b_push(r, fst, lst))
-			return (1);
+//		if (fst - lst != 1 && b_push(r, fst, lst))
+//			return (1);
 //		ft_printf("{bold}{red}.1{eoc}\n");///////////////////////////////////////
 	}
 	else if (ALLBD & GOOD)
@@ -120,13 +120,13 @@ int				nearest_checker(t_roll *r, int fst, int lst)
 //		ft_printf("{bold}{red}2.{eoc}\n");///////////////////////////////////////
 		if (third_check(r, &fst, &lst))
 			return (1);
-		if (ATBD ^ GOOD && fst - lst != 1 && value_insert(r, NULL, fst, lst))
+/*		if (ATBD ^ GOOD && fst - lst != 1 && value_insert(r, NULL, fst, lst))
 		{
 			r->b_rot = 1;
 			rotate(r, &r->a, 'a');
 			b_push(r, fst, lst);
 			return (1);
-		}
+		}*/
 //		ft_printf("{bold}{red}.2{eoc}\n");///////////////////////////////////////
 	}
 	else if (ATBD & GOOD && fourth_chech(r, &fst, &lst))

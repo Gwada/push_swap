@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/01/27 21:15:29 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/03/30 20:20:06 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,12 @@ SOURCES			= display.c \
 					quicksort.c \
 					swap.c \
 					rotate.c \
-					push.c
+					push.c \
+					calibrate_rot.c
 
 SOURCES_C		= $(SOURCES) \
 					c_main.c
+
 SOURCES_PS		= $(SOURCES) \
 					ps_main.c \
 					crack_that_shit.c \
@@ -41,7 +43,7 @@ SOURCES_PS		= $(SOURCES) \
 					nearest_dif.c \
 					nearest_checker.c \
 					last_step.c \
-					calibrate_rot.c
+					sort.c
 
 OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))
 OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))
@@ -158,5 +160,33 @@ gops5:
 	@make $(PUSH_SWAP)
 #	@time ./push_swap $(NUM3)
 	./push_swap $(NUM5)
+
+gof1:
+	@clear
+	@make clean_PS
+	@make clean_C
+	@make
+	@./push_swap $(NUM2) | ./checker $(NUM2)
+
+gof2:
+	@clear
+	@make clean_PS
+	@make clean_C
+	@make
+	@./push_swap $(NUM3) | ./checker $(NUM3)
+
+gof3:
+	@clear
+	@make clean_PS
+	@make clean_C
+	@make
+	@./push_swap $(NUM4) | ./checker $(NUM4)
+
+gof4:
+	@clear
+	@make clean_PS
+	@make clean_C
+	@make
+	@./push_swap $(NUM5) | ./checker $(NUM5)
 
 .PHONY: all re fclean clean

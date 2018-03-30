@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/27 21:22:25 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/30 20:20:03 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,9 @@ void				find_best_rot(t_roll *r, t_tab *t, int b_rot, int i);
 
 void				first_step(t_roll *r, t_tab *t, int i, int start);
 void				check_limits(t_roll *r, int i, int min, int max);
-void				fixe_push(t_roll *r, int i, int min, int max);
-void				second_step(t_roll *r, int i);
+void				fixe_push(t_roll *r, t_tab *t, int i);
+//void				fixe_push(t_roll *r, int i, int min, int max);
+void				second_step(t_roll *r, t_tab *t, int i);
 void				nearest_rotation(t_roll *r, int checker, int fst, int lst);
 int					nearest_checker(t_roll *r, int fst, int lst);
 int					value_insert(t_roll *r, int *rot, int min, int max);
@@ -151,6 +152,7 @@ void				clean_b(t_roll *r, int fst, int lst, int value);
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				swap(t_roll *r, t_pile *p, char pile);
+void				s_swap(t_roll *r);
 int					a_insert(t_roll *r, int rot_a, int value, int rot);
 void				rotate(t_roll *r, t_pile *p, char pile);
 void				r_rotate(t_roll *r, t_pile *p, char pile);

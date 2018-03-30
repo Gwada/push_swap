@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:16:09 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/25 18:32:03 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/30 19:38:32 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ void		swap(t_roll *r, t_pile *p, char pile)
 		ft_printf("{magenta}{bold}s%c{eoc}\n", pile);
 	else
 		ft_printf("s%c\n", pile);
+	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	r->b_rot = 0;
+}
+
+void		s_swap(t_roll *r)
+{
+	swap(NULL, &r->a, 0);
+	swap(NULL, &r->b, 0);
+	++r->dep;
+	if (r->bd & COLOR)
+		ft_printf("{magenta}{bold}ss{eoc}\n");
+	else
+		ft_printf("ss\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	r->b_rot = 0;
 }
@@ -69,8 +82,8 @@ static	int	a_rot(t_roll *r, int *min, int *max, int *rot_a)
 		if (ATBD & GOOD && rot == -1)
 		{
 			*min = ATNBR;
-			*rot_a = r->nb_a - i;
-			while (ALBD ^ GOOD && --*rot_a != r->nb_a + 1)
+			*rot_a = i;
+			while (ALBD ^ GOOD && ++*rot_a != r->nb_a + 1)
 				rotate(NULL, &r->a, 0);
 			*max = ALNBR;
 			while (ATBD ^ GOOD)
@@ -96,8 +109,13 @@ int			a_insert(t_roll *r, int rot_a, int value, int rot)
 	n_dep_l = rot > (r->nb_a / 2) ? r->nb_a - rot : rot;
 	n_dep_t = rot_a > (r->nb_a / 2) ? r->nb_a - rot_a : rot_a;
 	b_rot_a = n_dep_t < n_dep_l ? n_dep_t : n_dep_l;
-	if (b_rot_a > 1 && b_rot_a < b_rot(r, value))
+	if (b_rot_a > 1 && b_rot_a <= b_rot(r, value))
 	{
+		ft_printf("{red}{bold}--------------------------------------------------\n");
+		ft_printf("\t\t*** INSERTION DANS A ***\n", n_dep_l, n_dep_t);
+		ft_printf("n_dep_l = %d n_dep_t = %d\n", n_dep_l, n_dep_t);
+		ft_printf("rot = %d rot_a = %d\n", rot, rot_a);
+		ft_printf("------------------------------------------------{eoc}\n", n_dep_l, n_dep_t);
 		r->b_rot = n_dep_l <= n_dep_t ? rot : rot_a;
 		simple_push(r, &r->a, &r->b, 'b');
 		if (r->b_rot <= r->nb_a / 2)

@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 09:44:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/01/27 21:18:21 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/29 21:16:35 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		find_best_rot(t_roll *r, t_tab *t, int b_rot, int i)
 	r->b_rot = b_rot;
 }
 
-static	void	fixe_push_v2(t_roll *r, int i, int min, int max)
+/*static	void	fixe_push_v2(t_roll *r, int i, int min, int max)
 {
 	int			j;
 	int			left;
@@ -115,9 +115,10 @@ static	void	fixe_push_v2(t_roll *r, int i, int min, int max)
 		rotate(NULL, &r->a, 0);
 	}
 }
-
-void			fixe_push(t_roll *r, int i, int min, int max)
+*/
+/*void			fixe_push(t_roll *r, int i, int min, int max)
 {
+	if (r->size <= 50)
 	if (r->size > 150)
 		return (fixe_push_v2(r, -1, 0, 0));
 	while (++i < r->size)
@@ -129,4 +130,4 @@ void			fixe_push(t_roll *r, int i, int min, int max)
 	(void)min;
 	(void)i;
 	(void)max;
-}
+}*/

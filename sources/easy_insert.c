@@ -33,6 +33,8 @@ void		i_b_left_insert(t_roll *r, int *rot, int min, int max)
 
 		if (BLNBR > min && BLNBR < max && BLNBR < value)
 		{
+//			BLNBR == 19 || BLNBR == 32 ? ft_printf("{bold}{red}!!!!!!!!") : 0;
+//			BLNBR == 19 || BLNBR == 32 ? display_piles(r, &r->a, &r->b) : 0;
 			value = BLNBR;
 			*rot = i;
 		}
@@ -54,6 +56,8 @@ void		left_insert(t_roll *r, int rot, int min, int max)
 			r_rotate(r, &r->b, 'b');
 	while (r->nb_b > 0 && BLNBR > ATNBR && BLNBR < max)
 	{
+//		BLNBR == 19 || BLNBR == 32 ? ft_printf("{bold}{red}!!!!!!!!") : 0;
+//		BLNBR == 19 || BLNBR == 32 ? display_piles(r, &r->a, &r->b) : 0;
 		simple_push(r, &r->b, &r->a, 'a');
 		ALBD = GOOD;
 		BLBD = CHECK;
@@ -77,8 +81,8 @@ void		right_insert(t_roll *r, int rot, int min, int max)
 	{
 		simple_push(r, &r->b, &r->a, 'a');
 		ALBD = GOOD;
-		if (r->nb_b > 0 && BTNBR > min && BTNBR < ALNBR)
-			r_rotate(r, &r->b, 'b');
+//		if (r->nb_b > 0 && BTNBR > min && BTNBR < ALNBR)
+//			r_rotate(r, &r->b, 'b');
 	}
 //	ft_printf("{bold}{red}END\tEASY_INSERT RIGHT\n{eoc}");///////////////////////
 }

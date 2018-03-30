@@ -4,8 +4,6 @@ static	int		calibrate(t_roll *r, int rot_a, int rot_b)
 {
 	if (!rot_b)
 		return (0);
-	if (rot_a > r->nb_b)
-		return (1);
 	if (rot_a <= r->nb_a / 2)
 	{
 		if (rot_b <= r->nb_b / 2)
@@ -13,7 +11,7 @@ static	int		calibrate(t_roll *r, int rot_a, int rot_b)
 		else if (rot_b > r->nb_b / 2 && rot_a + (r->nb_b - rot_b) >= rot_b)
 			return (1);
 	}
-	else
+	else if (rot_a > r->nb_b / 2)
 	{
 		if (rot_b > r->nb_b / 2)
 			return (1);
@@ -29,10 +27,11 @@ static	int		p_calibrate(t_roll *r, int rot, int i)
 	int			rot_b;
 
 	rot_b = 0;
+//	ft_printf("ALNBR = %d rot = %d\n", ALNBR, rot);
 	while (++i < r->nb_b)
 	{
-		if ((ALNBR > BTNBR && ALNBR < BLNBR)
-		|| (BTNBR > BLNBR && (ALNBR > BTNBR || ALNBR < BLNBR)))
+		if ((ALNBR < BTNBR && ALNBR > BLNBR)
+		|| (BTNBR < BLNBR && (ALNBR < BTNBR || ALNBR > BLNBR)))
 			rot_b = i;
 		rotate(NULL, &r->b, 0);
 	}
@@ -40,7 +39,7 @@ static	int		p_calibrate(t_roll *r, int rot, int i)
 	return (calibrate(r, rot, rot_b));
 }
 
-static	int		i_calibrate(t_roll *r, int rot_a, int min, int max)
+/*static	int		i_calibrate(t_roll *r, int rot_a, int min, int max)
 {
 //	ft_printf("{bold}{magenta}{underline}IN\tINSERT_CALIBRATE{eoc}\n");//////////
 //	ft_printf("{bold}{magenta}{underline}ALNBR = %d{eoc}\n", ALNBR);/////////////
@@ -79,23 +78,24 @@ static	int		i_calibrate(t_roll *r, int rot_a, int min, int max)
 //	ft_printf("rot_b = %d\n", rot_b);////////////////////////////////////////////
 //	ft_printf("{bold}{magenta}{underline}END\tINSERT_CALIBRATE{eoc}\n");/////////
 	return (calibrate(r, rot_a, rot_b));
-}
+}*/
 
 int			calibrate_rot(t_roll *r, int rot, int i)
 {
 //	ft_printf("{bold}{underline}\nIN\tCALIBRATE_ROT{eoc}\n");////////////////////
 //	ft_printf("r->nb_a = %d r->b_rot = %d rot = %d\n", r->nb_a, r->b_rot, rot);//
 	int		ret;
-	int		min;
-	int		max;
+//	int		min;
+//	int		max;
 
 	ret = 0;
 	while (++i < r->nb_a)
 	{
-		if ((i <= r->nb_a / 2 && i == rot) || (i > r->nb_a / 2 && i + 1 == rot))
+		//if ((i <= r->nb_a / 2 && i == rot) || (i > r->nb_a / 2 && i - 1 == rot))
+		if (i == rot)
 		{
 //			ft_printf("ALNBR = %d\n", ALNBR);////////////////////////////////////
-			if (ATBD & GOOD)
+			/*if (ATBD & GOOD)
 			{
 //				ft_printf("ATBD & GOOD\n");//////////////////////////////////////
 				min = ATNBR;
@@ -104,12 +104,12 @@ int			calibrate_rot(t_roll *r, int rot, int i)
 				max = ALNBR;
 				while (ATBD ^ GOOD)
 					r_rotate(NULL, &r->a, 0);
-				if (value_insert(r, NULL, min, max))
-				{
+//				if (value_insert(r, NULL, min, max))
+//				{
 //					ft_printf("min = %d max = %d\n", ATNBR, max);////////////////
 //					ft_printf("ATBD & GOOD + insertion\n");//////////////////////
-					ret = 1;
-				}
+//					ret = 1;
+//				}
 			}
 			if (!ret && ALBD & GOOD)
 			{
@@ -120,13 +120,14 @@ int			calibrate_rot(t_roll *r, int rot, int i)
 				min = ATNBR;
 				while (ALBD ^ GOOD)
 					rotate(NULL, &r->a, 0);
-				if (value_insert(r, NULL, min, max))
-				{
+//				if (value_insert(r, NULL, min, max))
+//				{
 //					ft_printf("ALBD & GOOD && ATBD ^ GOOD + insertion\n");///////
-					ret = 1;
-				}
+//					ret = 1;
+//				}
 			}
-			ret = !ret ? p_calibrate(r, rot, -1) : i_calibrate(r, rot, min, max);
+//			ret = !ret ? p_calibrate(r, rot, -1) : i_calibrate(r, rot, min, max);*/
+			ret = p_calibrate(r, rot, -1);
 		}
 		rotate(NULL, &r->a, 0);
 	}
