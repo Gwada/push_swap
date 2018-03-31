@@ -36,7 +36,7 @@ static	void	finition_sort(t_roll *r, int *t, int size, int nb_cor)
 				t[j - 1] = t[j];
 			--nb_cor;
 		}
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	}
 }
 
@@ -50,7 +50,7 @@ static	void	section_sort(t_roll *r, int size, int min, int max)
 	nb_check = 0;
 	while (++i < size)
 	{
-		r_rotate(NULL, &r->a, 0);
+		r_rotate(NULL, &r->a, 0, 0);
 		if (ALNBR >= min && ALNBR <= max && ALBD ^ GOOD)
 		{
 			ALBD = NO_CHECK;
@@ -69,7 +69,7 @@ static	void	section_sort_v2(t_roll *r, int size, int i, int j)
 	while (++i < r->nb_a)
 	{
 		ALBD & GOOD ? verif[j++] = r->a.LNBR : 0;
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	}
 	j = 0;
 	min = *verif;
@@ -79,7 +79,7 @@ static	void	section_sort_v2(t_roll *r, int size, int i, int j)
 		if ((ALBD & CHECK || ALBD & NO_CHECK) && ALNBR < verif[j]
 		&& ALNBR > min && (min = ALNBR))
 			ALBD = GOOD;
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	}
 }
 
@@ -96,7 +96,7 @@ void			first_step(t_roll *r, t_tab *t, int i, int start)
 		if (((int)t[i].n == ALNBR) || (cor && i == r->nb_a - 1))
 			section_sort(r, i - start, (int)t[start].n, (int)t[i].n);
 		(int)t[i].n == ALNBR ? start = i : 0;
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	}
 	if (cor)
 	{
@@ -104,7 +104,7 @@ void			first_step(t_roll *r, t_tab *t, int i, int start)
 		while (--i >= 0)
 		{
 			(ALBD & GOOD || ALBD & CHECK) ? ++start : 0;
-			rotate(NULL, &r->a, 0);
+			rotate(NULL, &r->a, 0, 0);
 		}
 		section_sort_v2(r, start, -1, 0);
 	}

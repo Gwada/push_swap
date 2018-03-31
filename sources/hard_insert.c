@@ -10,7 +10,7 @@ void			i_b_max_finder(t_roll *r, int *rot, int i)
 		BLNBR == r->b_max ? *rot = i : 0;
 //		BLNBR > ATNBR && BLNBR < value ? *rot = i : 0;
 //		BLNBR < ATNBR && BLNBR < value ? value = BLNBR : 0;
-		rotate(NULL, &r->b, 0);
+		rotate(NULL, &r->b, 0, 0);
 	}
 
 /*	int			left;
@@ -59,7 +59,7 @@ void			i_b_min_finder(t_roll *r, int *rot, int i)
 	{
 		BLNBR < ALNBR && BLNBR > value ? *rot = i : 0;
 		BLNBR < ALNBR && BLNBR > value ? value = BLNBR : 0;
-		rotate(NULL, &r->b, 0);
+		rotate(NULL, &r->b, 0, 0);
 	}
 //	ft_printf("rot = %d number = %d\n", *rot, value);
 }
@@ -70,10 +70,10 @@ static	void	max_insert(t_roll *r, int rot, int i, int max)
 	i_b_max_finder(r, &rot, i);
 	if (rot <= r->nb_b / 2)
 		while (rot-- > 0)
-			rotate(r, &r->b, 'b');
+			rotate(r, &r->b, 'b', GOOD);
 	else
 		while (rot++ < r->nb_b)
-			r_rotate(r, &r->b, 'b');
+			r_rotate(r, &r->b, 'b', GOOD);
 	while (r->nb_b > 0 && BLNBR > ATNBR && BLNBR > max)
 	{
 		simple_push(r, &r->b, &r->a, 'a');
@@ -88,10 +88,10 @@ static	void	min_insert(t_roll *r, int rot, int i, int min)
 	i_b_min_finder(r, &rot, i);
 	if (rot <= r->nb_b / 2)
 		while (rot-- > 0)
-			rotate(r, &r->b, 'b');
+			rotate(r, &r->b, 'b', GOOD);
 	else
 		while (rot++ < r->nb_b)
-			r_rotate(r, &r->b, 'b');
+			r_rotate(r, &r->b, 'b', GOOD);
 	while (r->nb_b > 0 && BLNBR < ALNBR)
 	{
 //		ft_printf("{bold}{red}in min insert\n{eoc}");////////////////////////////////
@@ -121,10 +121,9 @@ void	hard_insert(t_roll *r, int rot, int min, int max)
 		if (r->b_max > max)
 		{
 			max_insert(r, rot, -1, max);
-			rotate(r, &r->a, 'a');
+			rotate(r, &r->a, 'a', GOOD);
 		}
 		r->b_min < min ? min_insert(r, rot, -1, min) : 0;
 	}
 //		display_piles(r, &r->a, &r->b);
 }
-

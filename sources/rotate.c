@@ -6,17 +6,17 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 09:41:02 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/30 01:25:46 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/31 16:23:42 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		rotate(t_roll *r, t_pile *p, char pile)
+void		rotate(t_roll *r, t_pile *p, char pile, int state)
 {
 	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
 		return ;
-	if (r && r->nb_b > 1 && pile == 'a' && BLBD & GOOD)
+	if (r && r->nb_b > 1 && pile == 'a' && BLBD & GOOD && state & GOOD)
 		if (calibrate_rot(r, r->b_rot < 1 ? 1 : r->b_rot, -1))
 			return (d_rotate(r, ROT));
 	p->low->bd &= ~ROT;
@@ -36,11 +36,11 @@ void		rotate(t_roll *r, t_pile *p, char pile)
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
 
-void		r_rotate(t_roll *r, t_pile *p, char pile)
+void		r_rotate(t_roll *r, t_pile *p, char pile, int state)
 {
 	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
 		return ;
-	if (r && r->nb_b > 1 && pile == 'a' && BLBD & GOOD)
+	if (r && r->nb_b > 1 && pile == 'a' && BLBD & GOOD && state & GOOD)
 		if (calibrate_rot(r, r->b_rot < 1 ? 1 : r->b_rot, -1))
 			return (d_rotate(r, R_ROT));
 	p->low->bd &= ~R_ROT;
@@ -64,14 +64,14 @@ void		d_rotate(t_roll *r, int state)
 {
 	if (state & ROT)
 	{
-		rotate(NULL, &r->a, 0);
-		rotate(NULL, &r->b, 0);
+		rotate(NULL, &r->a, 0, 0);
+		rotate(NULL, &r->b, 0, 0);
 		r->bd & COLOR ? ft_printf("{green}{bold}rr{eoc}\n") : ft_printf("rr\n");
 	}
 	else if (state & R_ROT)
 	{
-		r_rotate(NULL, &r->a, 0);
-		r_rotate(NULL, &r->b, 0);
+		r_rotate(NULL, &r->a, 0, 0);
+		r_rotate(NULL, &r->b, 0, 0);
 		r->bd & COLOR ? ft_printf("{green}{bold}rrr{eoc}\n") : ft_printf("rrr\n");
 	}
 	++r->dep;

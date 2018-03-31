@@ -6,7 +6,7 @@
 /*   By: dlavaury <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 17:17:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/30 18:56:38 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/31 16:22:41 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int				main(int argc, char **argv)
 		}
 		!(r.bd & ERR) && r.size ? push_swap(&r, argv, r.size) : 0;
 	}
-	r.bd & ERR ? display_error(&r) : 0;//
+	r.bd & ERR ? display_error(&r) : 0;
 	return (0);
 }

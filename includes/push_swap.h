@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/30 20:20:03 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/31 17:51:24 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,8 @@ void				simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				swap(t_roll *r, t_pile *p, char pile);
 void				s_swap(t_roll *r);
 int					a_insert(t_roll *r, int rot_a, int value, int rot);
-void				rotate(t_roll *r, t_pile *p, char pile);
-void				r_rotate(t_roll *r, t_pile *p, char pile);
+void				rotate(t_roll *r, t_pile *p, char pile, int stte);
+void				r_rotate(t_roll *r, t_pile *p, char pile, int state);
 void				d_rotate(t_roll *r, int state);
 int					calibrate_rot(t_roll *r, int rot, int i);
 

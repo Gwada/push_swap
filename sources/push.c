@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:32:24 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/29 23:49:51 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/31 16:44:35 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	void	find_max(t_roll *r)
 	r->a_min = !r->nb_a ? 0 : ALNBR;
 	while (++i <= r->nb_a)
 	{
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 		ALNBR > r->a_max ? r->a_max = ALNBR : 0;
 		ALNBR < r->a_min ? r->a_min = ALNBR : 0;
 	}
@@ -30,7 +30,7 @@ static	void	find_max(t_roll *r)
 	r->b_min = !r->nb_b ? 0 : BLNBR;
 	while (++i <= r->nb_b)
 	{
-		rotate(NULL, &r->b, 0);
+		rotate(NULL, &r->b, 0, 0);
 		BLNBR > r->b_max ? r->b_max = BLNBR : 0;
 		BLNBR < r->b_min ? r->b_min = BLNBR : 0;
 	}
@@ -50,14 +50,14 @@ static	void	find_best_insert(t_roll *r, int rot, int i)
 			if (((ALNBR < min || ALNBR > max) && BLNBR == max)
 			|| (ALNBR < BTNBR && ALNBR > BLNBR))
 				rot = i;
-			rotate(NULL, &r->b, 0);
+			rotate(NULL, &r->b, 0, 0);
 		}
 		if (rot > r->nb_b / 2)
 			while (rot++ < r->nb_b)
-				r_rotate(r, &r->b, 'b');
+				r_rotate(r, &r->b, 'b', GOOD);
 		else
 			while (rot-- > 0)
-				rotate(r, &r->b, 'b');
+				rotate(r, &r->b, 'b', GOOD);
 	}
 }
 
@@ -78,6 +78,7 @@ void			simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	r->bd & COLOR ? ft_printf("{red}{bold}p%c\n{eoc}", pile) : 0;
 	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
 	++r->dep;
+	pile == 'a' ? ALBD |= GOOD : 0;
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
 

@@ -33,7 +33,7 @@ static	int		p_calibrate(t_roll *r, int rot, int i)
 		if ((ALNBR < BTNBR && ALNBR > BLNBR)
 		|| (BTNBR < BLNBR && (ALNBR < BTNBR || ALNBR > BLNBR)))
 			rot_b = i;
-		rotate(NULL, &r->b, 0);
+		rotate(NULL, &r->b, 0, 0);
 	}
 //	ft_printf("{bold}{cyan}{underline}END\tPUSH_CALIBRATE{eoc}\n");//////////////
 	return (calibrate(r, rot, rot_b));
@@ -85,52 +85,12 @@ int			calibrate_rot(t_roll *r, int rot, int i)
 //	ft_printf("{bold}{underline}\nIN\tCALIBRATE_ROT{eoc}\n");////////////////////
 //	ft_printf("r->nb_a = %d r->b_rot = %d rot = %d\n", r->nb_a, r->b_rot, rot);//
 	int		ret;
-//	int		min;
-//	int		max;
 
 	ret = 0;
 	while (++i < r->nb_a)
 	{
-		//if ((i <= r->nb_a / 2 && i == rot) || (i > r->nb_a / 2 && i - 1 == rot))
-		if (i == rot)
-		{
-//			ft_printf("ALNBR = %d\n", ALNBR);////////////////////////////////////
-			/*if (ATBD & GOOD)
-			{
-//				ft_printf("ATBD & GOOD\n");//////////////////////////////////////
-				min = ATNBR;
-				while (ALBD ^ GOOD)
-					rotate(NULL, &r->a, 0);
-				max = ALNBR;
-				while (ATBD ^ GOOD)
-					r_rotate(NULL, &r->a, 0);
-//				if (value_insert(r, NULL, min, max))
-//				{
-//					ft_printf("min = %d max = %d\n", ATNBR, max);////////////////
-//					ft_printf("ATBD & GOOD + insertion\n");//////////////////////
-//					ret = 1;
-//				}
-			}
-			if (!ret && ALBD & GOOD)
-			{
-				max = ALNBR;
-//				ft_printf("ALBD & GOOD\n");//////////////////////////////////////
-				while (ATBD ^ GOOD)
-					r_rotate(NULL, &r->a, 0);
-				min = ATNBR;
-				while (ALBD ^ GOOD)
-					rotate(NULL, &r->a, 0);
-//				if (value_insert(r, NULL, min, max))
-//				{
-//					ft_printf("ALBD & GOOD && ATBD ^ GOOD + insertion\n");///////
-//					ret = 1;
-//				}
-			}
-//			ret = !ret ? p_calibrate(r, rot, -1) : i_calibrate(r, rot, min, max);*/
-			ret = p_calibrate(r, rot, -1);
-		}
-		rotate(NULL, &r->a, 0);
+		i == rot ? ret = p_calibrate(r, rot, -1) : 0;
+		rotate(NULL, &r->a, 0, 0);
 	}
-//	ft_printf("{bold}{underline}END\tCALIBRATE_ROT{eoc}\n");/////////////////////
 	return (ret);
 }

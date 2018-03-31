@@ -21,7 +21,7 @@ int			value_insert(t_roll *r, int *rt, int min, int max)
 			|| (min > max && (min < BLNBR || BLNBR < max)))
 				test = 1;
 		}
-		rotate(NULL, &r->b, 0);
+		rotate(NULL, &r->b, 0, 0);
 	}
 	return (test);
 

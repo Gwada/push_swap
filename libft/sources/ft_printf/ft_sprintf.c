@@ -6,13 +6,13 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:59:05 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/30 18:23:07 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/03/31 19:15:36 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int			ft_init_printf(t_data *data, const char *s)
+static int		ft_init_printf(t_data *data, const char *s)
 {
 	ft_bzero(data, sizeof(*data));
 	data->ft = (char*)s;
@@ -22,9 +22,9 @@ static int			ft_init_printf(t_data *data, const char *s)
 	return (1);
 }
 
-int					ft_sprintf(char **str, const char *format, ...)
+int				ft_sprintf(char **str, const char *format, ...)
 {
-	static	t_data	data;
+	t_data		data;
 
 	if (!ft_init_printf(&data, format))
 		return (-1);

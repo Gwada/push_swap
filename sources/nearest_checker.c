@@ -4,10 +4,10 @@ static	int		first_check(t_roll *r, int *fst, int *lst)
 {
 	*lst = ALNBR;
 	while (ATBD ^ GOOD)
-		r_rotate(NULL, &r->a, 0);
+		r_rotate(NULL, &r->a, 0, 0);
 	*fst = ATNBR;
 	while (ALBD ^ GOOD)
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	if (ALLBD ^ GOOD && ((ALLNBR > *fst && ALLNBR < *lst)
 	|| (*fst > *lst && (ALLNBR > *fst || ALLNBR < *lst))))
 	{
@@ -21,14 +21,14 @@ static	int		first_check(t_roll *r, int *fst, int *lst)
 static	int		second_check(t_roll *r, int *fst, int *lst)
 {
 	while (ALLBD ^ GOOD)
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	*lst = ALLNBR;
 	while (ALBD ^ GOOD)
-		r_rotate(NULL, &r->a, 0);
+		r_rotate(NULL, &r->a, 0, 0);
 	if ((ATNBR > *fst && ATNBR < *lst)
 	|| (*fst > *lst && (ATNBR > *fst || ATNBR < *lst)))
 	{
-		r_rotate(r, &r->a, 'a');
+		r_rotate(r, &r->a, 'a', GOOD);
 		swap(r, &r->a, 'a');
 		return (1);
 	}
@@ -39,10 +39,10 @@ static	int		second_check(t_roll *r, int *fst, int *lst)
 //	}
 	*lst = ALNBR;
 	while (ATBD ^ GOOD)
-		r_rotate(NULL, &r->a, 0);
+		r_rotate(NULL, &r->a, 0, 0);
 	*fst = ATNBR;
 	while (ALBD ^ GOOD)
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	return (0);
 }
 
@@ -50,10 +50,10 @@ static	int		third_check(t_roll *r, int *fst, int *lst)
 {
 	*fst = ALLNBR;
 	while (ALLLBD ^ GOOD)
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	*lst = ALLLNBR;
 	while (ALLBD ^ GOOD)
-		r_rotate(NULL, &r->a, 0);
+		r_rotate(NULL, &r->a, 0, 0);
 	if ((ALNBR > *fst && ALNBR < *lst)
 	|| (*fst > *lst && (ALNBR > *fst || ALNBR < *lst)))
 	{
@@ -64,10 +64,10 @@ static	int		third_check(t_roll *r, int *fst, int *lst)
 	{
 		*lst = ALLNBR;
 		while (ATBD ^ GOOD)
-			r_rotate(NULL, &r->a, 0);
+			r_rotate(NULL, &r->a, 0, 0);
 		*fst = ATNBR;
 		while (ALLBD ^ GOOD)
-			rotate(NULL, &r->a, 0);
+			rotate(NULL, &r->a, 0, 0);
 	}
 	return (0);
 }
@@ -76,14 +76,14 @@ static	int		fourth_chech(t_roll *r, int *fst, int *lst)
 {
 	*lst = ATNBR;
 	while (ATTBD ^ GOOD)
-		rotate(NULL, &r->a, 0);
+		rotate(NULL, &r->a, 0, 0);
 	*fst = ATTNBR;
 	while (ATBD ^ GOOD)
-		r_rotate(NULL, &r->a, 0);
+		r_rotate(NULL, &r->a, 0, 0);
 	if ((ALNBR > *fst && ALNBR < *lst)
 	|| (*fst > *lst && (ALNBR > *fst || ALNBR < *lst)))
 	{
-		r_rotate(r, &r->a, 'a');
+		r_rotate(r, &r->a, 'a', GOOD);
 		swap(r, &r->a, 'a');
 		return (1);
 	}
