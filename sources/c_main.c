@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 15:30:29 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/31 17:30:39 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/01 21:04:42 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static	void	checker(t_roll *r, char **p, int size)
 		return ;
 	while (get_next_line(0, &s))
 	{
-//		s && *s ? ft_printf("%s\n", s) : 0;
 		s && *s ? check_that(r, s) : 0;
 		s ? free(s) : 0;
 		if (r->bd & ERR)

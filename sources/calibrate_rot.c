@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   calibrate_rot.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/01 20:59:12 by dlavaury          #+#    #+#             */
+/*   Updated: 2018/04/01 20:59:30 by dlavaury         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static	int		calibrate(t_roll *r, int rot_a, int rot_b)
@@ -36,9 +48,9 @@ static	int		p_calibrate(t_roll *r, int rot, int i)
 	return (calibrate(r, rot, rot_b));
 }
 
-int			calibrate_rot(t_roll *r, int rot, int i)
+int				calibrate_rot(t_roll *r, int rot, int i)
 {
-	int		ret;
+	int			ret;
 
 	ret = 0;
 	i = -1;

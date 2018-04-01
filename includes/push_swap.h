@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/01 20:19:03 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/01 20:56:19 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ void				find_best_rot(t_roll *r, t_tab *t, int b_rot, int i);
 void				first_step(t_roll *r, t_tab *t, int i, int start);
 void				check_limits(t_roll *r, int i, int min, int max);
 void				fixe_push(t_roll *r, t_tab *t, int i);
-//void				fixe_push(t_roll *r, int i, int min, int max);
 void				second_step(t_roll *r, t_tab *t, int i);
 void				nearest_rotation(t_roll *r, int checker, int fst, int lst);
 int					nearest_checker(t_roll *r, int fst, int lst);

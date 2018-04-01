@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:26:28 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/01 20:20:27 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/01 20:58:50 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	void	display_pile(t_roll *r, t_pile *p, char pile)
 	if (p->low)
 	{
 		r->bd & COLOR ? ft_printf("{red}<-{eoc}") : ft_printf("<-");
-		while(!p->low->root)
+		while (!p->low->root)
 		{
 			if (p->low->bd & GOOD)
 				ft_printf("{green}[%d]{eoc}", p->LNBR);
@@ -42,7 +42,5 @@ void			display_piles(t_roll *r, t_pile *a, t_pile *b)
 {
 	display_pile(r, a, 'a');
 	display_pile(r, b, 'b');
-	ft_printf("r->dep = %d\n\n", r->dep);//////////////////////////////////////////
+	ft_printf("r->dep = %d\n\n", r->dep);
 }
-
-

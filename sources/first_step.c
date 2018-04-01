@@ -1,4 +1,16 @@
-# include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   first_step.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/01 21:04:48 by dlavaury          #+#    #+#             */
+/*   Updated: 2018/04/01 21:06:07 by dlavaury         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 static	int		is_present(int *t, int n, int value)
 {
@@ -24,7 +36,7 @@ static	void	finition_sort(t_roll *r, int *t, int size, int nb_cor)
 		if (ALBD == NO_CHECK && is_present(t, nb_cor, ALNBR) && !(j = 0))
 		{
 			if (ALNBR >= *t && ALNBR <= t[i] && (ALBD = GOOD))
-				while(*t < ALNBR && !(i = 0))
+				while (*t < ALNBR && !(i = 0))
 				{
 					++t;
 					--nb_cor;
