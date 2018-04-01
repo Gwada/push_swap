@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 09:41:02 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/31 16:23:42 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/01 19:19:46 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		rotate(t_roll *r, t_pile *p, char pile, int state)
 	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
 		return ;
 	if (r && r->nb_b > 1 && pile == 'a' && BLBD & GOOD && state & GOOD)
-		if (calibrate_rot(r, r->b_rot < 1 ? 1 : r->b_rot, -1))
+		if (calibrate_rot(r, r->b_rot + 1, -1))
 			return (d_rotate(r, ROT));
 	p->low->bd &= ~ROT;
 	p->low->top = p->top;
@@ -41,7 +41,7 @@ void		r_rotate(t_roll *r, t_pile *p, char pile, int state)
 	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
 		return ;
 	if (r && r->nb_b > 1 && pile == 'a' && BLBD & GOOD && state & GOOD)
-		if (calibrate_rot(r, r->b_rot < 1 ? 1 : r->b_rot, -1))
+		if (calibrate_rot(r, r->b_rot + 1, -1))
 			return (d_rotate(r, R_ROT));
 	p->low->bd &= ~R_ROT;
 	p->top->low = p->low;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   second_step.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/01 12:25:54 by dlavaury          #+#    #+#             */
+/*   Updated: 2018/04/01 19:57:42 by dlavaury         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static	int		error_checker(t_roll *r)
@@ -15,7 +27,7 @@ static	int		error_checker(t_roll *r)
 	return (total);
 }
 
-static	int		right_check(t_roll *r, int min, int max)
+/*static	int		right_check(t_roll *r, int min, int max)
 {
 	while (ALLLBD ^ GOOD)
 		rotate(NULL, &r->a, 0, 0);
@@ -54,25 +66,17 @@ static	void	fixe_that(t_roll *r)
 		return ;
 	if (ATBD & GOOD && left_check(r, 0, ATNBR))
 		return ;
-	push(r, &r->a, &r->b, 'b');
-}
+	r->b_rot < 1 ? push(r, &r->a, &r->b, 'b') : 0;
+}*/
 
 void			second_step(t_roll *r, t_tab *t, int i)
 {
-//	ft_printf("\n{yellow}{bold}-------------------------------------------------\n");
-//	ft_printf("|\t\t{red}{underline}IN SECOND STEP{runderline}{yellow}\t\t\t|\n");
-//	ft_printf("-------------------------------------------------{eoc}\n");
+//	int test = 0;//
 	while (++i < 9)
 	{
 		fixe_push(r, t, i);
-		while (error_checker(r)/* && r->nb_b < 12*/)
-		{
-			ALBD ^ NO_CHECK ? nearest_rotation(r, NO_CHECK, r->nb_a, 0) : 0;
-			ALBD & NO_CHECK ? fixe_that(r) : 0;
-		}
-		//return ;
+		while (error_checker(r)/* && r->dep < 3073*/)
+			nearest_rotation(r, NO_CHECK, r->nb_a, 0);
+//		return ;
 	}
-//	ft_printf("{yellow}{bold}-------------------------------------------------\n");
-//	ft_printf("|\t\t{red}{underline}END OF SECOND STEP{runderline}{yellow}\t\t|\n");
-//	ft_printf("-------------------------------------------------{eoc}\n\n");
 }

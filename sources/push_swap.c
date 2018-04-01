@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:23:15 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/31 22:21:16 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/01 20:20:43 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@ void		push_swap(t_roll *r, char **p, int size)
 //	r->bd &= ~VISUAL;
 	find_best_rot(r, t, 0, -1);
 	first_step(r, t, -1, 0);
+	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 	second_step(r, t, -1);
 	last_step(r, -1);
 
 //	display_piles(r, &r->a, &r->b);//////////////////////////////////////////////
 	int i = -1, test = 0;
-	while (++i < r->size)
+	while (++i < r->nb_a)
 	{
-	//			ft_printf("{bold}{green}t[%3d].n = %11ld\t{eoc}", i, t[i].n);
-	//			ft_printf("{bold}ALNBR = %11d\t{eoc}", ALNBR);
-	//			ALBD & GOOD ? ft_printf("{green}{bold}ALBD & GOOD{eoc}\t") : 0;
-	//			(int)t[i].n == ALNBR ? ft_printf("{green}{bold}GOOD{eoc}\n") : ft_printf("{red}{bold}ERROR !!!{eoc}\n");
+//				ft_printf("{bold}{green}t[%3d].n = %11ld\t{eoc}", i, t[i].n);
+//				ft_printf("{bold}ALNBR = %11d\t{eoc}", ALNBR);
+//				ALBD & GOOD ? ft_printf("{green}{bold}ALBD & GOOD{eoc}\t") : 0;
+//				(int)t[i].n == ALNBR ? ft_printf("{green}{bold}GOOD{eoc}\n") : ft_printf("{red}{bold}ERROR !!!{eoc}\n");
 		(int)t[i].n != ALNBR ? ++test : 0;
 		rotate(NULL, &r->a, 0, 0);
 	}
