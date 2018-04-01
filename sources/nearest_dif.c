@@ -21,32 +21,26 @@ static	int		find_b_dep(t_roll *r, int rot_a, int ret, int i)
 			ret = i;
 		rotate(NULL, &r->b, 0, 0);
 	}
-	if (ret > 0)
+	if (ret > 0 && rot_a <= r->nb_a / 2)
 	{
-		if (rot_a <= r->nb_a / 2)
-		{
-			if (ret <= r->nb_b / 2)
-				ret = rot_a >= ret ? 0 : ret - rot_a;
-			else
-				ret = rot_a >= ret ? 0 : r->nb_b - ret;
-		}
+		if (ret <= r->nb_b / 2)
+			ret = rot_a >= ret ? 0 : ret - rot_a;
 		else
-		{
-			if (ret > r->nb_b / 2)
-			{
-				if (r->nb_a - rot_a >= r->nb_b - ret)
-					ret = 0;
-				else
-					ret = (r->nb_b - ret) - (r->nb_a - rot_a);
-			}
-			else if (r->nb_a - rot_a >= r->nb_b - ret)
-				ret = 0;
-		}
+			ret = rot_a >= ret ? 0 : r->nb_b - ret;
 	}
+	else if (ret > 0 && ret > r->nb_b / 2)
+	{
+		if (r->nb_a - rot_a >= r->nb_b - ret)
+			ret = 0;
+		else
+			ret = (r->nb_b - ret) - (r->nb_a - rot_a);
+	}
+	else if (ret > 0 && r->nb_a - rot_a >= r->nb_b - ret)
+		ret = 0;
 	return (ret);
 }
 
-static	void	next_dif(t_roll *r, int checker, int b_rot, int i)
+static	void	next_dif(t_roll *r, int b_rot, int i)
 {
 	int			n_dep;
 	int			b_dep;
@@ -54,8 +48,9 @@ static	void	next_dif(t_roll *r, int checker, int b_rot, int i)
 	b_dep = r->size;
 	while (++i < r->nb_a)
 	{
-		if (ALBD & checker && (n_dep = 1))
+		if (ALBD & NO_CHECK)
 		{
+			n_dep = 1;
 			n_dep += (i <= r->nb_a / 2 ? i : r->nb_a - i);
 			n_dep += find_b_dep(r, i, 0, -1);
 			n_dep < b_dep ? b_rot = i : 0;
@@ -66,12 +61,12 @@ static	void	next_dif(t_roll *r, int checker, int b_rot, int i)
 	r->b_rot = b_rot;
 }
 
-void			nearest_rotation(t_roll *r, int checker, int fst, int lst)
+void			nearest_rotation(t_roll *r, int fst, int lst)
 {
-	next_dif(r, checker, r->size, -1);
+	next_dif(r, r->size, -1);
 	if (r->b_rot > 0)
 	{
-		ALBD |= r->b_rot-- < r->nb_a / 2 ? ROT : R_ROT;
+		ALBD |= r->b_rot-- <= r->nb_a / 2 ? ROT : R_ROT;
 		if (ALBD & ROT)
 		{
 			ALBD &= ~ROT;
@@ -87,5 +82,6 @@ void			nearest_rotation(t_roll *r, int checker, int fst, int lst)
 			return (r_rotate(r, &r->a, 'a', GOOD));
 		}
 	}
-	ALBD & NO_CHECK ? push(r, &r->a, &r->b, 'b') : 0;
+	if (ALBD & NO_CHECK && !nearest_checker(r, fst, lst))
+		push(r, &r->a, &r->b, 'b');
 }

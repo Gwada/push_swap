@@ -14,9 +14,6 @@
 
 void			i_b_max_finder(t_roll *r, int *rot, int i)
 {
-	int			value;
-
-	value = r->b_max;
 	while (++i < r->nb_b)
 	{
 		BLNBR == r->b_max ? *rot = i : 0;
@@ -53,7 +50,7 @@ static	void	max_insert(t_roll *r, int rot, int i, int max)
 	}
 }
 
-static	void	min_insert(t_roll *r, int rot, int i, int min)
+static	void	min_insert(t_roll *r, int rot, int i)
 {
 	i_b_min_finder(r, &rot, i);
 	if (rot <= r->nb_b / 2)
@@ -67,14 +64,13 @@ static	void	min_insert(t_roll *r, int rot, int i, int min)
 		simple_push(r, &r->b, &r->a, 'a');
 		ALBD = GOOD;
 	}
-	(void)min;
 }
 
 void			hard_insert(t_roll *r, int rot, int min, int max)
 {
 	if (ALBD & GOOD)
 	{
-		r->b_min < ALNBR ? min_insert(r, rot, -1, min) : 0;
+		r->b_min < ALNBR ? min_insert(r, rot, -1) : 0;
 		r->b_max > ATNBR ? max_insert(r, rot, -1, max) : 0;
 	}
 	else if (ATBD & GOOD)
@@ -84,6 +80,6 @@ void			hard_insert(t_roll *r, int rot, int min, int max)
 			max_insert(r, rot, -1, max);
 			rotate(r, &r->a, 'a', GOOD);
 		}
-		r->b_min < min ? min_insert(r, rot, -1, min) : 0;
+		r->b_min < min ? min_insert(r, rot, -1) : 0;
 	}
 }

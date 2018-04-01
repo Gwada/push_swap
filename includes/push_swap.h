@@ -133,7 +133,7 @@ void				first_step(t_roll *r, t_tab *t, int i, int start);
 void				check_limits(t_roll *r, int i, int min, int max);
 void				fixe_push(t_roll *r, t_tab *t, int i);
 void				second_step(t_roll *r, t_tab *t, int i);
-void				nearest_rotation(t_roll *r, int checker, int fst, int lst);
+void				nearest_rotation(t_roll *r, int fst, int lst);
 int					nearest_checker(t_roll *r, int fst, int lst);
 int					value_insert(t_roll *r, int *rot, int min, int max);
 int					easy_insert(t_roll *r, int rot, int min, int max);
