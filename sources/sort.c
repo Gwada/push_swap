@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 20:30:19 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/01 20:52:59 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/02 17:47:10 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static	void	small_sort(t_roll *r, t_tab *t, int n, int i)
 				ALBD = ALNBR <= (int)t[(r->size / 4) * 3].n ? NO_CHECK : CHECK;
 			else if (n == 2)
 				ALBD = ALNBR <= (int)t[(r->size / 8) * 7].n ? NO_CHECK : CHECK;
-			else if (n == 3)
-				ALBD = ALNBR <= (int)t[(r->size / 16) * 15].n ? NO_CHECK : CHECK;
 			else
 				ALBD = NO_CHECK;
 		}
@@ -46,9 +44,9 @@ static	void	medium_sort(t_roll *r, t_tab *t, int n, int i)
 			else if (n == 2)
 				ALBD = ALNBR <= (int)t[(r->size / 8) * 7].n ? NO_CHECK : CHECK;
 			else if (n == 3)
-				ALBD = ALNBR <= (int)t[(r->size / 16) * 15].n ? NO_CHECK : CHECK;
+				ALBD = ALNBR <= (int)t[r->size / 16 * 15].n ? NO_CHECK : CHECK;
 			else if (n == 4)
-				ALBD = ALNBR <= (int)t[(r->size / 32) * 31].n ? NO_CHECK : CHECK;
+				ALBD = ALNBR <= (int)t[r->size / 32 * 31].n ? NO_CHECK : CHECK;
 			else
 				ALBD = NO_CHECK;
 		}
@@ -69,13 +67,14 @@ static	void	big_sort(t_roll *r, t_tab *t, int n, int i)
 			else if (n == 2)
 				ALBD = ALNBR <= (int)t[(r->size / 8) * 7].n ? NO_CHECK : CHECK;
 			else if (n == 3)
-				ALBD = ALNBR <= (int)t[(r->size / 16) * 15].n ? NO_CHECK : CHECK;
+				ALBD = ALNBR <= (int)t[r->size / 16 * 15].n ? NO_CHECK : CHECK;
 			else if (n == 4)
-				ALBD = ALNBR <= (int)t[(r->size / 32) * 31].n ? NO_CHECK : CHECK;
+				ALBD = ALNBR <= (int)t[r->size / 32 * 31].n ? NO_CHECK : CHECK;
 			else if (n == 5)
-				ALBD = ALNBR <= (int)t[(r->size / 64) * 63].n ? NO_CHECK : CHECK;
+				ALBD = ALNBR <= (int)t[r->size / 64 * 63].n ? NO_CHECK : CHECK;
 			else if (n == 6)
-				ALBD = ALNBR <= (int)t[(r->size / 128) * 127].n ? NO_CHECK : CHECK;
+				ALBD = ALNBR <= (int)t[r->size / 128 * 127].n ? NO_CHECK
+				: CHECK;
 			else
 				ALBD = NO_CHECK;
 		}

@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:16:09 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/31 16:25:42 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/02 15:28:27 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void		swap(t_roll *r, t_pile *p, char pile)
 	r ? ++r->dep : 0;
 	if (!r || !pile)
 		return ;
-	if (r->bd & COLOR)
+	if (r->bd && r->bd & COLOR)
 		ft_printf("{magenta}{bold}s%c{eoc}\n", pile);
-	else
+	else if (r->bd && r->bd ^ COLOR)
 		ft_printf("s%c\n", pile);
-	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	r->bd && r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	r->b_rot = 0;
 }
 
@@ -43,9 +43,9 @@ void		s_swap(t_roll *r)
 	swap(NULL, &r->a, 0);
 	swap(NULL, &r->b, 0);
 	++r->dep;
-	if (r->bd & COLOR)
+	if (r->bd && r->bd & COLOR)
 		ft_printf("{magenta}{bold}ss{eoc}\n");
-	else
+	else if (r->bd && r->bd & COLOR)
 		ft_printf("ss\n");
 	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 	r->b_rot = 0;
@@ -111,11 +111,6 @@ int			a_insert(t_roll *r, int rot_a, int value, int rot)
 	b_rot_a = n_dep_t < n_dep_l ? n_dep_t : n_dep_l;
 	if (b_rot_a > 1 && b_rot_a <= b_rot(r, value))
 	{
-		ft_printf("{red}{bold}--------------------------------------------------\n");
-		ft_printf("\t\t*** INSERTION DANS A ***\n", n_dep_l, n_dep_t);
-		ft_printf("n_dep_l = %d n_dep_t = %d\n", n_dep_l, n_dep_t);
-		ft_printf("rot = %d rot_a = %d\n", rot, rot_a);
-		ft_printf("------------------------------------------------{eoc}\n", n_dep_l, n_dep_t);
 		r->b_rot = n_dep_l <= n_dep_t ? rot : rot_a;
 		simple_push(r, &r->a, &r->b, 'b');
 		if (r->b_rot <= r->nb_a / 2)

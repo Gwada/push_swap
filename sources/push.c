@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:32:24 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/03/31 16:44:35 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/02 15:40:30 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,22 @@ void			simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 	tmp->low->top = src;
 	tmp->top = dst;
 	tmp->low = dst->low ? dst->low : dst;
-	dst->low ? (dst->low->top = tmp) : (dst->top = tmp);
-	!dst->top ? (dst->top = tmp) : (dst->low = tmp);
+	if (dst->low)
+		dst->low->top = tmp;
+	else
+		dst->top = tmp;
+	if (!dst->top)
+		dst->top = tmp;
+	else
+		dst->low = tmp;
 	r->nb_a += (pile == 'a') ? 1 : -1;
 	r->nb_b += (pile == 'b') ? 1 : -1;
 	find_max(r);
-	r->bd & COLOR ? ft_printf("{red}{bold}p%c\n{eoc}", pile) : 0;
-	!(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
+	r->bd && r->bd & COLOR ? ft_printf("{red}{bold}p%c\n{eoc}", pile) : 0;
+	r->bd && !(r->bd & COLOR) ? ft_printf("p%c\n", pile) : 0;
 	++r->dep;
 	pile == 'a' ? ALBD |= GOOD : 0;
-	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	r->bd && r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }
 
 void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)

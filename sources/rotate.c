@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 09:41:02 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/01 19:19:46 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/02 15:35:33 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ void		rotate(t_roll *r, t_pile *p, char pile, int state)
 	if (!r || !pile)
 		return ;
 	++r->dep;
-	if (r->bd & COLOR)
-		ft_printf("{green}{bold}r%c{eoc}\n", pile);
-	else
-		ft_printf("r%c\n", pile);
-	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	if (r->bd)
+	{
+		if (r->bd & COLOR)
+			ft_printf("{green}{bold}r%c{eoc}\n", pile);
+		else
+			ft_printf("r%c\n", pile);
+		r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	}
 }
 
 void		r_rotate(t_roll *r, t_pile *p, char pile, int state)
@@ -53,11 +56,14 @@ void		r_rotate(t_roll *r, t_pile *p, char pile, int state)
 	if (!r || !pile)
 		return ;
 	++r->dep;
-	if (r->bd & COLOR)
-		ft_printf("{green}{bold}rr%c{eoc}\n", pile);
-	else
-		ft_printf("rr%c\n", pile);
-	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	if (r->bd)
+	{
+		if (r->bd & COLOR)
+			ft_printf("{green}{bold}rr%c{eoc}\n", pile);
+		else
+			ft_printf("rr%c\n", pile);
+		r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	}
 }
 
 void		d_rotate(t_roll *r, int state)
@@ -66,14 +72,16 @@ void		d_rotate(t_roll *r, int state)
 	{
 		rotate(NULL, &r->a, 0, 0);
 		rotate(NULL, &r->b, 0, 0);
-		r->bd & COLOR ? ft_printf("{green}{bold}rr{eoc}\n") : ft_printf("rr\n");
+		r->bd && r->bd & COLOR ? ft_printf("{green}{bold}rr{eoc}\n") : 0;
+		r->bd && r->bd ^ COLOR ? ft_printf("rr\n") : 0;
 	}
 	else if (state & R_ROT)
 	{
 		r_rotate(NULL, &r->a, 0, 0);
 		r_rotate(NULL, &r->b, 0, 0);
-		r->bd & COLOR ? ft_printf("{green}{bold}rrr{eoc}\n") : ft_printf("rrr\n");
+		r->bd && r->bd & COLOR ? ft_printf("{green}{bold}rrr{eoc}\n") : 0;
+		r->bd && r->bd ^ COLOR ? ft_printf("rrr\n") : 0;
 	}
 	++r->dep;
-	r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	r->bd && r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
 }

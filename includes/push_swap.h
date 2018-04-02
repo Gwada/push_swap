@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/01 20:56:19 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/02 15:51:41 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,17 +136,7 @@ void				second_step(t_roll *r, t_tab *t, int i);
 void				nearest_rotation(t_roll *r, int fst, int lst);
 int					nearest_checker(t_roll *r, int fst, int lst);
 int					value_insert(t_roll *r, int *rot, int min, int max);
-int					easy_insert(t_roll *r, int rot, int min, int max);
-void				i_b_right_insert(t_roll *r, int *rot, int min, int max);
-void				right_insert(t_roll *r, int rot, int min, int max);
-void				i_b_left_insert(t_roll *r, int *rot, int min, int max);
-void				left_insert(t_roll *r, int rot, int min, int max);
-void				hard_insert(t_roll *r, int rot, int min, int max);
-void				i_b_max_finder(t_roll *r, int *rot, int i);
-void				i_b_min_finder(t_roll *r, int *rot, int i);
-int					b_push(t_roll *r, int min, int max);
 void				last_step(t_roll *r, int i);
-void				clean_b(t_roll *r, int fst, int lst, int value);
 
 void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile);

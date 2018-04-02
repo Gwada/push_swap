@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:58:18 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/01 19:36:19 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/02 15:42:45 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				init_struct(t_roll *r, char **nbr, int size)
 	r->b.root = &r->b;
 	r->b.top = r->b.low;
 	r->b.low = r->b.top;
-	while (*nbr && r->bd ^ ERR)//
+	while (*nbr && r->bd ^ ERR)
 	{
 		parse_nbr(r, *nbr++, &size);
 		r->bd & STRING && *nbr && size ? r->bd |= ERR : 0;
@@ -78,7 +78,7 @@ static	void	init_sort(t_tab *t, t_roll *r, int i)
 		t[i].m.top = r->a.top ? r->a.top : &r->a;
 		if (r->a.low)
 			r->a.top->low = &t[i].m;
-		else 
+		else
 			r->a.low = &t[i].m;
 		r->a.top = &t[i].m;
 	}
