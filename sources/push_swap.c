@@ -12,6 +12,30 @@
 
 #include "push_swap.h"
 
+static	int		error_checker(t_roll *r)
+{
+	int			i;
+	int			total;
+
+	i = -1;
+	total = 0;
+	while (++i < r->nb_a)
+	{
+		ALBD & NO_CHECK ? ++total : 0;
+		rotate(NULL, &r->a, 0, 0);
+	}
+	return (total);
+}
+
+static	void	fixe_push(t_roll *r, int i)
+{
+	while (++i < r->nb_a)
+	{
+		ALBD ^ GOOD ? ALBD = NO_CHECK : 0;
+		rotate(NULL, &r->a, 0, 0);
+	}
+}
+
 void		push_swap(t_roll *r, char **p, int size)
 {
 	t_tab	t[size];
@@ -24,6 +48,8 @@ void		push_swap(t_roll *r, char **p, int size)
 	r->bd |= GOOD;
 	find_best_rot(r, t, 0, -1);
 	first_step(r, t, -1, 0);
-	second_step(r, t, -1);
+	fixe_push(r, -1);
+	while (error_checker(r))
+		nearest_rotation(r, r->nb_a, 0);
 	last_step(r, -1);
 }

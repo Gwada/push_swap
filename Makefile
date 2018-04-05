@@ -36,12 +36,10 @@ SOURCES_PS		= $(SOURCES) \
 					push_swap_crack.c \
 					push_swap.c \
 					first_step.c \
-					second_step.c \
 					value_insert.c \
 					nearest_dif.c \
 					nearest_checker.c \
 					last_step.c \
-					sort.c
 
 OBJ_C			= $(addprefix sources/,$(SOURCES_C:.c=.o))
 OBJ_PS			= $(addprefix sources/,$(SOURCES_PS:.c=.o))

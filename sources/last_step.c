@@ -53,7 +53,6 @@ static	void	min_insert(t_roll *r, int rot, int i, int j)
 		ALNBR == r->a_min ? rot_a = j : 0;
 		rotate(NULL, &r->a, 0, 0);
 	}
-//	ft_printf("\nrot = %d rot_a = %d\n\n", rot, rot_a);
 	synchro(r, &rot, &rot_a);
 	while (r->nb_b > 0)
 		simple_push(r, &r->b, &r->a, 'a');
@@ -73,7 +72,6 @@ static	void	middle_insert(t_roll *r, int rot, int i, int j)
 		BLNBR == r->b_max ? rot = j : 0;
 		rotate(NULL, &r->b, 0, 0);
 	}
-//	ft_printf("\nrot = %d rot_a = %d\n\n", rot, rot_a);
 	synchro(r, &rot, &rot_a);
 	while (BLNBR > ATNBR && BLNBR < ALNBR)
 		simple_push(r, &r->b, &r->a, 'a');
@@ -100,8 +98,6 @@ static	void	max_insert(t_roll *r, int rot, int i, int j)
 
 void			last_step(t_roll *r, int i)
 {
-//	ft_printf("{bold}{yellow}IN\tLAST STEP\n\n{eoc}");//
-//	display_piles(r, &r->a, &r->b);//
 	int			rot;
 
 	if (r->nb_b > 0 && r->b_max > r->a_max)
@@ -121,5 +117,4 @@ void			last_step(t_roll *r, int i)
 		rot <= r->nb_a / 2 ? rotate(r, &r->a, 'a', 0) : 0;
 		rot > r->nb_a / 2 ? r_rotate(r, &r->a, 'a', 0) : 0;
 	}
-//	ft_printf("{bold}{yellow}END\tLAST STEP\n\n{eoc}");//
 }

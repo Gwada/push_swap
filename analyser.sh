@@ -22,15 +22,15 @@
 ##		third request is for know how many loops are above and below
 
 
-echo "\x1B[36m";
-echo "\n--- [ ANALYSING PUSH_SWAP] ---";
-echo "\x1B[0m";
+
+
+echo "--- [ ANALYSING PUSH_SWAP] ---";
 
 read -p "How many range of number [from ... to] (2 number needed) : " NBRBOT NBRTOP
 read -p "How many loop : " TRY
 read -p "Mediane for test : " MED
 NBR=$(($NBRTOP - $NBRBOT))
-((NBR++))
+NBR=$(( $NBR + 1 ));
 MOY=0;
 MAX=-1;
 MIN=-1;
@@ -76,17 +76,17 @@ do
 	IND=$(( $IND - 1 ));
 	if [ $NBRCOUP -gt $MED ]
 	then 
-		((MORE++))
+		MORE=$(( $MORE + 1 ));
 	else
-		((LESS++))
+		LESS=$(( $LESS + 1 ));
 	fi;
 done;
 MOY=$(( $MOY / $TRY ));
-echo "\nThere is \x1b[33m$WELL/$TRY\x1b[0m correct answer"
-echo "There is \x1B[31m$MORE\x1b[0m more than $MED"
-echo "There is \x1B[32m$LESS\x1b[0m less than $MED"
-echo "The biggest  is :\x1B[31m$MAX\x1b[0m"
-echo "The average is :\t\x1b[33m$MOY\x1b[0m"
-echo "The smallest is :\x1B[32m$MIN\x1b[0m"
+echo "\nThere is $WELL/$TRY correct answer"
+echo "There is $MORE more than $MED"
+echo "There is $LESS less than $MED"
+echo "The biggest  is :\t$MAX"
+echo "The average is :\t$MOY"
+echo "The smallest is :\t$MIN"
 echo "The worst list :\t$ACTMAX"
 echo "The best list :\t\t$ACTMIN"
