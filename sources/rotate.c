@@ -72,16 +72,25 @@ void		d_rotate(t_roll *r, int state)
 	{
 		rotate(NULL, &r->a, 0, 0);
 		rotate(NULL, &r->b, 0, 0);
-		r->bd && r->bd & COLOR ? ft_printf("{green}{bold}rr{eoc}\n") : 0;
-		r->bd && r->bd ^ COLOR ? ft_printf("rr\n") : 0;
 	}
 	else if (state & R_ROT)
 	{
 		r_rotate(NULL, &r->a, 0, 0);
 		r_rotate(NULL, &r->b, 0, 0);
-		r->bd && r->bd & COLOR ? ft_printf("{green}{bold}rrr{eoc}\n") : 0;
-		r->bd && r->bd ^ COLOR ? ft_printf("rrr\n") : 0;
 	}
 	++r->dep;
-	r->bd && r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	if (r->bd)
+	{
+		if (r->bd & COLOR)
+		{
+			state & ROT ? ft_printf("{green}{bold}rr{eoc}\n") : 0;
+			state & R_ROT ? ft_printf("{green}{bold}rrr{eoc}\n") : 0;
+		}
+		else
+		{
+			state & ROT ? ft_printf("rr\n") : 0;
+			state & R_ROT ? ft_printf("rrr\n") : 0;
+		}
+		r->bd && r->bd & VISUAL ? display_piles(r, &r->a, &r->b) : 0;
+	}
 }

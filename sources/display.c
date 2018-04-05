@@ -15,9 +15,9 @@
 static	void	display_pile(t_roll *r, t_pile *p, char pile)
 {
 	r->bd & COLOR ? ft_printf("{blue}{bold}Pile %c{eoc} = ", pile) : 0;
-	!(r->bd & COLOR) ? ft_printf("Pile %c = ", pile) : 0;
+	r->bd ^ COLOR ? ft_printf("Pile %c = ", pile) : 0;
 	!p->low && r->bd & COLOR ? ft_printf("{red}[EMPTY]{eoc}\n") : 0;
-	!p->low && !(r->bd & COLOR) ? ft_printf("[EMPTY]\n") : 0;
+	!p->low && r->bd ^ COLOR ? ft_printf("[EMPTY]\n") : 0;
 	if (p->low)
 	{
 		r->bd & COLOR ? ft_printf("{red}<-{eoc}") : ft_printf("<-");
