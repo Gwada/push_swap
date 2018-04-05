@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 15:30:29 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/02 15:33:23 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/04 23:51:39 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static	void	checker(t_roll *r, char **p, int size)
 
 	init_tab(t, r, p, -1);
 	s = NULL;
-	if (r->bd & ERR || r->bd & GOOD)
+	if (r->bd & ERR)
 		return ;
 	!(r->bd & COLOR) && !(r->bd & VISUAL) ? r->bd = 0 : 0;
 	while (get_next_line(0, &s))

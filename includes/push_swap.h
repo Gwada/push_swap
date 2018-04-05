@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/02 15:51:41 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/04 23:29:01 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@
 # define ATTTNBR	r->a.top->top->TNBR
 # define ALLLBD		r->a.low->low->LBD
 # define ATTTBD		r->a.top->top->TBD
+# define BLLLBD		r->b.low->low->LBD
+# define BTTTBD		r->b.top->top->TBD
+# define BLLLNBR	r->b.low->low->LNBR
+# define BTTTNBR	r->b.top->top->TNBR
+
 
 /*
 ** STRUCTURES
