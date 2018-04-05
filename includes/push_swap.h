@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/04 23:29:01 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/05 06:56:16 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@
 # define BTTTBD		r->b.top->top->TBD
 # define BLLLNBR	r->b.low->low->LNBR
 # define BTTTNBR	r->b.top->top->TNBR
-
 
 /*
 ** STRUCTURES
