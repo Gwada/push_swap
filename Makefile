@@ -6,7 +6,7 @@
 #    By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 17:27:58 by dlavaury          #+#    #+#              #
-#    Updated: 2018/04/06 17:10:31 by dlavaury         ###   ########.fr        #
+#    Updated: 2018/04/06 17:31:37 by dlavaury         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CHECKER			= checker
 PUSH_SWAP		= push_swap
 
 CC				= gcc
-FLAGS			= -Wall -Wextra -Werror -g3
+FLAGS			= -Wall -Wextra -Werror
 HARDFLAGS		= -Weverything
 HEADER			= -I includes -I $(LIB)/includes/
 
