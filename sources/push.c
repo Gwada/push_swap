@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:32:24 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/02 15:40:30 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 14:33:19 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,7 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 		src->low->bd = GOOD;
 		return (simple_push(r, src, dst, pile));
 	}
-	if (a_insert(r, -1, ALNBR, -1))
-	{
-		find_best_insert(r, 0, -1);
-		src->low->bd = GOOD;
-		simple_push(r, src, dst, pile);
-	}
+	find_best_insert(r, 0, -1);
+	src->low->bd = GOOD;
+	simple_push(r, src, dst, pile);
 }

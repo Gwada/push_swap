@@ -6,21 +6,11 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 15:41:49 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/02 15:41:51 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 14:34:22 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void		pile_sort(t_roll *r, int *t, int size, int i)
-{
-	while (++i < size)
-	{
-		t[i] = r->a.LNBR;
-		rotate(NULL, &r->a, 0, 0);
-	}
-	ft_qsort(t, size, 0, 0);
-}
 
 void		find_best_rotation(t_roll *r, int rot, int state)
 {

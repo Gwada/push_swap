@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:26:28 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/02 15:29:07 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 10:13:15 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static	void	display_pile(t_roll *r, t_pile *p, char pile)
 {
-	r->bd & COLOR ? ft_printf("{blue}{bold}Pile %c{eoc} = ", pile) : 0;
-	r->bd ^ COLOR ? ft_printf("Pile %c = ", pile) : 0;
+	if (r->bd & COLOR)
+		ft_printf("{blue}{bold}Pile %c{eoc} = ", pile);
+	else
+		ft_printf("Pile %c = ", pile);
 	!p->low && r->bd & COLOR ? ft_printf("{red}[EMPTY]{eoc}\n") : 0;
 	!p->low && r->bd ^ COLOR ? ft_printf("[EMPTY]\n") : 0;
 	if (p->low)

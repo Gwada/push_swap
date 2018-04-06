@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/05 06:56:16 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 14:34:25 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ void				push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile);
 void				swap(t_roll *r, t_pile *p, char pile);
 void				s_swap(t_roll *r);
-int					a_insert(t_roll *r, int rot_a, int value, int rot);
 void				rotate(t_roll *r, t_pile *p, char pile, int stte);
 void				r_rotate(t_roll *r, t_pile *p, char pile, int state);
 void				d_rotate(t_roll *r, int state);
@@ -152,7 +151,6 @@ int					calibrate_rot(t_roll *r, int rot, int i);
 
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);
-void				pile_sort(t_roll *r, int *t, int size, int i);
 
 void				push_swap(t_roll *r, char **p, int size);
 
