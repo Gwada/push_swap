@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:32:24 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/06 14:33:19 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 17:23:35 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void			simple_push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 {
 	t_pile		*tmp;
 
+	if ((pile == 'a' && !r->nb_b) || (pile == 'b' && !r->nb_a))
+		return ;
 	tmp = src->low;
 	src->low = src->low->low;
 	tmp->low->top = src;
@@ -92,6 +94,8 @@ void			push(t_roll *r, t_pile *src, t_pile *dst, char pile)
 {
 	int			size;
 
+	if ((pile == 'a' && !r->nb_b) || (pile == 'b' && !r->nb_a))
+		return ;
 	size = (pile == 'a' ? r->nb_b : r->nb_a);
 	if (!(src->low) || src->low->root || !size)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 11:39:34 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/06 14:34:25 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 16:29:58 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,6 @@ int					calibrate_rot(t_roll *r, int rot, int i);
 void				ft_qsort(int *t, int size, int i, int j);
 void				ft_ps_qsort(t_tab *t, int size, int i, int j);
 
-void				push_swap(t_roll *r, char **p, int size);
+void				push_swap(t_roll *r, char **p, unsigned int size);
 
 #endif

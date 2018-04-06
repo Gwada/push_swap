@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:16:09 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/06 14:34:19 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 17:22:19 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void		swap(t_roll *r, t_pile *p, char pile)
 {
 	t_pile	*tmp;
 
-	if (!p->low || p->low->root)
+	if (!p->low || p->low->root
+	|| (pile == 'a' && r->nb_a < 2) || (pile == 'b' && r->nb_b < 2))
 		return ;
 	p->LBD = GOOD;
 	p->low->LBD = GOOD;

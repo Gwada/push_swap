@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:23:15 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/06 14:35:10 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 16:23:56 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static	void	fixe_push(t_roll *r, int i)
 	}
 }
 
-void			push_swap(t_roll *r, char **p, int size)
+void			push_swap(t_roll *r, char **p, unsigned int size)
 {
 	t_tab		t[size];
 

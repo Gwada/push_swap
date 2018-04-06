@@ -4,7 +4,7 @@ NAME	= libft.a
 
 HEADER = -I includes/
 
-CFLAGS = -Wall -Wextra -Werror $(HEADER)
+CFLAGS = -Wall -Wextra -Werror  $(HEADER)
 
 SRC = mem/ft_memset.c \
 		ft_bzero.c \

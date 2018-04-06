@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 15:30:29 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/04 23:51:39 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 17:15:58 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static	void	end_checker(t_roll *r, t_tab *t, int result, int i)
 		ft_printf("%s\n", result ? "KO" : "OK");
 }
 
-static	void	checker(t_roll *r, char **p, int size)
+static	void	checker(t_roll *r, char **p, unsigned int size)
 {
 	char	*s;
 	t_tab	t[size];
@@ -77,10 +77,11 @@ static	void	checker(t_roll *r, char **p, int size)
 	while (get_next_line(0, &s))
 	{
 		s && *s ? check_that(r, s) : 0;
-		s ? free(s) : 0;
+		ft_strdel(&s);
 		if (r->bd & ERR)
 			break ;
 	}
+	ft_strdel(&s);
 	if (r->bd & ERR)
 		return ;
 	else

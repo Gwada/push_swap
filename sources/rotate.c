@@ -6,7 +6,7 @@
 /*   By: dlavaury <dlavaury@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 09:41:02 by dlavaury          #+#    #+#             */
-/*   Updated: 2018/04/02 15:35:33 by dlavaury         ###   ########.fr       */
+/*   Updated: 2018/04/06 17:21:10 by dlavaury         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		rotate(t_roll *r, t_pile *p, char pile, int state)
 {
-	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
+	if ((pile == 'a' && r->nb_a < 2) || (pile == 'b' && r->nb_b < 2))
 		return ;
 	if (r && r->nb_b > 1 && pile == 'a' && BLBD & GOOD && state & GOOD)
 		if (calibrate_rot(r, r->b_rot + 1, -1))
@@ -41,7 +41,7 @@ void		rotate(t_roll *r, t_pile *p, char pile, int state)
 
 void		r_rotate(t_roll *r, t_pile *p, char pile, int state)
 {
-	if ((pile == 'a' && r->nb_a == 1) || (pile == 'b' && r->nb_b == 1))
+	if ((pile == 'a' && r->nb_a < 2) || (pile == 'b' && r->nb_b < 2))
 		return ;
 	if (r && r->nb_b > 1 && pile == 'a' && BLBD & GOOD && state & GOOD)
 		if (calibrate_rot(r, r->b_rot + 1, -1))
@@ -70,13 +70,13 @@ void		d_rotate(t_roll *r, int state)
 {
 	if (state & ROT)
 	{
-		rotate(NULL, &r->a, 0, 0);
-		rotate(NULL, &r->b, 0, 0);
+		r->nb_a > 1 ? rotate(NULL, &r->a, 0, 0) : 0;
+		r->nb_b > 1 ? rotate(NULL, &r->b, 0, 0) : 0;
 	}
 	else if (state & R_ROT)
 	{
-		r_rotate(NULL, &r->a, 0, 0);
-		r_rotate(NULL, &r->b, 0, 0);
+		r->nb_a > 1 ? r_rotate(NULL, &r->a, 0, 0) : 0;
+		r->nb_b > 1 ? r_rotate(NULL, &r->b, 0, 0) : 0;
 	}
 	++r->dep;
 	if (r->bd)
