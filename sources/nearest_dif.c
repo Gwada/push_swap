@@ -48,7 +48,7 @@ static	void	next_dif(t_roll *r, int b_rot, int i)
 	b_dep = r->size;
 	while (++i < r->nb_a)
 	{
-		if (ALBD & NO_CHECK)
+		if (ALBD & NO_CHECK && (i < b_dep || (r->nb_a - i) < b_dep))
 		{
 			n_dep = 1;
 			n_dep += (i <= r->nb_a / 2 ? i : r->nb_a - i);
